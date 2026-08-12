@@ -222,7 +222,7 @@ export default function HomePage() {
             <div className="hidden min-[900px]:col-[3] min-[900px]:flex min-[900px]:items-center min-[900px]:justify-self-end">
               <a
                 href="#"
-                className="inline-flex min-h-[2.5rem] items-center justify-center whitespace-nowrap rounded-full border border-[#e8fb76] bg-[#e8fb76] px-[1.05rem] py-[0.42rem] text-[0.76rem] font-bold tracking-[0.08em] text-[#111]"
+                className="inline-flex min-h-[2.2rem] items-center justify-center whitespace-nowrap rounded-full border border-[#e8fb76] bg-[#e8fb76] px-[0.92rem] py-[0.34rem] text-[0.7rem] font-bold tracking-[0.08em] text-[#111]"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 BOOK A TRIAL
