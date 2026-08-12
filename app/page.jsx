@@ -36,20 +36,119 @@ export default function HomePage() {
     };
   }, []);
 
+  const isNavActive = isNavScrolled || isMobileMenuOpen;
+
+  const testimonials = [
+    {
+      id: "sushant",
+      quote:
+        "Active20 made training feel easy to stick with. The workouts are fast, focused, and I noticed meaningful strength gains within weeks. It finally fits my schedule without compromising results.",
+      name: "Sushant, Age 37",
+      initials: "SU",
+      gradientAngle: 160,
+      minHeight: "15.8rem",
+    },
+    {
+      id: "ananya",
+      quote:
+        "The coaching and EMS pairing has been incredible. I get a full-body session in just 20 minutes and still feel challenged every time. Recovery is smoother and my energy is better all week.",
+      name: "Ananya, Age 28",
+      initials: "AN",
+      gradientAngle: 230,
+      minHeight: "14.5rem",
+    },
+    {
+      id: "girish",
+      quote:
+        "I expected it to be a trend, but the progress has been very real. The sessions are efficient, my posture improved, and I feel stronger without putting unnecessary stress on my joints.",
+      name: "Girish, Age 52",
+      initials: "GI",
+      gradientAngle: 312,
+      minHeight: "16.3rem",
+    },
+    {
+      id: "rahul",
+      quote:
+        "Active20 keeps me consistent in a way no gym plan ever did. Short sessions, expert guidance, and visible improvement made it easy to build a routine I actually enjoy.",
+      name: "Rahul, Age 41",
+      initials: "RK",
+      gradientAngle: 28,
+      minHeight: "14.1rem",
+    },
+    {
+      id: "meera",
+      quote:
+        "I joined with lower back concerns and was surprised by how controlled every movement felt. My coach adjusted intensity each week, and I can now train consistently without flare-ups.",
+      name: "Meera, Age 46",
+      initials: "ME",
+      gradientAngle: 188,
+      minHeight: "17.1rem",
+    },
+    {
+      id: "arjun",
+      quote:
+        "As a founder, time is always tight. Active20 gave me a practical routine that actually fits my calendar. The 20-minute format is efficient, and the strength improvements are clear.",
+      name: "Arjun, Age 34",
+      initials: "AR",
+      gradientAngle: 256,
+      minHeight: "13.8rem",
+    },
+    {
+      id: "naina",
+      quote:
+        "I wanted better muscle tone without long gym sessions. Within the first month, I noticed better definition and stamina. The structure keeps me motivated week after week.",
+      name: "Naina, Age 31",
+      initials: "NA",
+      gradientAngle: 330,
+      minHeight: "15.1rem",
+    },
+    {
+      id: "dev",
+      quote:
+        "From day one, the coaching felt premium and personal. The session quality is consistent, the effort feels focused, and recovery has been far better than my old routine.",
+      name: "Dev, Age 39",
+      initials: "DE",
+      gradientAngle: 96,
+      minHeight: "16.7rem",
+    },
+    {
+      id: "isha",
+      quote:
+        "I came in looking for a smarter routine, and the accountability here made all the difference. The sessions are short, progress is measurable, and I feel stronger in daily life.",
+      name: "Isha, Age 33",
+      initials: "IS",
+      gradientAngle: 142,
+      minHeight: "15.4rem",
+    },
+  ];
+
+  const topbarClassName = `fixed left-0 top-0 z-40 w-full border-none bg-transparent px-[1.2rem] py-[0.85rem] shadow-none transition-[background-color,backdrop-filter,box-shadow] duration-[220ms] max-[899px]:px-3 max-[899px]:pb-[0.6rem] max-[899px]:pt-[0.55rem] ${
+    isNavActive
+      ? "bg-[linear-gradient(135deg,rgba(12,12,12,0.82),rgba(4,4,4,0.88))] shadow-[0_8px_24px_rgba(0,0,0,0.4)] backdrop-blur-[8px]"
+      : ""
+  }`;
+
+  const topNavClassName = `mx-auto w-full max-[899px]:mt-[0.35rem] max-[899px]:hidden ${
+    isNavActive ? "text-[#e8f5ff]" : "text-[#111]"
+  } ${isMobileMenuOpen ? "max-[899px]:block" : ""}`;
+
+  const navItemsClassName =
+    "flex w-full items-center justify-around gap-[1.35rem] whitespace-nowrap text-[clamp(0.5rem,0.62vw,0.61rem)] font-medium tracking-[0.1em] max-[899px]:w-full max-[899px]:flex-col max-[899px]:items-start max-[899px]:gap-[0.6rem] max-[899px]:px-0 max-[899px]:pb-[0.3rem] max-[899px]:pt-[0.15rem] max-[899px]:text-[0.5rem] max-[899px]:leading-[1.2] min-[900px]:w-full min-[900px]:gap-[1.7rem] min-[900px]:text-[0.61rem]";
+
   return (
-    <main className="landing-shell">
-      <div className="page-width">
-        <header
-          className={`topbar${isNavScrolled ? " topbar--scrolled" : ""}${
-            isMobileMenuOpen ? " topbar--menu-open" : ""
-          }`}
-        >
-          <div className="topbar-inner">
-            <a href="#" className="brand" aria-label="Active20">
+    <main className="relative isolate flex w-full justify-center overflow-x-hidden p-0 before:pointer-events-none before:absolute before:left-[-4rem] before:top-10 before:z-0 before:h-[clamp(22rem,46vh,38rem)] before:w-[clamp(8rem,13vw,12rem)] before:rounded-full before:bg-[radial-gradient(ellipse_at_center,rgba(245,255,180,0.98)_0%,rgba(232,251,118,0.9)_18%,rgba(232,251,118,0.56)_40%,rgba(232,251,118,0.2)_62%,rgba(232,251,118,0.02)_80%,rgba(232,251,118,0)_100%)] before:blur-[15px] after:pointer-events-none after:absolute after:right-[-4rem] after:top-10 after:z-0 after:h-[clamp(22rem,46vh,38rem)] after:w-[clamp(8rem,13vw,12rem)] after:rounded-full after:bg-[radial-gradient(ellipse_at_center,rgba(245,255,180,0.98)_0%,rgba(232,251,118,0.9)_18%,rgba(232,251,118,0.56)_40%,rgba(232,251,118,0.2)_62%,rgba(232,251,118,0.02)_80%,rgba(232,251,118,0)_100%)] after:blur-[15px]">
+      <div className="relative z-[1] w-[min(100%,1440px)] px-4 pb-6 max-[899px]:px-3 max-[899px]:pb-4 [&>section+section]:mt-16 max-[899px]:[&>section+section]:mt-[2.6rem] min-[900px]:px-[1.2rem] min-[900px]:[&>section+section]:mt-24">
+        <header className={topbarClassName}>
+          <div className="mx-auto grid w-[min(100%,1440px)] grid-cols-[auto_1fr] items-center gap-[1.2rem] px-[1.2rem] max-[899px]:grid-cols-[1fr_auto] max-[899px]:gap-[0.65rem]">
+            <a
+              href="#"
+              className="inline-flex items-center gap-[0.38rem] max-[899px]:col-[1]"
+              aria-label="Active20"
+            >
               <Image
                 src="/images/logo.png"
                 alt="Active20"
-                className="brand-logo"
+                className="block h-8 w-auto"
                 width={252}
                 height={48}
                 priority
@@ -58,81 +157,111 @@ export default function HomePage() {
 
             <button
               type="button"
-              className="nav-toggle"
+              className={`hidden h-[2.2rem] w-[2.2rem] cursor-pointer flex-col items-center justify-center gap-[0.22rem] rounded-full border p-0 max-[899px]:col-[2] max-[899px]:inline-flex ${
+                isNavActive
+                  ? "border-[rgba(232,245,255,0.35)] bg-[rgba(10,12,14,0.35)] text-[#e8f5ff]"
+                  : "border-[rgba(255,255,255,0.25)] bg-[rgba(10,12,14,0.15)] text-[#111]"
+              }`}
               aria-label="Toggle navigation menu"
               aria-controls="primary-nav"
               aria-expanded={isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen((prev) => !prev)}
             >
-              <span />
-              <span />
-              <span />
+              <span className="block h-[1.5px] w-[0.95rem] bg-current" />
+              <span className="block h-[1.5px] w-[0.95rem] bg-current" />
+              <span className="block h-[1.5px] w-[0.95rem] bg-current" />
             </button>
 
-            <nav id="primary-nav" className="topnav" aria-label="Primary">
-              <a href="#" onClick={() => setIsMobileMenuOpen(false)}>
-                HOW IT WORKS
-              </a>
-              <a href="#" onClick={() => setIsMobileMenuOpen(false)}>
-                FRANCHIS
-              </a>
-              <a href="#" onClick={() => setIsMobileMenuOpen(false)}>
-                ABOUT US
-              </a>
-              <a href="#" onClick={() => setIsMobileMenuOpen(false)}>
-                OUR STUDIOS
-              </a>
-              <a href="#" onClick={() => setIsMobileMenuOpen(false)}>
-                FAQS
-              </a>
-              <a
-                href="#"
-                className="pill-cta topnav-cta"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                BOOK A TRIAL
-              </a>
+            <nav id="primary-nav" className={topNavClassName} aria-label="Primary">
+              <div className={navItemsClassName}>
+                <a
+                  href="#"
+                  className="inline-flex items-center justify-center px-[0.2rem] leading-none"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  HOW IT WORKS
+                </a>
+                <a
+                  href="#"
+                  className="inline-flex items-center justify-center px-[0.2rem] leading-none"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  FRANCHIS
+                </a>
+                <a
+                  href="#"
+                  className="inline-flex items-center justify-center px-[0.2rem] leading-none"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  ABOUT US
+                </a>
+                <a
+                  href="#"
+                  className="inline-flex items-center justify-center px-[0.2rem] leading-none"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  OUR STUDIOS
+                </a>
+                <a
+                  href="#"
+                  className="inline-flex items-center justify-center px-[0.2rem] leading-none"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  FAQS
+                </a>
+                <a
+                  href="#"
+                  className="ml-[0.8rem] inline-flex min-h-10 items-center justify-center whitespace-nowrap rounded-full border border-[#e8fb76] bg-[#e8fb76] px-[1.2rem] py-[0.5rem] text-[clamp(0.58rem,0.72vw,0.7rem)] font-bold tracking-[0.08em] text-[#111] min-[900px]:px-[1.35rem] min-[900px]:py-[0.58rem] min-[900px]:text-[0.82rem] max-[899px]:ml-0 max-[899px]:mt-[0.25rem] max-[899px]:min-h-8 max-[899px]:px-[0.9rem] max-[899px]:py-[0.38rem] max-[899px]:text-[0.58rem] max-[899px]:tracking-[0.05em]"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  BOOK A TRIAL
+                </a>
+              </div>
             </nav>
           </div>
         </header>
 
-        <section className="hero">
+        <section className="relative isolate -mx-[calc(50vw-50%)] h-[100svh] min-h-[100svh] w-screen overflow-hidden bg-transparent max-[899px]:h-[88svh] max-[899px]:min-h-[32rem]">
           <Image
             src="/images/holders/hero.png"
             alt="Athlete in EMS suit"
-            className="hero-bg"
+            className="relative z-0 block h-full w-full object-cover object-top"
             width={0}
             height={0}
             sizes="100vw"
             priority
           />
-          <div className="hero-copy">
-            <h1>
+          <div className="absolute left-3 right-3 top-[52%] z-[2] max-w-[18.5rem] -translate-y-1/2 pt-[clamp(2.5rem,8vw,3.2rem)] min-[900px]:right-auto min-[900px]:left-8 min-[900px]:top-[48%] min-[900px]:max-w-[17.5rem] min-[900px]:pt-[clamp(2.8rem,6vw,3.6rem)] min-[1101px]:left-[max(2.45rem,calc((100vw-1440px)/2+1.2rem))] min-[1101px]:top-[46%] min-[1101px]:max-w-[24rem] min-[1101px]:pt-[clamp(3rem,4.8vw,4.2rem)]">
+            <h1 className="m-0 text-[clamp(1.85rem,10vw,2.8rem)] font-extrabold leading-[0.96] tracking-[0.03em] text-[#111] min-[900px]:text-[clamp(2.4rem,6vw,4.2rem)] min-[1101px]:text-[4.2rem]">
               ADVANCED
               <br />
               FITNESS
               <br />
               CLUB
             </h1>
-            <p>
+            <p className="mt-[0.85rem] max-w-[15.8rem] text-[clamp(0.82rem,3.8vw,1rem)] leading-[1.35] text-[#222] [font-family:var(--font-familjen)] min-[900px]:max-w-[15rem] min-[900px]:text-[clamp(0.9rem,2vw,1.15rem)] min-[1101px]:mt-[1.1rem] min-[1101px]:max-w-[16rem] min-[1101px]:text-[1.18rem]">
               Fully personalised training designed to unlock your body&apos;s
               full potential. Achieve your fitness goals faster, smarter, and
               more efficiently.
             </p>
-            <a href="#" className="dark-cta">
+            <a
+              href="#"
+              className="mt-4 inline-flex min-h-[2.45rem] items-center justify-center rounded-full bg-[#151515] px-[1.15rem] py-[0.58rem] text-[0.75rem] font-bold tracking-[0.08em] text-white min-[900px]:mt-6 min-[900px]:min-h-12 min-[900px]:px-[1.7rem] min-[900px]:py-[0.76rem] min-[900px]:text-[clamp(0.86rem,1.02vw,1.08rem)] min-[1101px]:px-[1.8rem] min-[1101px]:py-[0.84rem]"
+            >
               BOOK A TRIAL
             </a>
           </div>
-          <div className="hero-fade" />
+          <div className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(to_top,rgb(21_33_39)_0%,rgb(21_34_39_/_64%)_16%,rgb(21_33_39_/_19%)_38%,rgb(21_33_39_/_0%)_58%,rgb(14_44_60_/_0%)_78%,rgb(21_33_39_/_0%)_100%)]" />
         </section>
 
         <STitle
-          sectionClassName="intro"
+          sectionClassName="relative z-[3] mt-0 px-[0.2rem] pb-[1.2rem] text-center min-[900px]:px-[7.5rem] min-[900px]:pb-[2rem]"
+          descriptionClassName="mx-auto max-w-[41rem] text-[clamp(1.08rem,5.4vw,1.32rem)] font-semibold leading-[1.38] text-[#f2fbff] [font-family:var(--font-new-science-extended)] [font-stretch:normal] min-[900px]:text-[clamp(1.28rem,1.95vw,1.82rem)] min-[900px]:leading-[1.45]"
           description={
             <>
               Experience one of the world&apos;s most effective full-body
               workouts. ACTIVE20&apos;s advanced
-              <span className="intro-highlight">
+              <span className="text-[#80c5d5]">
                 {" "}
                 Electro-Muscle Stimulation (EMS)
               </span>{" "}
@@ -142,102 +271,125 @@ export default function HomePage() {
           }
         />
 
-        <section className="card-row">
-          <article className="mini-card">
+        <section className="mt-0 grid grid-cols-1 gap-[0.65rem] min-[900px]:grid-cols-3 min-[900px]:gap-[0.8rem]">
+          <article className="relative m-0 aspect-[16/12] overflow-hidden rounded-[0.3rem] border border-[rgba(132,169,193,0.26)] bg-transparent min-[900px]:aspect-[3/4]">
             <Image
-              src="/images/holders/gentle-on-joints.webp"
+              src="/images/holders/gentle-on-joints.png"
               alt="Gentle on joints"
+              className="object-cover"
               fill
               sizes="(max-width: 900px) 33vw, 360px"
-              style={{ objectFit: "cover" }}
             />
-            <h3>GENTLE ON JOINTS</h3>
+            <h3 className="absolute inset-x-0 bottom-0 m-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.72)_0%,transparent_100%)] px-[0.7rem] pb-[0.7rem] pt-[1.65rem] text-[0.7rem] font-semibold tracking-[0.05em] text-[#f7fdff] min-[900px]:pt-[2.5rem] min-[900px]:text-[0.9rem]">
+              GENTLE ON JOINTS
+            </h3>
           </article>
-          <article className="mini-card">
+          <article className="relative m-0 aspect-[16/12] overflow-hidden rounded-[0.3rem] border border-[rgba(132,169,193,0.26)] bg-transparent min-[900px]:aspect-[3/4]">
             <Image
-              src="/images/holders/powerful-on-muscles.webp"
+              src="/images/holders/powerful-on-muscles.png"
               alt="Powerful on muscles"
+              className="object-cover"
               fill
               sizes="(max-width: 900px) 33vw, 360px"
-              style={{ objectFit: "cover" }}
             />
-            <h3>POWERFUL ON MUSCLES</h3>
+            <h3 className="absolute inset-x-0 bottom-0 m-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.72)_0%,transparent_100%)] px-[0.7rem] pb-[0.7rem] pt-[1.65rem] text-[0.7rem] font-semibold tracking-[0.05em] text-[#f7fdff] min-[900px]:pt-[2.5rem] min-[900px]:text-[0.9rem]">
+              POWERFUL ON MUSCLES
+            </h3>
           </article>
-          <article className="mini-card">
+          <article className="relative m-0 aspect-[16/12] overflow-hidden rounded-[0.3rem] border border-[rgba(132,169,193,0.26)] bg-transparent min-[900px]:aspect-[3/4]">
             <img
-              src="/images/content-placeholder.svg"
+              src="/images/holders/science-backed-results.png"
               alt="Science backed results"
+              className="block h-full w-full object-cover"
             />
-            <h3>SCIENCE BACKED RESULTS</h3>
+            <h3 className="absolute inset-x-0 bottom-0 m-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.72)_0%,transparent_100%)] px-[0.7rem] pb-[0.7rem] pt-[1.65rem] text-[0.7rem] font-semibold tracking-[0.05em] text-[#f7fdff] min-[900px]:pt-[2.5rem] min-[900px]:text-[0.9rem]">
+              SCIENCE BACKED RESULTS
+            </h3>
           </article>
         </section>
 
-        <section className="how-it-works-section">
+        <section>
           <STitle
-            sectionClassName="work-section"
+            sectionClassName="px-[0.1rem] pb-4 pt-[1.6rem] min-[900px]:px-12 min-[900px]:pb-[1.2rem] min-[900px]:pt-20"
+            titleClassName="m-0 text-[clamp(1.45rem,7vw,2rem)] leading-none text-[#80c5d5] [font-family:var(--font-new-science-extended)] min-[900px]:text-[2.6rem] min-[900px]:leading-[1.05]"
+            descriptionClassName="mt-[0.55rem] max-w-full text-[0.86rem] leading-[1.42] text-[#f2fbff] [font-family:var(--font-familjen)] min-[900px]:mt-[0.65rem] min-[900px]:max-w-[39rem] min-[900px]:text-[1rem] min-[900px]:leading-[1.5]"
             title="HOW DOES IT WORK"
             description="During an ACTIVE20 session, low-impact electrical impulses activate multiple muscle groups at once while you move through simple, guided exercises with your coach. This creates deeper, more complete muscle contractions, delivering a full-body workout in just 20 minutes with minimal joint stress."
           />
 
-          <div className="banner-image">
+          <div className="relative mt-0 overflow-hidden rounded-[0.9rem] border border-[rgba(132,169,193,0.26)] bg-transparent">
             <Image
-              src="/images/holders/how-it-works.webp"
+              src="/images/holders/how-it-works.png"
               alt="Battle rope training"
+              className="block h-[clamp(14rem,64vw,19rem)] w-full object-cover min-[900px]:h-[clamp(28rem,56vw,46rem)]"
               width={0}
               height={0}
               sizes="100vw"
             />
-            <span className="play-ring" aria-hidden="true" />
+            <span
+              className="pointer-events-none absolute left-1/2 top-1/2 h-[3.2rem] w-[3.2rem] -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-[rgba(219,237,246,0.68)] after:absolute after:left-1/2 after:top-1/2 after:-translate-x-[42%] after:-translate-y-1/2 after:border-b-[0.44rem] after:border-l-[0.7rem] after:border-t-[0.44rem] after:border-b-transparent after:border-l-[rgba(219,237,246,0.9)] after:border-t-transparent after:content-['']"
+              aria-hidden="true"
+            />
           </div>
         </section>
 
-        <section className="advanced-fitness-section">
+        <section className="pt-0">
           <STitle
-            sectionClassName="section-title-only"
+            sectionClassName="px-[0.1rem] pb-[0.7rem] pt-0 text-center min-[900px]:pb-4"
+            titleClassName="m-0 text-[clamp(1.1rem,5.8vw,1.55rem)] leading-none text-[#80c5d5] [font-family:var(--font-new-science-extended)] min-[900px]:whitespace-nowrap min-[900px]:text-[clamp(0.78rem,2.55vw,1.95rem)]"
             title="ADVANCED FITNESS FOR EVERY BODY"
           />
 
-          <div className="feature-banner">
+          <div className="relative mt-0 overflow-hidden rounded-[0.9rem] border border-[rgba(132,169,193,0.26)] bg-transparent">
             <img
-              src="/images/holders/advance-fitness.webp"
+              src="/images/holders/advance-fitness.png"
               alt="Strength training with age"
+              className="block h-[clamp(14rem,64vw,19rem)] w-full object-cover min-[900px]:h-[clamp(28rem,56vw,46rem)]"
             />
-            <span>Those Building Strength with Age</span>
+            <span className="absolute bottom-[0.7rem] right-[0.7rem] rounded-full border border-[rgba(180,214,236,0.72)] bg-[rgba(0,8,16,0.68)] px-[0.72rem] py-[0.4rem] text-[0.68rem] font-bold text-[#e5f6ff] min-[900px]:bottom-[1.2rem] min-[900px]:right-[1.2rem] min-[900px]:px-[1rem] min-[900px]:py-[0.48rem] min-[900px]:text-[clamp(0.75rem,1.1vw,1.05rem)]">
+              Those Building Strength with Age
+            </span>
           </div>
         </section>
 
-        <section className="ems-tech-section">
+        <section className="pt-0">
           <STitle
-            sectionClassName="work-section ems-copy"
+            sectionClassName="px-[0.1rem] pb-4 pt-[1.6rem] min-[900px]:px-12 min-[900px]:pb-4 min-[900px]:pt-20"
+            titleClassName="m-0 text-[clamp(1.45rem,7vw,2rem)] leading-none text-[#80c5d5] [font-family:var(--font-new-science-extended)] min-[900px]:text-[2.6rem] min-[900px]:leading-[1.05]"
+            descriptionClassName="mt-[0.55rem] max-w-full text-[0.86rem] leading-[1.42] text-[#f2fbff] [font-family:var(--font-familjen)] min-[900px]:mt-[0.65rem] min-[900px]:max-w-[39rem] min-[900px]:text-[1rem] min-[900px]:leading-[1.5]"
             title="THE EMS TECH"
             description="Wear a state-of-the-art EMS suit connected to a tablet-controlled system and guided by your certified coach. Every session is personalised in real time, with intensity, muscle activation, and training programmes precisely adjusted to match your body, fitness level, and goals."
           />
 
-          <div className="tech-grid">
+          <div className="mt-0 grid grid-cols-1 gap-[0.45rem] min-[900px]:grid-cols-[1fr_1.45fr_1fr] min-[900px]:grid-rows-2 min-[900px]:gap-[0.3rem]">
             <Image
-              src="/images/holders/ems-tech1.webp"
+              src="/images/holders/ems-tech1.png"
               alt="EMS module close-up"
+              className="block min-h-full w-full rounded-[0.22rem] border border-[rgba(132,169,193,0.26)] object-cover min-[900px]:col-[1] min-[900px]:row-[1]"
               width={0}
               height={0}
               sizes="(max-width: 900px) 33vw, 370px"
             />
             <Image
-              src="/images/holders/ems-tech-2.webp"
+              src="/images/holders/ems-tech-2.png"
               alt="EMS console"
+              className="block min-h-full w-full rounded-[0.22rem] border border-[rgba(132,169,193,0.26)] object-cover min-[900px]:col-[2] min-[900px]:row-[1/span_2]"
               width={0}
               height={0}
               sizes="(max-width: 900px) 45vw, 540px"
             />
             <Image
-              src="/images/holders/ems-tech-3.webp"
+              src="/images/holders/ems-tech-3.png"
               alt="Resistance and EMS suit"
+              className="block min-h-full w-full rounded-[0.22rem] border border-[rgba(132,169,193,0.26)] object-cover min-[900px]:col-[3] min-[900px]:row-[1/span_2]"
               width={0}
               height={0}
               sizes="(max-width: 900px) 33vw, 370px"
             />
             <Image
-              src="/images/holders/ems-tech-4.webp"
+              src="/images/holders/ems-tech-4.png"
               alt="EMS suit"
+              className="block min-h-full w-full rounded-[0.22rem] border border-[rgba(132,169,193,0.26)] object-cover min-[900px]:col-[1] min-[900px]:row-[2]"
               width={0}
               height={0}
               sizes="(max-width: 900px) 33vw, 370px"
@@ -245,54 +397,47 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="testimonials-section">
+        <section className="pt-0">
           <STitle
-            sectionClassName="section-title-only testimonials-title"
+            sectionClassName="px-[0.1rem] pb-4 pt-0 text-center min-[900px]:pb-6"
+            titleClassName="m-0 text-[clamp(1.45rem,7vw,2rem)] leading-none text-[#80c5d5] [font-family:var(--font-new-science-extended)] min-[900px]:text-[2.6rem] min-[900px]:leading-[1.05]"
             title="REAL PEOPLE. REAL PROGRESS."
           />
 
-          <div className="quotes-row">
-            <button
-              type="button"
-              className="arrow-btn"
-              aria-label="Previous testimonial"
-            >
-              &lt;
-            </button>
-            <article className="quote-card">
-              <p>
-                &quot;Active 20 completely changed my perspective. The workouts
-                are quick, challenging, and incredibly effective. After just a
-                few weeks, I felt stronger, and noticed visible improvements in
-                my fitness.&quot;
-              </p>
-              <strong>Sushant, Age 37</strong>
-            </article>
-            <article className="quote-card">
-              <p>
-                &quot;Active 20 completely changed my perspective. The workouts
-                are quick, challenging, and incredibly effective. After just a
-                few weeks, I felt stronger, and noticed visible improvements in
-                my fitness.&quot;
-              </p>
-              <strong>Ananya, Age 28</strong>
-            </article>
-            <article className="quote-card">
-              <p>
-                &quot;Active 20 completely changed my perspective. The workouts
-                are quick, challenging, and incredibly effective. After just a
-                few weeks, I felt stronger, and noticed visible improvements in
-                my fitness.&quot;
-              </p>
-              <strong>Girish, Age 52</strong>
-            </article>
-            <button
-              type="button"
-              className="arrow-btn"
-              aria-label="Next testimonial"
-            >
-              &gt;
-            </button>
+          <div className="mt-4 columns-1 gap-[1rem] min-[760px]:columns-2 min-[1160px]:columns-3">
+            {testimonials.map((testimonial) => (
+              <article
+                key={testimonial.id}
+                className="relative isolate mb-[1rem] overflow-hidden rounded-[1rem] px-[1.2rem] pb-[1.15rem] pt-[1.15rem] shadow-[inset_0_1px_0_rgba(168,209,235,0.08)] [break-inside:avoid] min-[900px]:px-[1.55rem] min-[900px]:pb-[1.32rem] min-[900px]:pt-[1.32rem]"
+                style={{
+                  minHeight: testimonial.minHeight,
+                  backgroundImage: `linear-gradient(${testimonial.gradientAngle}deg, rgba(36,48,60,0.24) 0%, rgba(20,28,38,0.34) 42%, rgba(11,16,24,0.46) 100%)`,
+                }}
+              >
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_16%_0%,rgba(122,210,248,0.03)_0%,rgba(122,210,248,0)_36%)]" />
+                <p className="relative z-[1] m-0 text-[0.9rem] leading-[1.55] text-[rgba(214,227,238,0.72)] [font-family:var(--font-familjen)] min-[900px]:text-[1.08rem] min-[900px]:leading-[1.5]">
+                  &quot;{testimonial.quote}&quot;
+                </p>
+                <div className="relative z-[1] mt-[0.85rem] flex items-center gap-[0.52rem] min-[900px]:mt-[1rem]">
+                  <div className="flex -space-x-2">
+                    <span className="inline-grid h-[1.9rem] w-[1.9rem] place-items-center rounded-full border border-[rgba(151,209,240,0.34)] bg-[linear-gradient(145deg,rgba(105,198,237,0.34),rgba(37,84,114,0.9))] text-[0.5rem] font-semibold tracking-[0.03em] text-[#f4fcff] min-[900px]:h-[2.35rem] min-[900px]:w-[2.35rem] min-[900px]:text-[0.62rem]">
+                      {testimonial.initials}
+                    </span>
+                    <span className="inline-grid h-[1.9rem] w-[1.9rem] place-items-center rounded-full border border-[rgba(160,194,214,0.28)] bg-[linear-gradient(145deg,rgba(53,72,94,0.95),rgba(16,30,45,0.98))] text-[0.48rem] font-semibold tracking-[0.03em] text-[#e8f2f9] min-[900px]:h-[2.35rem] min-[900px]:w-[2.35rem] min-[900px]:text-[0.6rem]">
+                      M
+                    </span>
+                  </div>
+                  <div>
+                    <strong className="block text-[0.86rem] font-medium text-[rgba(225,237,247,0.8)] min-[900px]:text-[1.02rem]">
+                      {testimonial.name}
+                    </strong>
+                    <span className="block text-[0.68rem] text-[rgba(166,188,206,0.62)] [font-family:var(--font-familjen)] min-[900px]:text-[0.82rem]">
+                      Active20 Member
+                    </span>
+                  </div>
+                </div>
+              </article>
+            ))}
           </div>
         </section>
 
