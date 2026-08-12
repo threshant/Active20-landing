@@ -128,21 +128,21 @@ export default function HomePage() {
       : ""
   }`;
 
-  const topNavClassName = `mx-auto w-full max-[899px]:mt-[0.35rem] max-[899px]:hidden ${
+  const topNavClassName = `w-full max-[899px]:col-[1/span_2] max-[899px]:mt-[0.35rem] max-[899px]:hidden min-[900px]:col-[2] min-[900px]:justify-self-center ${
     isNavActive ? "text-[#e8f5ff]" : "text-[#111]"
   } ${isMobileMenuOpen ? "max-[899px]:block" : ""}`;
 
   const navItemsClassName =
-    "flex w-full items-center justify-around gap-[1.35rem] whitespace-nowrap text-[clamp(0.5rem,0.62vw,0.61rem)] font-medium tracking-[0.1em] max-[899px]:w-full max-[899px]:flex-col max-[899px]:items-start max-[899px]:gap-[0.6rem] max-[899px]:px-0 max-[899px]:pb-[0.3rem] max-[899px]:pt-[0.15rem] max-[899px]:text-[0.5rem] max-[899px]:leading-[1.2] min-[900px]:w-full min-[900px]:gap-[1.7rem] min-[900px]:text-[0.61rem]";
+    "flex w-full items-center justify-center gap-[0.75rem] whitespace-nowrap text-[clamp(0.5rem,0.62vw,0.61rem)] font-medium tracking-[0.1em] max-[899px]:w-full max-[899px]:flex-col max-[899px]:items-start max-[899px]:gap-[0.6rem] max-[899px]:px-0 max-[899px]:pb-[0.3rem] max-[899px]:pt-[0.15rem] max-[899px]:text-[0.5rem] max-[899px]:leading-[1.2] min-[900px]:w-auto min-[900px]:text-[0.61rem]";
 
   return (
     <main className="relative isolate flex w-full justify-center overflow-x-hidden p-0 before:pointer-events-none before:absolute before:left-[-4rem] before:top-10 before:z-0 before:h-[clamp(22rem,46vh,38rem)] before:w-[clamp(8rem,13vw,12rem)] before:rounded-full before:bg-[radial-gradient(ellipse_at_center,rgba(245,255,180,0.98)_0%,rgba(232,251,118,0.9)_18%,rgba(232,251,118,0.56)_40%,rgba(232,251,118,0.2)_62%,rgba(232,251,118,0.02)_80%,rgba(232,251,118,0)_100%)] before:blur-[15px] after:pointer-events-none after:absolute after:right-[-4rem] after:top-10 after:z-0 after:h-[clamp(22rem,46vh,38rem)] after:w-[clamp(8rem,13vw,12rem)] after:rounded-full after:bg-[radial-gradient(ellipse_at_center,rgba(245,255,180,0.98)_0%,rgba(232,251,118,0.9)_18%,rgba(232,251,118,0.56)_40%,rgba(232,251,118,0.2)_62%,rgba(232,251,118,0.02)_80%,rgba(232,251,118,0)_100%)] after:blur-[15px]">
       <div className="relative z-[1] w-[min(100%,1440px)] px-4 pb-6 max-[899px]:px-3 max-[899px]:pb-4 [&>section+section]:mt-16 max-[899px]:[&>section+section]:mt-[2.6rem] min-[900px]:px-[1.2rem] min-[900px]:[&>section+section]:mt-24">
         <header className={topbarClassName}>
-          <div className="mx-auto grid w-[min(100%,1440px)] grid-cols-[auto_1fr] items-center gap-[1.2rem] px-[1.2rem] max-[899px]:grid-cols-[1fr_auto] max-[899px]:gap-[0.65rem]">
+          <div className="mx-auto grid w-[min(100%,1440px)] grid-cols-[1fr_auto] items-center gap-[1.2rem] px-[1.2rem] max-[899px]:gap-[0.65rem] min-[900px]:grid-cols-[1fr_auto_1fr]">
             <a
               href="#"
-              className="inline-flex items-center gap-[0.38rem] max-[899px]:col-[1]"
+              className="inline-flex items-center gap-[0.38rem] max-[899px]:col-[1] min-[900px]:col-[1] min-[900px]:justify-self-start"
               aria-label="Active20"
             >
               <Image
@@ -211,13 +211,23 @@ export default function HomePage() {
                 </a>
                 <a
                   href="#"
-                  className="ml-[0.8rem] inline-flex min-h-10 items-center justify-center whitespace-nowrap rounded-full border border-[#e8fb76] bg-[#e8fb76] px-[1.2rem] py-[0.5rem] text-[clamp(0.58rem,0.72vw,0.7rem)] font-bold tracking-[0.08em] text-[#111] min-[900px]:px-[1.35rem] min-[900px]:py-[0.58rem] min-[900px]:text-[0.82rem] max-[899px]:ml-0 max-[899px]:mt-[0.25rem] max-[899px]:min-h-8 max-[899px]:px-[0.9rem] max-[899px]:py-[0.38rem] max-[899px]:text-[0.58rem] max-[899px]:tracking-[0.05em]"
+                  className="ml-0 inline-flex min-h-[2.5rem] items-center justify-center whitespace-nowrap rounded-full border border-[#e8fb76] bg-[#e8fb76] px-[1.05rem] py-[0.42rem] text-[clamp(0.56rem,0.68vw,0.67rem)] font-bold tracking-[0.08em] text-[#111] min-[900px]:hidden max-[899px]:ml-0 max-[899px]:mt-[0.25rem] max-[899px]:min-h-[1.9rem] max-[899px]:px-[0.82rem] max-[899px]:py-[0.32rem] max-[899px]:text-[0.54rem] max-[899px]:tracking-[0.05em]"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   BOOK A TRIAL
                 </a>
               </div>
             </nav>
+
+            <div className="hidden min-[900px]:col-[3] min-[900px]:flex min-[900px]:items-center min-[900px]:justify-self-end">
+              <a
+                href="#"
+                className="inline-flex min-h-[2.5rem] items-center justify-center whitespace-nowrap rounded-full border border-[#e8fb76] bg-[#e8fb76] px-[1.05rem] py-[0.42rem] text-[0.76rem] font-bold tracking-[0.08em] text-[#111]"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                BOOK A TRIAL
+              </a>
+            </div>
           </div>
         </header>
 
