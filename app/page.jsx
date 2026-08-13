@@ -331,7 +331,7 @@ export default function HomePage() {
             <Image
               src="/images/holders/how-it-works.png"
               alt="Battle rope training"
-              className="block h-[clamp(14rem,64vw,19rem)] w-full object-cover min-[900px]:h-[clamp(28rem,56vw,46rem)]"
+              className="block h-[70svh] w-full object-cover min-[900px]:h-[clamp(28rem,56vw,46rem)]"
               width={0}
               height={0}
               sizes="100vw"
@@ -354,7 +354,7 @@ export default function HomePage() {
             <img
               src="/images/holders/advance-fitness.png"
               alt="Strength training with age"
-              className="block h-[clamp(14rem,64vw,19rem)] w-full object-cover min-[900px]:h-[clamp(28rem,56vw,46rem)]"
+              className="block h-[70svh] w-full object-cover min-[900px]:h-[clamp(28rem,56vw,46rem)]"
             />
             <span className="absolute bottom-[0.7rem] right-[0.7rem] rounded-full border border-[rgba(180,214,236,0.72)] bg-[rgba(0,8,16,0.68)] px-[0.72rem] py-[0.4rem] text-[0.68rem] font-bold text-[#e5f6ff] min-[900px]:bottom-[1.2rem] min-[900px]:right-[1.2rem] min-[900px]:px-[1rem] min-[900px]:py-[0.48rem] min-[900px]:text-[clamp(0.75rem,1.1vw,1.05rem)]">
               Those Building Strength with Age
