@@ -186,7 +186,7 @@ export default function HomePage() {
                   className="inline-flex items-center justify-center px-[0.2rem] leading-none"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  FRANCHIS
+                  FRANCHISE
                 </a>
                 <a
                   href="#"
@@ -249,7 +249,7 @@ export default function HomePage() {
               <br />
               CLUB
             </h1>
-            <p className="mt-[0.85rem] max-w-[15.8rem] text-[clamp(0.82rem,3.8vw,1rem)] leading-[1.35] text-[#222] [font-family:var(--font-familjen)] min-[900px]:max-w-[15rem] min-[900px]:text-[clamp(0.9rem,2vw,1.15rem)] min-[1101px]:mt-[1.1rem] min-[1101px]:max-w-[16rem] min-[1101px]:text-[1.18rem]">
+            <p className="mt-[0.85rem] max-w-[15.8rem] text-[clamp(0.82rem,3.8vw,1rem)] leading-[1.35] text-[#222] [font-family:var(--font-inter)] min-[900px]:max-w-[15rem] min-[900px]:text-[clamp(0.9rem,2vw,1.15rem)] min-[1101px]:mt-[1.1rem] min-[1101px]:max-w-[16rem] min-[1101px]:text-[1.18rem]">
               Fully personalised training designed to unlock your body&apos;s
               full potential. Achieve your fitness goals faster, smarter, and
               more efficiently.
@@ -266,7 +266,7 @@ export default function HomePage() {
 
         <STitle
           sectionClassName="relative z-[3] mt-0 px-[0.2rem] pb-[1.2rem] text-center min-[900px]:px-[7.5rem] min-[900px]:pb-[2rem]"
-          descriptionClassName="mx-auto max-w-[41rem] text-[clamp(1.08rem,5.4vw,1.32rem)] font-semibold leading-[1.38] text-[#f2fbff] [font-family:var(--font-new-science-extended)] [font-stretch:normal] min-[900px]:text-[clamp(1.28rem,1.95vw,1.82rem)] min-[900px]:leading-[1.45]"
+          descriptionClassName="mx-auto max-w-[90rem] text-[clamp(1.08rem,5.4vw,1.32rem)] font-semibold leading-[1.38] text-[#f2fbff] [font-family:var(--font-new-science-extended)] [font-stretch:normal] min-[900px]:text-[clamp(1.28rem,1.95vw,1.82rem)] min-[900px]:leading-[1.45]"
           description={
             <>
               Experience one of the world&apos;s most effective full-body
@@ -322,7 +322,7 @@ export default function HomePage() {
           <STitle
             sectionClassName="px-[0.1rem] pb-4 pt-[1.6rem] min-[900px]:px-12 min-[900px]:pb-[1.2rem] min-[900px]:pt-20"
             titleClassName="m-0 text-[clamp(1.45rem,7vw,2rem)] leading-none text-[#80c5d5] [font-family:var(--font-new-science-extended)] min-[900px]:text-[2.6rem] min-[900px]:leading-[1.05]"
-            descriptionClassName="mt-[0.55rem] max-w-full text-[0.86rem] leading-[1.42] text-[#f2fbff] [font-family:var(--font-familjen)] min-[900px]:mt-[0.65rem] min-[900px]:max-w-[39rem] min-[900px]:text-[1rem] min-[900px]:leading-[1.5]"
+            descriptionClassName="mt-[0.55rem] max-w-full text-[0.86rem] leading-[1.42] text-[#f2fbff] [font-family:var(--font-inter)] min-[900px]:mt-[0.65rem] min-[900px]:max-w-[39rem] min-[900px]:text-[1rem] min-[900px]:leading-[1.5]"
             title="HOW DOES IT WORK"
             description="During an ACTIVE20 session, low-impact electrical impulses activate multiple muscle groups at once while you move through simple, guided exercises with your coach. This creates deeper, more complete muscle contractions, delivering a full-body workout in just 20 minutes with minimal joint stress."
           />
@@ -337,7 +337,7 @@ export default function HomePage() {
               sizes="100vw"
             />
             <span
-              className="pointer-events-none absolute left-1/2 top-1/2 h-[3.2rem] w-[3.2rem] -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-[rgba(219,237,246,0.68)] after:absolute after:left-1/2 after:top-1/2 after:-translate-x-[42%] after:-translate-y-1/2 after:border-b-[0.44rem] after:border-l-[0.7rem] after:border-t-[0.44rem] after:border-b-transparent after:border-l-[rgba(219,237,246,0.9)] after:border-t-transparent after:content-['']"
+              className="absolute left-1/2 top-1/2 h-[5rem] w-[5rem] -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-full border-2 border-[rgba(219,237,246,0.68)] bg-[rgba(8,10,12,0.28)] backdrop-blur-[10px] after:absolute after:left-1/2 after:top-1/2 after:-translate-x-[42%] after:-translate-y-1/2 after:border-b-[0.7rem] after:border-l-[1.1rem] after:border-t-[0.7rem] after:border-b-transparent after:border-l-[rgba(219,237,246,0.9)] after:border-t-transparent after:content-[''] min-[900px]:h-[6.5rem] min-[900px]:w-[6.5rem] min-[900px]:after:border-b-[0.9rem] min-[900px]:after:border-l-[1.45rem] min-[900px]:after:border-t-[0.9rem]"
               aria-hidden="true"
             />
           </div>
@@ -356,7 +356,7 @@ export default function HomePage() {
               alt="Strength training with age"
               className="block h-[70svh] w-full object-cover min-[900px]:h-[clamp(28rem,56vw,46rem)]"
             />
-            <span className="absolute bottom-[0.7rem] right-[0.7rem] rounded-full border border-[rgba(180,214,236,0.72)] bg-[rgba(0,8,16,0.68)] px-[0.72rem] py-[0.4rem] text-[0.68rem] font-bold text-[#e5f6ff] min-[900px]:bottom-[1.2rem] min-[900px]:right-[1.2rem] min-[900px]:px-[1rem] min-[900px]:py-[0.48rem] min-[900px]:text-[clamp(0.75rem,1.1vw,1.05rem)]">
+            <span className="absolute bottom-[0.7rem] right-[0.7rem] rounded-full border border-[rgba(180,214,236,0.72)] bg-[rgba(0,8,16,0.68)] px-[0.72rem] py-[0.4rem] text-[0.68rem] font-bold text-[#e5f6ff] [font-family:var(--font-inter)] min-[900px]:bottom-[1.2rem] min-[900px]:right-[1.2rem] min-[900px]:px-[1rem] min-[900px]:py-[0.48rem] min-[900px]:text-[clamp(0.75rem,1.1vw,1.05rem)]">
               Those Building Strength with Age
             </span>
           </div>
@@ -366,7 +366,7 @@ export default function HomePage() {
           <STitle
             sectionClassName="px-[0.1rem] pb-4 pt-[1.6rem] min-[900px]:px-12 min-[900px]:pb-4 min-[900px]:pt-20"
             titleClassName="m-0 text-[clamp(1.45rem,7vw,2rem)] leading-none text-[#80c5d5] [font-family:var(--font-new-science-extended)] min-[900px]:text-[2.6rem] min-[900px]:leading-[1.05]"
-            descriptionClassName="mt-[0.55rem] max-w-full text-[0.86rem] leading-[1.42] text-[#f2fbff] [font-family:var(--font-familjen)] min-[900px]:mt-[0.65rem] min-[900px]:max-w-[39rem] min-[900px]:text-[1rem] min-[900px]:leading-[1.5]"
+            descriptionClassName="mt-[0.55rem] max-w-full text-[0.86rem] leading-[1.42] text-[#f2fbff] [font-family:var(--font-inter)] min-[900px]:mt-[0.65rem] min-[900px]:max-w-[39rem] min-[900px]:text-[1rem] min-[900px]:leading-[1.5]"
             title="THE EMS TECH"
             description="Wear a state-of-the-art EMS suit connected to a tablet-controlled system and guided by your certified coach. Every session is personalised in real time, with intensity, muscle activation, and training programmes precisely adjusted to match your body, fitness level, and goals."
           />
@@ -425,7 +425,7 @@ export default function HomePage() {
                 }}
               >
                 <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_16%_0%,rgba(122,210,248,0.03)_0%,rgba(122,210,248,0)_36%)]" />
-                <p className="relative z-[1] m-0 text-[0.9rem] leading-[1.55] text-[rgba(214,227,238,0.72)] [font-family:var(--font-familjen)] min-[900px]:text-[1.08rem] min-[900px]:leading-[1.5]">
+                <p className="relative z-[1] m-0 text-[0.9rem] leading-[1.55] text-[rgba(214,227,238,0.72)] [font-family:var(--font-inter)] min-[900px]:text-[1.08rem] min-[900px]:leading-[1.5]">
                   &quot;{testimonial.quote}&quot;
                 </p>
                 <div className="relative z-[1] mt-[0.85rem] flex items-center gap-[0.52rem] min-[900px]:mt-[1rem]">
@@ -438,10 +438,10 @@ export default function HomePage() {
                     </span>
                   </div>
                   <div>
-                    <strong className="block text-[0.86rem] font-medium text-[rgba(225,237,247,0.8)] min-[900px]:text-[1.02rem]">
+                    <strong className="block text-[0.86rem] font-medium text-[rgba(225,237,247,0.8)] [font-family:var(--font-inter)] min-[900px]:text-[1.02rem]">
                       {testimonial.name}
                     </strong>
-                    <span className="block text-[0.68rem] text-[rgba(166,188,206,0.62)] [font-family:var(--font-familjen)] min-[900px]:text-[0.82rem]">
+                    <span className="block text-[0.68rem] text-[rgba(166,188,206,0.62)] [font-family:var(--font-inter)] min-[900px]:text-[0.82rem]">
                       Active20 Member
                     </span>
                   </div>

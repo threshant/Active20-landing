@@ -9,7 +9,7 @@ export default function Footer2() {
         <h2 className="m-0 text-[clamp(1.55rem,4.2vw,3.05rem)] leading-none tracking-[0.015em] text-[#80c5d5] [font-family:var(--font-new-science-extended)] max-[899px]:text-[clamp(1.3rem,8.2vw,2rem)]">
           FIND A STUDIO NEAR YOU TODAY
         </h2>
-        <p className="mx-auto mt-[clamp(0.55rem,1.2vw,0.9rem)] max-w-[34rem] text-[clamp(0.68rem,1.02vw,0.9rem)] leading-[1.35] text-[#aebfc9] [font-family:var(--font-familjen)] max-[899px]:max-w-[18rem]">
+        <p className="mx-auto mt-[clamp(0.55rem,1.2vw,0.9rem)] max-w-[34rem] text-[clamp(0.68rem,1.02vw,0.9rem)] leading-[1.35] text-[#aebfc9] [font-family:var(--font-inter)] max-[899px]:max-w-[18rem]">
           Get moving with ACTIVE20. Fast, personalised sessions designed to fit
           your lifestyle and goals.
         </p>
@@ -28,31 +28,31 @@ export default function Footer2() {
       >
         <a
           href="#"
-          className="text-[clamp(0.68rem,0.9vw,0.84rem)] text-[#a9b2b9]"
+          className="text-[clamp(0.68rem,0.9vw,0.84rem)] text-[#a9b2b9] [font-family:var(--font-inter)]"
         >
           Home
         </a>
         <a
           href="#"
-          className="text-[clamp(0.68rem,0.9vw,0.84rem)] text-[#a9b2b9]"
+          className="text-[clamp(0.68rem,0.9vw,0.84rem)] text-[#a9b2b9] [font-family:var(--font-inter)]"
         >
           About
         </a>
         <a
           href="#"
-          className="text-[clamp(0.68rem,0.9vw,0.84rem)] text-[#a9b2b9]"
+          className="text-[clamp(0.68rem,0.9vw,0.84rem)] text-[#a9b2b9] [font-family:var(--font-inter)]"
         >
           Feature
         </a>
         <a
           href="#"
-          className="text-[clamp(0.68rem,0.9vw,0.84rem)] text-[#a9b2b9]"
+          className="text-[clamp(0.68rem,0.9vw,0.84rem)] text-[#a9b2b9] [font-family:var(--font-inter)]"
         >
           Pricing
         </a>
         <a
           href="#"
-          className="text-[clamp(0.68rem,0.9vw,0.84rem)] text-[#a9b2b9]"
+          className="text-[clamp(0.68rem,0.9vw,0.84rem)] text-[#a9b2b9] [font-family:var(--font-inter)]"
         >
           Blog
         </a>
