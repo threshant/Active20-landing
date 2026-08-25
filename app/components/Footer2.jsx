@@ -1,3 +1,6 @@
+"use client";
+
+import Link from "next/link";
 import MapBackground from "./MapBackground";
 
 export default function Footer2() {
@@ -50,12 +53,18 @@ export default function Footer2() {
         >
           Pricing
         </a>
-        <a
-          href="#"
+        <Link
+          href="/privacy-policy"
           className="text-[clamp(0.68rem,0.9vw,0.84rem)] text-[#a9b2b9] [font-family:var(--font-inter)]"
         >
-          Blog
-        </a>
+          Privacy Policy
+        </Link>
+        <Link
+          href="/terms"
+          className="text-[clamp(0.68rem,0.9vw,0.84rem)] text-[#a9b2b9] [font-family:var(--font-inter)]"
+        >
+          Terms and Conditions
+        </Link>
       </nav>
 
       <p
