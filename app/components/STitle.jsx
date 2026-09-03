@@ -1,3 +1,7 @@
+"use client";
+
+import { RevealItem, RevealStagger } from "./Reveal";
+
 export default function STitle({
   title,
   description,
@@ -6,11 +10,17 @@ export default function STitle({
   descriptionClassName = "",
 }) {
   return (
-    <section className={sectionClassName}>
-      {title ? <h2 className={titleClassName || undefined}>{title}</h2> : null}
-      {description ? (
-        <p className={descriptionClassName || undefined}>{description}</p>
+    <RevealStagger as="section" className={sectionClassName} stagger={0.12}>
+      {title ? (
+        <RevealItem as="h2" className={titleClassName || undefined}>
+          {title}
+        </RevealItem>
       ) : null}
-    </section>
+      {description ? (
+        <RevealItem as="p" className={descriptionClassName || undefined}>
+          {description}
+        </RevealItem>
+      ) : null}
+    </RevealStagger>
   );
 }

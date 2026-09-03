@@ -1,13 +1,23 @@
 "use client";
 
+import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Footer2 from "./components/Footer2";
+import {
+  fadeScale,
+  fadeUp,
+  premiumEase,
+  Reveal,
+  RevealItem,
+  RevealStagger,
+} from "./components/Reveal";
 import STitle from "./components/STitle";
 
 export default function HomePage() {
   const [isNavScrolled, setIsNavScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     const onScroll = () => {
@@ -232,34 +242,62 @@ export default function HomePage() {
         </header>
 
         <section className="relative isolate -mx-[calc(50vw-50%)] h-[100svh] min-h-[100svh] w-screen overflow-hidden bg-transparent max-[899px]:h-[88svh] max-[899px]:min-h-[32rem]">
-          <Image
-            src="/images/holders/hero.png"
-            alt="Athlete in EMS suit"
-            className="relative z-0 block h-full w-full object-cover object-top"
-            width={0}
-            height={0}
-            sizes="100vw"
-            priority
-          />
+          <motion.div
+            className="relative z-0 h-full w-full"
+            initial={reduceMotion ? false : { scale: 1.05 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 1.6, ease: premiumEase }}
+          >
+            <Image
+              src="/images/holders/hero.png"
+              alt="Athlete in EMS suit"
+              className="relative z-0 block h-full w-full object-cover object-top"
+              width={0}
+              height={0}
+              sizes="100vw"
+              priority
+            />
+          </motion.div>
           <div className="absolute left-3 right-3 top-[52%] z-[2] max-w-[18.5rem] -translate-y-1/2 pt-[clamp(2.5rem,8vw,3.2rem)] min-[900px]:right-auto min-[900px]:left-8 min-[900px]:top-[48%] min-[900px]:max-w-[17.5rem] min-[900px]:pt-[clamp(2.8rem,6vw,3.6rem)] min-[1101px]:left-[max(2.45rem,calc((100vw-1440px)/2+1.2rem))] min-[1101px]:top-[46%] min-[1101px]:max-w-[24rem] min-[1101px]:pt-[clamp(3rem,4.8vw,4.2rem)]">
-            <h1 className="m-0 text-[clamp(1.85rem,10vw,2.8rem)] font-extrabold leading-[0.96] tracking-[0.03em] text-[#111] min-[900px]:text-[clamp(2.4rem,6vw,4.2rem)] min-[1101px]:text-[4.2rem]">
-              ADVANCED
-              <br />
-              FITNESS
-              <br />
-              CLUB
-            </h1>
-            <p className="mt-[0.85rem] max-w-[15.8rem] text-[clamp(0.82rem,3.8vw,1rem)] leading-[1.35] text-[#222] [font-family:var(--font-inter)] min-[900px]:max-w-[15rem] min-[900px]:text-[clamp(0.9rem,2vw,1.15rem)] min-[1101px]:mt-[1.1rem] min-[1101px]:max-w-[16rem] min-[1101px]:text-[1.18rem]">
-              Fully personalised training designed to unlock your body&apos;s
-              full potential. Achieve your fitness goals faster, smarter, and
-              more efficiently.
-            </p>
-            <a
-              href="#"
-              className="mt-4 inline-flex min-h-[2.45rem] items-center justify-center rounded-full bg-[#151515] px-[1.15rem] py-[0.58rem] text-[0.75rem] font-bold tracking-[0.08em] text-white min-[900px]:mt-6 min-[900px]:min-h-12 min-[900px]:px-[1.7rem] min-[900px]:py-[0.76rem] min-[900px]:text-[clamp(0.86rem,1.02vw,1.08rem)] min-[1101px]:px-[1.8rem] min-[1101px]:py-[0.84rem]"
+            <motion.div
+              initial={reduceMotion ? false : "hidden"}
+              animate="visible"
+              variants={{
+                hidden: {},
+                visible: {
+                  transition: { staggerChildren: 0.12, delayChildren: 0.18 },
+                },
+              }}
             >
-              BOOK A TRIAL
-            </a>
+              <motion.h1
+                className="m-0 text-[clamp(1.85rem,10vw,2.8rem)] font-extrabold leading-[0.96] tracking-[0.03em] text-[#111] min-[900px]:text-[clamp(2.4rem,6vw,4.2rem)] min-[1101px]:text-[4.2rem]"
+                variants={fadeUp}
+                transition={{ duration: 0.9, ease: premiumEase }}
+              >
+                ADVANCED
+                <br />
+                FITNESS
+                <br />
+                CLUB
+              </motion.h1>
+              <motion.p
+                className="mt-[0.85rem] max-w-[15.8rem] text-[clamp(0.82rem,3.8vw,1rem)] leading-[1.35] text-[#222] [font-family:var(--font-inter)] min-[900px]:max-w-[15rem] min-[900px]:text-[clamp(0.9rem,2vw,1.15rem)] min-[1101px]:mt-[1.1rem] min-[1101px]:max-w-[16rem] min-[1101px]:text-[1.18rem]"
+                variants={fadeUp}
+                transition={{ duration: 0.85, ease: premiumEase }}
+              >
+                Fully personalised training designed to unlock your body&apos;s
+                full potential. Achieve your fitness goals faster, smarter, and
+                more efficiently.
+              </motion.p>
+              <motion.a
+                href="#"
+                className="mt-4 inline-flex min-h-[2.45rem] items-center justify-center rounded-full bg-[#151515] px-[1.15rem] py-[0.58rem] text-[0.75rem] font-bold tracking-[0.08em] text-white min-[900px]:mt-6 min-[900px]:min-h-12 min-[900px]:px-[1.7rem] min-[900px]:py-[0.76rem] min-[900px]:text-[clamp(0.86rem,1.02vw,1.08rem)] min-[1101px]:px-[1.8rem] min-[1101px]:py-[0.84rem]"
+                variants={fadeUp}
+                transition={{ duration: 0.8, ease: premiumEase }}
+              >
+                BOOK A TRIAL
+              </motion.a>
+            </motion.div>
           </div>
           <div className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(to_top,rgb(21_33_39)_0%,rgb(21_34_39_/_64%)_16%,rgb(21_33_39_/_19%)_38%,rgb(21_33_39_/_0%)_58%,rgb(14_44_60_/_0%)_78%,rgb(21_33_39_/_0%)_100%)]" />
         </section>
@@ -281,8 +319,12 @@ export default function HomePage() {
           }
         />
 
-        <section className="mt-0 grid grid-cols-1 gap-[0.65rem] min-[900px]:grid-cols-3 min-[900px]:gap-[0.8rem]">
-          <article className="relative m-0 aspect-[16/12] overflow-hidden rounded-[0.3rem] border border-[rgba(132,169,193,0.26)] bg-transparent min-[900px]:aspect-[3/4]">
+        <RevealStagger
+          as="section"
+          className="mt-0 grid grid-cols-1 gap-[0.65rem] min-[900px]:grid-cols-3 min-[900px]:gap-[0.8rem]"
+          stagger={0.12}
+        >
+          <RevealItem as="article" className="relative m-0 aspect-[16/12] overflow-hidden rounded-[0.3rem] border border-[rgba(132,169,193,0.26)] bg-transparent min-[900px]:aspect-[3/4]">
             <Image
               src="/images/holders/gentle-on-joints.png"
               alt="Gentle on joints"
@@ -293,8 +335,8 @@ export default function HomePage() {
             <h3 className="absolute inset-x-0 bottom-0 m-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.72)_0%,transparent_100%)] px-[0.7rem] pb-[0.7rem] pt-[1.65rem] text-[0.7rem] font-semibold tracking-[0.05em] text-[#f7fdff] min-[900px]:pt-[2.5rem] min-[900px]:text-[0.9rem]">
               GENTLE ON JOINTS
             </h3>
-          </article>
-          <article className="relative m-0 aspect-[16/12] overflow-hidden rounded-[0.3rem] border border-[rgba(132,169,193,0.26)] bg-transparent min-[900px]:aspect-[3/4]">
+          </RevealItem>
+          <RevealItem as="article" className="relative m-0 aspect-[16/12] overflow-hidden rounded-[0.3rem] border border-[rgba(132,169,193,0.26)] bg-transparent min-[900px]:aspect-[3/4]">
             <Image
               src="/images/holders/powerful-on-muscles.png"
               alt="Powerful on muscles"
@@ -305,8 +347,8 @@ export default function HomePage() {
             <h3 className="absolute inset-x-0 bottom-0 m-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.72)_0%,transparent_100%)] px-[0.7rem] pb-[0.7rem] pt-[1.65rem] text-[0.7rem] font-semibold tracking-[0.05em] text-[#f7fdff] min-[900px]:pt-[2.5rem] min-[900px]:text-[0.9rem]">
               POWERFUL ON MUSCLES
             </h3>
-          </article>
-          <article className="relative m-0 aspect-[16/12] overflow-hidden rounded-[0.3rem] border border-[rgba(132,169,193,0.26)] bg-transparent min-[900px]:aspect-[3/4]">
+          </RevealItem>
+          <RevealItem as="article" className="relative m-0 aspect-[16/12] overflow-hidden rounded-[0.3rem] border border-[rgba(132,169,193,0.26)] bg-transparent min-[900px]:aspect-[3/4]">
             <img
               src="/images/holders/science-backed-results.png"
               alt="Science backed results"
@@ -315,8 +357,8 @@ export default function HomePage() {
             <h3 className="absolute inset-x-0 bottom-0 m-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.72)_0%,transparent_100%)] px-[0.7rem] pb-[0.7rem] pt-[1.65rem] text-[0.7rem] font-semibold tracking-[0.05em] text-[#f7fdff] min-[900px]:pt-[2.5rem] min-[900px]:text-[0.9rem]">
               SCIENCE BACKED RESULTS
             </h3>
-          </article>
-        </section>
+          </RevealItem>
+        </RevealStagger>
 
         <section>
           <STitle
@@ -327,7 +369,7 @@ export default function HomePage() {
             description="During an ACTIVE20 session, low-impact electrical impulses activate multiple muscle groups at once while you move through simple, guided exercises with your coach. This creates deeper, more complete muscle contractions, delivering a full-body workout in just 20 minutes with minimal joint stress."
           />
 
-          <div className="relative mt-0 overflow-hidden rounded-[0.9rem] border border-[rgba(132,169,193,0.26)] bg-transparent">
+          <Reveal className="relative mt-0 overflow-hidden rounded-[0.9rem] border border-[rgba(132,169,193,0.26)] bg-transparent">
             <Image
               src="/images/holders/how-it-works.png"
               alt="Battle rope training"
@@ -336,11 +378,16 @@ export default function HomePage() {
               height={0}
               sizes="100vw"
             />
-            <span
-              className="absolute left-1/2 top-1/2 h-[5rem] w-[5rem] -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-full border-2 border-[rgba(219,237,246,0.68)] bg-[rgba(8,10,12,0.28)] backdrop-blur-[10px] after:absolute after:left-1/2 after:top-1/2 after:-translate-x-[42%] after:-translate-y-1/2 after:border-b-[0.7rem] after:border-l-[1.1rem] after:border-t-[0.7rem] after:border-b-transparent after:border-l-[rgba(219,237,246,0.9)] after:border-t-transparent after:content-[''] min-[900px]:h-[6.5rem] min-[900px]:w-[6.5rem] min-[900px]:after:border-b-[0.9rem] min-[900px]:after:border-l-[1.45rem] min-[900px]:after:border-t-[0.9rem]"
-              aria-hidden="true"
-            />
-          </div>
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+              <Reveal
+                as="span"
+                variants={fadeScale}
+                delay={0.18}
+                className="relative block h-[5rem] w-[5rem] cursor-pointer rounded-full border-2 border-[rgba(219,237,246,0.68)] bg-[rgba(8,10,12,0.28)] backdrop-blur-[10px] after:absolute after:left-1/2 after:top-1/2 after:-translate-x-[42%] after:-translate-y-1/2 after:border-b-[0.7rem] after:border-l-[1.1rem] after:border-t-[0.7rem] after:border-b-transparent after:border-l-[rgba(219,237,246,0.9)] after:border-t-transparent after:content-[''] min-[900px]:h-[6.5rem] min-[900px]:w-[6.5rem] min-[900px]:after:border-b-[0.9rem] min-[900px]:after:border-l-[1.45rem] min-[900px]:after:border-t-[0.9rem]"
+                aria-hidden="true"
+              />
+            </div>
+          </Reveal>
         </section>
 
         <section className="pt-0">
@@ -350,16 +397,20 @@ export default function HomePage() {
             title="ADVANCED FITNESS FOR EVERY BODY"
           />
 
-          <div className="relative mt-0 overflow-hidden rounded-[0.9rem] border border-[rgba(132,169,193,0.26)] bg-transparent">
+          <Reveal className="relative mt-0 overflow-hidden rounded-[0.9rem] border border-[rgba(132,169,193,0.26)] bg-transparent">
             <img
               src="/images/holders/advance-fitness.png"
               alt="Strength training with age"
               className="block h-[70svh] w-full object-cover min-[900px]:h-[clamp(28rem,56vw,46rem)]"
             />
-            <span className="absolute bottom-[0.7rem] right-[0.7rem] rounded-full border border-[rgba(180,214,236,0.72)] bg-[rgba(0,8,16,0.68)] px-[0.72rem] py-[0.4rem] text-[0.68rem] font-bold text-[#e5f6ff] [font-family:var(--font-inter)] min-[900px]:bottom-[1.2rem] min-[900px]:right-[1.2rem] min-[900px]:px-[1rem] min-[900px]:py-[0.48rem] min-[900px]:text-[clamp(0.75rem,1.1vw,1.05rem)]">
+            <Reveal
+              as="span"
+              delay={0.16}
+              className="absolute bottom-[0.7rem] right-[0.7rem] rounded-full border border-[rgba(180,214,236,0.72)] bg-[rgba(0,8,16,0.68)] px-[0.72rem] py-[0.4rem] text-[0.68rem] font-bold text-[#e5f6ff] [font-family:var(--font-inter)] min-[900px]:bottom-[1.2rem] min-[900px]:right-[1.2rem] min-[900px]:px-[1rem] min-[900px]:py-[0.48rem] min-[900px]:text-[clamp(0.75rem,1.1vw,1.05rem)]"
+            >
               Those Building Strength with Age
-            </span>
-          </div>
+            </Reveal>
+          </Reveal>
         </section>
 
         <section className="pt-0">
@@ -371,7 +422,7 @@ export default function HomePage() {
             description="Wear a state-of-the-art EMS suit connected to a tablet-controlled system and guided by your certified coach. Every session is personalised in real time, with intensity, muscle activation, and training programmes precisely adjusted to match your body, fitness level, and goals."
           />
 
-          <div className="mt-0 grid grid-cols-1 gap-[0.45rem] min-[900px]:grid-cols-[1fr_1.45fr_1fr] min-[900px]:grid-rows-2 min-[900px]:gap-[0.3rem]">
+          <Reveal className="mt-0 grid grid-cols-1 gap-[0.45rem] min-[900px]:grid-cols-[1fr_1.45fr_1fr] min-[900px]:grid-rows-2 min-[900px]:gap-[0.3rem]">
             <Image
               src="/images/holders/ems-tech1.png"
               alt="EMS module close-up"
@@ -404,7 +455,7 @@ export default function HomePage() {
               height={0}
               sizes="(max-width: 900px) 33vw, 370px"
             />
-          </div>
+          </Reveal>
         </section>
 
         <section className="pt-0">
@@ -414,9 +465,13 @@ export default function HomePage() {
             title="REAL PEOPLE. REAL PROGRESS."
           />
 
-          <div className="mt-4 columns-1 gap-[1rem] min-[760px]:columns-2 min-[1160px]:columns-3">
+          <RevealStagger
+            className="mt-4 columns-1 gap-[1rem] min-[760px]:columns-2 min-[1160px]:columns-3"
+            stagger={0.07}
+          >
             {testimonials.map((testimonial) => (
-              <article
+              <RevealItem
+                as="article"
                 key={testimonial.id}
                 className="relative isolate mb-[1rem] overflow-hidden rounded-[1rem] px-[1.2rem] pb-[1.15rem] pt-[1.15rem] shadow-[inset_0_1px_0_rgba(168,209,235,0.08)] [break-inside:avoid] min-[900px]:px-[1.55rem] min-[900px]:pb-[1.32rem] min-[900px]:pt-[1.32rem]"
                 style={{
@@ -446,9 +501,9 @@ export default function HomePage() {
                     </span>
                   </div>
                 </div>
-              </article>
+              </RevealItem>
             ))}
-          </div>
+          </RevealStagger>
         </section>
 
         <Footer2 />
