@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import Footer2 from "./components/Footer2";
 import {
   fadeScale,
-  fadeUp,
   premiumEase,
   Reveal,
   RevealItem,
@@ -48,7 +47,9 @@ export default function HomePage() {
 
   useEffect(() => {
     const originalOverflow = document.body.style.overflow;
-    document.body.style.overflow = isMobileMenuOpen ? "hidden" : originalOverflow;
+    document.body.style.overflow = isMobileMenuOpen
+      ? "hidden"
+      : originalOverflow;
 
     return () => {
       document.body.style.overflow = originalOverflow;
@@ -201,7 +202,11 @@ export default function HomePage() {
               <button
                 type="button"
                 className="inline-flex h-[2.35rem] w-[2.35rem] cursor-pointer flex-col items-center justify-center gap-[0.22rem] rounded-full border border-[rgba(232,245,255,0.38)] bg-[rgba(10,12,14,0.35)] p-0 text-[#f4fbff] min-[900px]:hidden"
-                aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+                aria-label={
+                  isMobileMenuOpen
+                    ? "Close navigation menu"
+                    : "Open navigation menu"
+                }
                 aria-controls="mobile-nav"
                 aria-expanded={isMobileMenuOpen}
                 onClick={() => setIsMobileMenuOpen((prev) => !prev)}
@@ -286,7 +291,7 @@ export default function HomePage() {
             <Image
               src="/images/holders/hero.png"
               alt="Athlete in EMS suit"
-              className="object-cover object-[68%_center] brightness-[0.42] contrast-[1.2] saturate-[0.7] max-[899px]:object-[70%_20%]"
+              className="object-cover max-[899px]:object-[70%_20%]"
               fill
               sizes="100vw"
               priority
@@ -298,8 +303,6 @@ export default function HomePage() {
             <div className="absolute left-[-10%] top-[46%] h-[2.4rem] w-[120%] rotate-[0.8deg] bg-[linear-gradient(90deg,transparent_0%,rgba(110,240,255,0.22)_28%,rgba(180,250,255,0.7)_50%,rgba(110,240,255,0.22)_72%,transparent_100%)] blur-[8px] max-[899px]:top-[44%]" />
             <div className="absolute left-[-6%] top-[52%] h-[4.8rem] w-[112%] -rotate-[0.4deg] bg-[linear-gradient(90deg,transparent_0%,rgba(0,160,230,0.12)_22%,rgba(40,210,255,0.38)_50%,rgba(0,160,230,0.12)_78%,transparent_100%)] blur-[16px] max-[899px]:top-[50%] max-[899px]:h-[3.4rem]" />
           </div>
-
-          <div className="pointer-events-none absolute inset-0 z-[2] bg-[linear-gradient(to_bottom,rgba(5,8,12,0.72)_0%,rgba(5,8,12,0.18)_28%,rgba(5,8,12,0.08)_52%,rgba(5,8,12,0.42)_78%,#080a0c_100%)]" />
 
           <div className="absolute inset-0 z-[3] flex flex-col items-center justify-center px-4 pt-[4.6rem] max-[899px]:justify-start max-[899px]:pt-[7.2rem]">
             <motion.h1
@@ -370,7 +373,10 @@ export default function HomePage() {
           className="mt-0 grid grid-cols-1 gap-[0.65rem] min-[900px]:grid-cols-3 min-[900px]:gap-[0.8rem]"
           stagger={0.12}
         >
-          <RevealItem as="article" className="relative m-0 aspect-[16/12] overflow-hidden rounded-[0.3rem] border border-[rgba(132,169,193,0.26)] bg-transparent min-[900px]:aspect-[3/4]">
+          <RevealItem
+            as="article"
+            className="relative m-0 aspect-[16/12] overflow-hidden rounded-[0.3rem] border border-[rgba(132,169,193,0.26)] bg-transparent min-[900px]:aspect-[3/4]"
+          >
             <Image
               src="/images/holders/gentle-on-joints.png"
               alt="Gentle on joints"
@@ -382,7 +388,10 @@ export default function HomePage() {
               GENTLE ON JOINTS
             </h3>
           </RevealItem>
-          <RevealItem as="article" className="relative m-0 aspect-[16/12] overflow-hidden rounded-[0.3rem] border border-[rgba(132,169,193,0.26)] bg-transparent min-[900px]:aspect-[3/4]">
+          <RevealItem
+            as="article"
+            className="relative m-0 aspect-[16/12] overflow-hidden rounded-[0.3rem] border border-[rgba(132,169,193,0.26)] bg-transparent min-[900px]:aspect-[3/4]"
+          >
             <Image
               src="/images/holders/powerful-on-muscles.png"
               alt="Powerful on muscles"
@@ -394,7 +403,10 @@ export default function HomePage() {
               POWERFUL ON MUSCLES
             </h3>
           </RevealItem>
-          <RevealItem as="article" className="relative m-0 aspect-[16/12] overflow-hidden rounded-[0.3rem] border border-[rgba(132,169,193,0.26)] bg-transparent min-[900px]:aspect-[3/4]">
+          <RevealItem
+            as="article"
+            className="relative m-0 aspect-[16/12] overflow-hidden rounded-[0.3rem] border border-[rgba(132,169,193,0.26)] bg-transparent min-[900px]:aspect-[3/4]"
+          >
             <img
               src="/images/holders/science-backed-results.png"
               alt="Science backed results"
