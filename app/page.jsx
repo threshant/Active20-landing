@@ -58,6 +58,37 @@ export default function HomePage() {
 
   const isNavActive = isNavScrolled || isMobileMenuOpen;
 
+  const emsTechImages = [
+    {
+      src: "/images/holders/ems-tech1.png",
+      alt: "EMS module close-up",
+      sizes: "(max-width: 900px) 78vw, 370px",
+      className:
+        "block min-h-full w-full rounded-[0.22rem] border border-[rgba(132,169,193,0.26)] object-cover min-[900px]:col-[1] min-[900px]:row-[1]",
+    },
+    {
+      src: "/images/holders/ems-tech-2.png",
+      alt: "EMS console",
+      sizes: "(max-width: 900px) 78vw, 540px",
+      className:
+        "block min-h-full w-full rounded-[0.22rem] border border-[rgba(132,169,193,0.26)] object-cover min-[900px]:col-[2] min-[900px]:row-[1/span_2]",
+    },
+    {
+      src: "/images/holders/ems-tech-3.png",
+      alt: "Resistance and EMS suit",
+      sizes: "(max-width: 900px) 78vw, 370px",
+      className:
+        "block min-h-full w-full rounded-[0.22rem] border border-[rgba(132,169,193,0.26)] object-cover min-[900px]:col-[3] min-[900px]:row-[1/span_2]",
+    },
+    {
+      src: "/images/holders/ems-tech-4.png",
+      alt: "EMS suit",
+      sizes: "(max-width: 900px) 78vw, 370px",
+      className:
+        "block min-h-full w-full rounded-[0.22rem] border border-[rgba(132,169,193,0.26)] object-cover min-[900px]:col-[1] min-[900px]:row-[2]",
+    },
+  ];
+
   const testimonials = [
     {
       id: "sushant",
@@ -201,7 +232,7 @@ export default function HomePage() {
               </a>
               <button
                 type="button"
-                className="inline-flex h-[2.35rem] w-[2.35rem] cursor-pointer flex-col items-center justify-center gap-[0.22rem] rounded-full border border-[rgba(232,245,255,0.38)] bg-[rgba(10,12,14,0.35)] p-0 text-[#f4fbff] min-[900px]:hidden"
+                className="inline-flex h-8 w-8 cursor-pointer flex-col items-center justify-center gap-[0.28rem] border-0 bg-transparent p-0 text-[#f4fbff] min-[900px]:hidden"
                 aria-label={
                   isMobileMenuOpen
                     ? "Close navigation menu"
@@ -213,14 +244,14 @@ export default function HomePage() {
               >
                 {isMobileMenuOpen ? (
                   <>
-                    <span className="block h-[1.5px] w-[0.95rem] translate-y-[3.5px] rotate-45 bg-current" />
-                    <span className="block h-[1.5px] w-[0.95rem] -translate-y-[3.5px] -rotate-45 bg-current" />
+                    <span className="block h-[1.5px] w-[1.2rem] translate-y-[3.8px] rotate-45 bg-current" />
+                    <span className="block h-[1.5px] w-[1.2rem] -translate-y-[3.8px] -rotate-45 bg-current" />
                   </>
                 ) : (
                   <>
-                    <span className="block h-[1.5px] w-[0.95rem] bg-current" />
-                    <span className="block h-[1.5px] w-[0.95rem] bg-current" />
-                    <span className="block h-[1.5px] w-[0.95rem] bg-current" />
+                    <span className="block h-[1.5px] w-[1.2rem] bg-current" />
+                    <span className="block h-[1.5px] w-[1.2rem] bg-current" />
+                    <span className="block h-[1.5px] w-[1.2rem] bg-current" />
                   </>
                 )}
               </button>
@@ -340,8 +371,8 @@ export default function HomePage() {
         </section>
 
         <STitle
-          sectionClassName="relative z-[3] mt-0 px-[0.2rem] pb-[1.2rem] text-center min-[900px]:px-[7.5rem] min-[900px]:pb-[2rem]"
-          descriptionClassName="mx-auto max-w-[90rem] text-[clamp(1.08rem,5.4vw,1.32rem)] font-semibold leading-[1.38] text-[#f2fbff] [font-family:var(--font-new-science-extended)] [font-stretch:normal] min-[900px]:text-[clamp(1.28rem,1.95vw,1.82rem)] min-[900px]:leading-[1.45]"
+          sectionClassName="relative z-[3] mt-0 px-[0.2rem] pb-[1.2rem] text-left min-[900px]:px-[7.5rem] min-[900px]:pb-[2rem] min-[900px]:text-center"
+          descriptionClassName="mx-auto max-w-[90rem] text-[clamp(0.82rem,3.9vw,0.96rem)] font-semibold leading-[1.42] text-[#f2fbff] [font-family:var(--font-new-science-extended)] [font-stretch:normal] min-[900px]:text-[clamp(1.28rem,1.95vw,1.82rem)] min-[900px]:leading-[1.45]"
           description={
             <>
               Experience one of the world&apos;s most effective full-body
@@ -468,39 +499,36 @@ export default function HomePage() {
             description="Wear a state-of-the-art EMS suit connected to a tablet-controlled system and guided by your certified coach. Every session is personalised in real time, with intensity, muscle activation, and training programmes precisely adjusted to match your body, fitness level, and goals."
           />
 
-          <Reveal className="mt-0 grid grid-cols-1 gap-[0.45rem] min-[900px]:grid-cols-[1fr_1.45fr_1fr] min-[900px]:grid-rows-2 min-[900px]:gap-[0.3rem]">
-            <Image
-              src="/images/holders/ems-tech1.png"
-              alt="EMS module close-up"
-              className="block min-h-full w-full rounded-[0.22rem] border border-[rgba(132,169,193,0.26)] object-cover min-[900px]:col-[1] min-[900px]:row-[1]"
-              width={0}
-              height={0}
-              sizes="(max-width: 900px) 33vw, 370px"
-            />
-            <Image
-              src="/images/holders/ems-tech-2.png"
-              alt="EMS console"
-              className="block min-h-full w-full rounded-[0.22rem] border border-[rgba(132,169,193,0.26)] object-cover min-[900px]:col-[2] min-[900px]:row-[1/span_2]"
-              width={0}
-              height={0}
-              sizes="(max-width: 900px) 45vw, 540px"
-            />
-            <Image
-              src="/images/holders/ems-tech-3.png"
-              alt="Resistance and EMS suit"
-              className="block min-h-full w-full rounded-[0.22rem] border border-[rgba(132,169,193,0.26)] object-cover min-[900px]:col-[3] min-[900px]:row-[1/span_2]"
-              width={0}
-              height={0}
-              sizes="(max-width: 900px) 33vw, 370px"
-            />
-            <Image
-              src="/images/holders/ems-tech-4.png"
-              alt="EMS suit"
-              className="block min-h-full w-full rounded-[0.22rem] border border-[rgba(132,169,193,0.26)] object-cover min-[900px]:col-[1] min-[900px]:row-[2]"
-              width={0}
-              height={0}
-              sizes="(max-width: 900px) 33vw, 370px"
-            />
+          <div className="ems-tech-marquee mt-0 min-[900px]:hidden">
+            <div className="ems-tech-marquee-track">
+              {[0, 1].flatMap((copy) =>
+                emsTechImages.map((image) => (
+                  <Image
+                    key={`${image.src}-${copy}`}
+                    src={image.src}
+                    alt={image.alt}
+                    className="h-[13.5rem] w-[78vw] shrink-0 rounded-[0.22rem] border border-[rgba(132,169,193,0.26)] object-cover"
+                    width={0}
+                    height={0}
+                    sizes={image.sizes}
+                  />
+                )),
+              )}
+            </div>
+          </div>
+
+          <Reveal className="mt-0 hidden grid-cols-[1fr_1.45fr_1fr] grid-rows-2 gap-[0.3rem] min-[900px]:grid">
+            {emsTechImages.map((image) => (
+              <Image
+                key={image.src}
+                src={image.src}
+                alt={image.alt}
+                className={image.className}
+                width={0}
+                height={0}
+                sizes={image.sizes}
+              />
+            ))}
           </Reveal>
         </section>
 

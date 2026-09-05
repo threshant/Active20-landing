@@ -20,3 +20,37 @@
     text-decoration: none;
   }
 }
+
+@layer utilities {
+  @keyframes ems-tech-scroll {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .ems-tech-marquee {
+    overflow: hidden;
+  }
+
+  .ems-tech-marquee-track {
+    display: flex;
+    width: max-content;
+    gap: 0.45rem;
+    animation: ems-tech-scroll 24s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ems-tech-marquee {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .ems-tech-marquee-track {
+      animation: none;
+    }
+  }
+}
