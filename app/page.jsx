@@ -298,15 +298,9 @@ export default function HomePage() {
             />
           </motion.div>
 
-          <div className="pointer-events-none absolute inset-0 z-[1] overflow-hidden">
-            <div className="absolute left-[-8%] top-[38%] h-[7.5rem] w-[116%] -rotate-[1.5deg] bg-[linear-gradient(90deg,transparent_0%,rgba(0,196,255,0.08)_18%,rgba(70,230,255,0.55)_50%,rgba(0,196,255,0.08)_82%,transparent_100%)] blur-[18px] max-[899px]:top-[36%] max-[899px]:h-[5.2rem]" />
-            <div className="absolute left-[-10%] top-[46%] h-[2.4rem] w-[120%] rotate-[0.8deg] bg-[linear-gradient(90deg,transparent_0%,rgba(110,240,255,0.22)_28%,rgba(180,250,255,0.7)_50%,rgba(110,240,255,0.22)_72%,transparent_100%)] blur-[8px] max-[899px]:top-[44%]" />
-            <div className="absolute left-[-6%] top-[52%] h-[4.8rem] w-[112%] -rotate-[0.4deg] bg-[linear-gradient(90deg,transparent_0%,rgba(0,160,230,0.12)_22%,rgba(40,210,255,0.38)_50%,rgba(0,160,230,0.12)_78%,transparent_100%)] blur-[16px] max-[899px]:top-[50%] max-[899px]:h-[3.4rem]" />
-          </div>
-
-          <div className="absolute inset-0 z-[3] flex flex-col items-center justify-center px-4 pt-[4.6rem] max-[899px]:justify-start max-[899px]:pt-[7.2rem]">
+          <div className="absolute inset-0 z-[3] flex flex-col items-center justify-center px-4">
             <motion.h1
-              className="m-0 text-center text-[clamp(2.4rem,7.4vw,6.4rem)] font-extrabold uppercase leading-[0.88] tracking-[0.02em] text-white [font-family:var(--font-new-science-extended)] [text-shadow:0_0_28px_rgba(120,230,255,0.28)] max-[899px]:text-[clamp(1.85rem,10.4vw,2.7rem)]"
+              className="m-0 text-center text-[clamp(2.4rem,7.4vw,6.4rem)] font-extrabold uppercase leading-[0.88] tracking-[0.02em] text-white [font-family:var(--font-new-science-extended)] [text-shadow:0_1px_2px_rgba(0,0,0,0.35)] max-[899px]:text-[clamp(1.85rem,10.4vw,2.7rem)]"
               initial={reduceMotion ? false : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.95, ease: premiumEase }}
@@ -322,33 +316,27 @@ export default function HomePage() {
               </span>
               <span className="block whitespace-nowrap">CLUB</span>
             </motion.h1>
-          </div>
 
-          <motion.div
-            className="absolute bottom-[1.7rem] left-1/2 z-[4] flex w-[min(100%-1.5rem,22rem)] -translate-x-1/2 flex-col items-center gap-[0.7rem] max-[899px]:bottom-[1.15rem] min-[900px]:bottom-[2.1rem] min-[900px]:w-auto min-[900px]:flex-row min-[900px]:gap-[0.85rem]"
-            initial={reduceMotion ? false : { opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: premiumEase, delay: 0.24 }}
-          >
-            <a
-              href="#"
-              className="inline-flex min-h-[2.7rem] w-full items-center justify-center rounded-full border border-[#e8fb76] bg-[#e8fb76] px-[1.4rem] text-[0.72rem] font-bold tracking-[0.1em] text-[#111] min-[900px]:min-h-[2.9rem] min-[900px]:w-auto min-[900px]:min-w-[10.5rem] min-[900px]:text-[0.76rem]"
+            <motion.div
+              className="mt-7 flex w-[min(100%,22rem)] flex-col items-center justify-center gap-[0.7rem] min-[900px]:mt-8 min-[900px]:w-auto min-[900px]:flex-row min-[900px]:gap-[0.85rem]"
+              initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: premiumEase, delay: 0.24 }}
             >
-              BOOK A TRIAL
-            </a>
-            <a
-              href="#how-it-works"
-              className="inline-flex min-h-[2.7rem] w-full items-center justify-center rounded-full border border-white/80 bg-transparent px-[1.4rem] text-[0.72rem] font-bold tracking-[0.1em] text-white min-[900px]:min-h-[2.9rem] min-[900px]:w-auto min-[900px]:min-w-[10.5rem] min-[900px]:text-[0.76rem]"
-            >
-              KNOW MORE
-            </a>
-            <span
-              className="mt-1 text-[1.15rem] leading-none text-white/85 min-[900px]:hidden"
-              aria-hidden="true"
-            >
-              ∨
-            </span>
-          </motion.div>
+              <a
+                href="#"
+                className="inline-flex min-h-[2.7rem] w-full items-center justify-center rounded-full border border-[#e8fb76] bg-[#e8fb76] px-[1.4rem] text-[0.72rem] font-bold tracking-[0.1em] text-[#111] min-[900px]:min-h-[2.9rem] min-[900px]:w-auto min-[900px]:min-w-[10.5rem] min-[900px]:text-[0.76rem]"
+              >
+                BOOK A TRIAL
+              </a>
+              <a
+                href="#how-it-works"
+                className="inline-flex min-h-[2.7rem] w-full items-center justify-center rounded-full border border-white/80 bg-transparent px-[1.4rem] text-[0.72rem] font-bold tracking-[0.1em] text-white min-[900px]:min-h-[2.9rem] min-[900px]:w-auto min-[900px]:min-w-[10.5rem] min-[900px]:text-[0.76rem]"
+              >
+                KNOW MORE
+              </a>
+            </motion.div>
+          </div>
         </section>
 
         <STitle
