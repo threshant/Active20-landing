@@ -152,7 +152,7 @@ export default function HomePage() {
     "inline-flex min-h-[2.4rem] items-center justify-center px-[0.2rem] leading-none max-[899px]:min-h-[2.75rem] max-[899px]:w-full max-[899px]:justify-start max-[899px]:border-b max-[899px]:border-[rgba(232,245,255,0.12)] max-[899px]:px-0 max-[899px]:text-[0.78rem] max-[899px]:tracking-[0.12em]";
 
   return (
-    <main className="relative isolate flex w-full justify-center overflow-x-hidden p-0 before:pointer-events-none before:absolute before:left-[-4rem] before:top-10 before:z-0 before:h-[clamp(22rem,46vh,38rem)] before:w-[clamp(8rem,13vw,12rem)] before:rounded-full before:bg-[radial-gradient(ellipse_at_center,rgba(245,255,180,0.98)_0%,rgba(232,251,118,0.9)_18%,rgba(232,251,118,0.56)_40%,rgba(232,251,118,0.2)_62%,rgba(232,251,118,0.02)_80%,rgba(232,251,118,0)_100%)] before:blur-[15px] after:pointer-events-none after:absolute after:right-[-4rem] after:top-10 after:z-0 after:h-[clamp(22rem,46vh,38rem)] after:w-[clamp(8rem,13vw,12rem)] after:rounded-full after:bg-[radial-gradient(ellipse_at_center,rgba(245,255,180,0.98)_0%,rgba(232,251,118,0.9)_18%,rgba(232,251,118,0.56)_40%,rgba(232,251,118,0.2)_62%,rgba(232,251,118,0.02)_80%,rgba(232,251,118,0)_100%)] after:blur-[15px]">
+    <main className="relative isolate flex w-full justify-center overflow-x-hidden bg-[#01111e] p-0">
       <div className="relative z-[1] w-[min(100%,1440px)] px-4 pb-6 max-[899px]:px-3 max-[899px]:pb-4 [&>section+section]:mt-16 max-[899px]:[&>section+section]:mt-[2.6rem] min-[900px]:px-[1.2rem] min-[900px]:[&>section+section]:mt-24">
         <header className={topbarClassName}>
           <div className="mx-auto flex w-[min(100%,1440px)] items-center justify-between gap-[1.2rem] px-[1.2rem] max-[899px]:gap-[0.65rem] max-[899px]:px-1">
@@ -281,7 +281,7 @@ export default function HomePage() {
           ) : null}
         </header>
 
-        <section className="relative isolate -mx-[calc(50vw-50%)] h-[100svh] min-h-[36rem] w-screen overflow-hidden bg-[#05080c] max-[899px]:min-h-[40rem]">
+        <section className="relative isolate -mx-[calc(50vw-50%)] h-[100svh] min-h-[36rem] w-screen overflow-hidden bg-[#01111e] max-[899px]:min-h-[40rem]">
           <motion.div
             className="absolute inset-0 z-0"
             initial={reduceMotion ? false : { scale: 1.06 }}

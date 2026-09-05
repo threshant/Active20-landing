@@ -49,7 +49,7 @@ export function LegalContactEmail() {
 
 export default function LegalPageLayout({ title, lastUpdated, children }) {
   return (
-    <main className="relative isolate flex w-full justify-center overflow-x-hidden p-0 before:pointer-events-none before:absolute before:left-[-4rem] before:top-10 before:z-0 before:h-[clamp(22rem,46vh,38rem)] before:w-[clamp(8rem,13vw,12rem)] before:rounded-full before:bg-[radial-gradient(ellipse_at_center,rgba(245,255,180,0.98)_0%,rgba(232,251,118,0.9)_18%,rgba(232,251,118,0.56)_40%,rgba(232,251,118,0.2)_62%,rgba(232,251,118,0.02)_80%,rgba(232,251,118,0)_100%)] before:blur-[15px] after:pointer-events-none after:absolute after:right-[-4rem] after:top-10 after:z-0 after:h-[clamp(22rem,46vh,38rem)] after:w-[clamp(8rem,13vw,12rem)] after:rounded-full after:bg-[radial-gradient(ellipse_at_center,rgba(245,255,180,0.98)_0%,rgba(232,251,118,0.9)_18%,rgba(232,251,118,0.56)_40%,rgba(232,251,118,0.2)_62%,rgba(232,251,118,0.02)_80%,rgba(232,251,118,0)_100%)] after:blur-[15px]">
+    <main className="relative isolate flex w-full justify-center overflow-x-hidden bg-[#01111e] p-0">
       <div className="relative z-[1] w-[min(100%,1440px)] px-4 pb-6 max-[899px]:px-3 max-[899px]:pb-4 min-[900px]:px-[1.2rem]">
         <header className="fixed left-0 top-0 z-40 w-full border-none bg-[linear-gradient(135deg,rgba(12,12,12,0.82),rgba(4,4,4,0.88))] px-[1.2rem] py-[0.85rem] shadow-[0_8px_24px_rgba(0,0,0,0.4)] backdrop-blur-[8px] max-[899px]:px-3 max-[899px]:pb-[0.6rem] max-[899px]:pt-[0.55rem]">
           <div className="mx-auto grid w-[min(100%,1440px)] grid-cols-[1fr_auto] items-center gap-[1.2rem] px-[1.2rem] max-[899px]:gap-[0.65rem] min-[900px]:grid-cols-[1fr_auto_1fr]">
