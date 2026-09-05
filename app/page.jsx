@@ -241,65 +241,73 @@ export default function HomePage() {
           </div>
         </header>
 
-        <section className="relative isolate -mx-[calc(50vw-50%)] h-[100svh] min-h-[100svh] w-screen overflow-hidden bg-transparent max-[899px]:h-[88svh] max-[899px]:min-h-[32rem]">
+        <section className="relative isolate -mx-[calc(50vw-50%)] h-[100svh] min-h-[36rem] w-screen overflow-hidden bg-[#cbcbcd] max-[899px]:h-[92svh] max-[899px]:min-h-[34rem]">
           <motion.div
-            className="relative z-0 h-full w-full"
-            initial={reduceMotion ? false : { scale: 1.05 }}
+            className="absolute inset-0 z-0"
+            initial={reduceMotion ? false : { scale: 1.04 }}
             animate={{ scale: 1 }}
             transition={{ duration: 1.6, ease: premiumEase }}
           >
             <Image
-              src="/images/holders/hero.png"
-              alt="Athlete in EMS suit"
-              className="relative z-0 block h-full w-full object-cover object-top"
-              width={0}
-              height={0}
+              src="/images/hero_background.png"
+              alt=""
+              className="object-cover object-center"
+              fill
               sizes="100vw"
               priority
             />
           </motion.div>
-          <div className="absolute left-3 right-3 top-[52%] z-[2] max-w-[18.5rem] -translate-y-1/2 pt-[clamp(2.5rem,8vw,3.2rem)] min-[900px]:right-auto min-[900px]:left-8 min-[900px]:top-[48%] min-[900px]:max-w-[17.5rem] min-[900px]:pt-[clamp(2.8rem,6vw,3.6rem)] min-[1101px]:left-[max(2.45rem,calc((100vw-1440px)/2+1.2rem))] min-[1101px]:top-[46%] min-[1101px]:max-w-[24rem] min-[1101px]:pt-[clamp(3rem,4.8vw,4.2rem)]">
-            <motion.div
-              initial={reduceMotion ? false : "hidden"}
-              animate="visible"
-              variants={{
-                hidden: {},
-                visible: {
-                  transition: { staggerChildren: 0.12, delayChildren: 0.18 },
-                },
-              }}
+
+          <div className="pointer-events-none absolute inset-0 z-[1] flex items-center justify-center px-3 pt-[4.2rem] max-[899px]:items-start max-[899px]:pt-[5.6rem] min-[900px]:pt-6">
+            <motion.h1
+              className="m-0 text-center text-[clamp(2.55rem,10.8vw,8.35rem)] font-extrabold uppercase leading-[0.82] tracking-[-0.035em] text-[#0c0c0c] [font-family:var(--font-new-science-extended)] max-[899px]:text-[clamp(2.05rem,12.6vw,3.35rem)]"
+              initial={reduceMotion ? false : { opacity: 0, y: 22 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.95, ease: premiumEase }}
             >
-              <motion.h1
-                className="m-0 text-[clamp(1.85rem,10vw,2.8rem)] font-extrabold leading-[0.96] tracking-[0.03em] text-[#111] min-[900px]:text-[clamp(2.4rem,6vw,4.2rem)] min-[1101px]:text-[4.2rem]"
-                variants={fadeUp}
-                transition={{ duration: 0.9, ease: premiumEase }}
-              >
-                ADVANCED
-                <br />
-                FITNESS
-                <br />
-                CLUB
-              </motion.h1>
-              <motion.p
-                className="mt-[0.85rem] max-w-[15.8rem] text-[clamp(0.82rem,3.8vw,1rem)] leading-[1.35] text-[#222] [font-family:var(--font-inter)] min-[900px]:max-w-[15rem] min-[900px]:text-[clamp(0.9rem,2vw,1.15rem)] min-[1101px]:mt-[1.1rem] min-[1101px]:max-w-[16rem] min-[1101px]:text-[1.18rem]"
-                variants={fadeUp}
-                transition={{ duration: 0.85, ease: premiumEase }}
-              >
-                Fully personalised training designed to unlock your body&apos;s
-                full potential. Achieve your fitness goals faster, smarter, and
-                more efficiently.
-              </motion.p>
-              <motion.a
-                href="#"
-                className="mt-4 inline-flex min-h-[2.45rem] items-center justify-center rounded-full bg-[#151515] px-[1.15rem] py-[0.58rem] text-[0.75rem] font-bold tracking-[0.08em] text-white min-[900px]:mt-6 min-[900px]:min-h-12 min-[900px]:px-[1.7rem] min-[900px]:py-[0.76rem] min-[900px]:text-[clamp(0.86rem,1.02vw,1.08rem)] min-[1101px]:px-[1.8rem] min-[1101px]:py-[0.84rem]"
-                variants={fadeUp}
-                transition={{ duration: 0.8, ease: premiumEase }}
-              >
-                BOOK A TRIAL
-              </motion.a>
-            </motion.div>
+              <span className="block whitespace-nowrap">ADVANCED FITNESS</span>
+              <span className="block whitespace-nowrap">CLUB</span>
+            </motion.h1>
           </div>
-          <div className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(to_top,rgb(21_33_39)_0%,rgb(21_34_39_/_64%)_16%,rgb(21_33_39_/_19%)_38%,rgb(21_33_39_/_0%)_58%,rgb(14_44_60_/_0%)_78%,rgb(21_33_39_/_0%)_100%)]" />
+
+          <motion.div
+            className="absolute inset-x-0 bottom-[4.8rem] z-[2] flex h-[min(78%,46rem)] items-end justify-center max-[899px]:bottom-[6.4rem] max-[899px]:h-[min(64%,28rem)] min-[900px]:bottom-[5.4rem]"
+            initial={reduceMotion ? false : { opacity: 0, y: 28, scale: 1.04 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 1.15, ease: premiumEase, delay: 0.12 }}
+          >
+            <Image
+              src="/images/hero_foreground.png"
+              alt="Athlete in EMS suit"
+              className="h-full w-auto max-w-[min(94vw,44rem)] object-contain object-bottom max-[899px]:max-w-[min(108vw,27rem)]"
+              width={962}
+              height={933}
+              sizes="(max-width: 899px) 100vw, 44rem"
+              priority
+            />
+          </motion.div>
+
+          <motion.div
+            className="absolute bottom-[1.15rem] left-1/2 z-[4] flex w-[min(100%-1.4rem,28rem)] -translate-x-1/2 flex-wrap items-center justify-center gap-[0.55rem] max-[899px]:bottom-[0.95rem] min-[520px]:flex-nowrap min-[900px]:bottom-[1.45rem] min-[900px]:w-auto min-[900px]:gap-[0.75rem]"
+            initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: premiumEase, delay: 0.28 }}
+          >
+            <a
+              href="#"
+              className="inline-flex min-h-[2.55rem] min-w-[8.6rem] items-center justify-center rounded-full border border-[#e8fb76] bg-[#e8fb76] px-[1.25rem] py-[0.55rem] text-[0.72rem] font-bold tracking-[0.08em] text-[#111] min-[900px]:min-h-[2.85rem] min-[900px]:min-w-[10rem] min-[900px]:px-[1.55rem] min-[900px]:text-[0.78rem]"
+            >
+              Start trial
+            </a>
+            <a
+              href="#how-it-works"
+              className="inline-flex min-h-[2.55rem] min-w-[8.6rem] items-center justify-center rounded-full border border-[rgba(255,255,255,0.72)] bg-[rgba(8,10,12,0.42)] px-[1.25rem] py-[0.55rem] text-[0.72rem] font-bold tracking-[0.08em] text-[#f7fdff] backdrop-blur-[8px] min-[900px]:min-h-[2.85rem] min-[900px]:min-w-[10rem] min-[900px]:px-[1.55rem] min-[900px]:text-[0.78rem]"
+            >
+              Know more
+            </a>
+          </motion.div>
+
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[3] h-[7.5rem] bg-[linear-gradient(to_top,#080a0c_0%,rgba(8,10,12,0.62)_42%,transparent_100%)] max-[899px]:h-[6.4rem]" />
         </section>
 
         <STitle
@@ -360,7 +368,7 @@ export default function HomePage() {
           </RevealItem>
         </RevealStagger>
 
-        <section>
+        <section id="how-it-works" className="scroll-mt-24">
           <STitle
             sectionClassName="px-[0.1rem] pb-4 pt-[1.6rem] min-[900px]:px-12 min-[900px]:pb-[1.2rem] min-[900px]:pt-20"
             titleClassName="m-0 text-[clamp(1.45rem,7vw,2rem)] leading-none text-[#80c5d5] [font-family:var(--font-new-science-extended)] min-[900px]:text-[2.6rem] min-[900px]:leading-[1.05]"
