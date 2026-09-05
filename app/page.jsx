@@ -46,6 +46,15 @@ export default function HomePage() {
     };
   }, []);
 
+  useEffect(() => {
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = isMobileMenuOpen ? "hidden" : originalOverflow;
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [isMobileMenuOpen]);
+
   const isNavActive = isNavScrolled || isMobileMenuOpen;
 
   const testimonials = [
@@ -132,27 +141,23 @@ export default function HomePage() {
     },
   ];
 
-  const topbarClassName = `fixed left-0 top-0 z-40 w-full border-none bg-transparent px-[1.2rem] py-[0.85rem] shadow-none transition-[background-color,backdrop-filter,box-shadow] duration-[220ms] max-[899px]:px-3 max-[899px]:pb-[0.6rem] max-[899px]:pt-[0.55rem] ${
+  const topbarClassName = `fixed left-0 top-0 z-50 w-full border-none bg-transparent px-[1.2rem] py-[0.85rem] text-[#f4fbff] shadow-none transition-[background-color,backdrop-filter,box-shadow] duration-[220ms] max-[899px]:px-3 max-[899px]:pb-[0.6rem] max-[899px]:pt-[0.55rem] ${
     isNavActive
-      ? "bg-[linear-gradient(135deg,rgba(12,12,12,0.82),rgba(4,4,4,0.88))] shadow-[0_8px_24px_rgba(0,0,0,0.4)] backdrop-blur-[8px]"
+      ? "bg-[linear-gradient(135deg,rgba(12,12,12,0.92),rgba(4,4,4,0.94))] shadow-[0_8px_24px_rgba(0,0,0,0.4)] backdrop-blur-[10px]"
       : ""
   }`;
 
-  const topNavClassName = `w-full max-[899px]:col-[1/span_2] max-[899px]:mt-[0.35rem] max-[899px]:hidden min-[900px]:col-[2] min-[900px]:justify-self-center ${
-    isNavActive ? "text-[#e8f5ff]" : "text-[#111]"
-  } ${isMobileMenuOpen ? "max-[899px]:block" : ""}`;
-
-  const navItemsClassName =
-    "flex w-full items-center justify-center gap-[0.75rem] whitespace-nowrap text-[clamp(0.5rem,0.62vw,0.61rem)] font-medium tracking-[0.1em] max-[899px]:w-full max-[899px]:flex-col max-[899px]:items-start max-[899px]:gap-[0.6rem] max-[899px]:px-0 max-[899px]:pb-[0.3rem] max-[899px]:pt-[0.15rem] max-[899px]:text-[0.5rem] max-[899px]:leading-[1.2] min-[900px]:w-auto min-[900px]:text-[0.61rem]";
+  const navLinkClassName =
+    "inline-flex min-h-[2.4rem] items-center justify-center px-[0.2rem] leading-none max-[899px]:min-h-[2.75rem] max-[899px]:w-full max-[899px]:justify-start max-[899px]:border-b max-[899px]:border-[rgba(232,245,255,0.12)] max-[899px]:px-0 max-[899px]:text-[0.78rem] max-[899px]:tracking-[0.12em]";
 
   return (
     <main className="relative isolate flex w-full justify-center overflow-x-hidden p-0 before:pointer-events-none before:absolute before:left-[-4rem] before:top-10 before:z-0 before:h-[clamp(22rem,46vh,38rem)] before:w-[clamp(8rem,13vw,12rem)] before:rounded-full before:bg-[radial-gradient(ellipse_at_center,rgba(245,255,180,0.98)_0%,rgba(232,251,118,0.9)_18%,rgba(232,251,118,0.56)_40%,rgba(232,251,118,0.2)_62%,rgba(232,251,118,0.02)_80%,rgba(232,251,118,0)_100%)] before:blur-[15px] after:pointer-events-none after:absolute after:right-[-4rem] after:top-10 after:z-0 after:h-[clamp(22rem,46vh,38rem)] after:w-[clamp(8rem,13vw,12rem)] after:rounded-full after:bg-[radial-gradient(ellipse_at_center,rgba(245,255,180,0.98)_0%,rgba(232,251,118,0.9)_18%,rgba(232,251,118,0.56)_40%,rgba(232,251,118,0.2)_62%,rgba(232,251,118,0.02)_80%,rgba(232,251,118,0)_100%)] after:blur-[15px]">
       <div className="relative z-[1] w-[min(100%,1440px)] px-4 pb-6 max-[899px]:px-3 max-[899px]:pb-4 [&>section+section]:mt-16 max-[899px]:[&>section+section]:mt-[2.6rem] min-[900px]:px-[1.2rem] min-[900px]:[&>section+section]:mt-24">
         <header className={topbarClassName}>
-          <div className="mx-auto grid w-[min(100%,1440px)] grid-cols-[1fr_auto] items-center gap-[1.2rem] px-[1.2rem] max-[899px]:gap-[0.65rem] min-[900px]:grid-cols-[1fr_auto_1fr]">
+          <div className="mx-auto flex w-[min(100%,1440px)] items-center justify-between gap-[1.2rem] px-[1.2rem] max-[899px]:gap-[0.65rem] max-[899px]:px-1">
             <a
               href="#"
-              className="inline-flex items-center gap-[0.38rem] max-[899px]:col-[1] min-[900px]:col-[1] min-[900px]:justify-self-start"
+              className="inline-flex shrink-0 items-center gap-[0.38rem]"
               aria-label="Active20"
             >
               <Image
@@ -165,149 +170,182 @@ export default function HomePage() {
               />
             </a>
 
-            <button
-              type="button"
-              className={`hidden h-[2.2rem] w-[2.2rem] cursor-pointer flex-col items-center justify-center gap-[0.22rem] rounded-full border p-0 max-[899px]:col-[2] max-[899px]:inline-flex ${
-                isNavActive
-                  ? "border-[rgba(232,245,255,0.35)] bg-[rgba(10,12,14,0.35)] text-[#e8f5ff]"
-                  : "border-[rgba(255,255,255,0.25)] bg-[rgba(10,12,14,0.15)] text-[#111]"
-              }`}
-              aria-label="Toggle navigation menu"
-              aria-controls="primary-nav"
-              aria-expanded={isMobileMenuOpen}
-              onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+            <nav
+              className="hidden items-center justify-center gap-[0.85rem] text-[0.61rem] font-medium tracking-[0.1em] min-[900px]:flex"
+              aria-label="Primary"
             >
-              <span className="block h-[1.5px] w-[0.95rem] bg-current" />
-              <span className="block h-[1.5px] w-[0.95rem] bg-current" />
-              <span className="block h-[1.5px] w-[0.95rem] bg-current" />
-            </button>
+              <a href="#how-it-works" className={navLinkClassName}>
+                HOW IT WORKS
+              </a>
+              <a href="#" className={navLinkClassName}>
+                FRANCHISE
+              </a>
+              <a href="#" className={navLinkClassName}>
+                ABOUT US
+              </a>
+              <a href="#" className={navLinkClassName}>
+                OUR STUDIOS
+              </a>
+              <a href="#" className={navLinkClassName}>
+                FAQS
+              </a>
+            </nav>
 
-            <nav id="primary-nav" className={topNavClassName} aria-label="Primary">
-              <div className={navItemsClassName}>
+            <div className="flex items-center gap-3">
+              <a
+                href="#"
+                className="hidden min-h-[2.2rem] items-center justify-center whitespace-nowrap rounded-full border border-[#e8fb76] bg-[#e8fb76] px-[0.92rem] py-[0.34rem] text-[0.7rem] font-bold tracking-[0.08em] text-[#111] min-[900px]:inline-flex"
+              >
+                BOOK A TRIAL
+              </a>
+              <button
+                type="button"
+                className="inline-flex h-[2.35rem] w-[2.35rem] cursor-pointer flex-col items-center justify-center gap-[0.22rem] rounded-full border border-[rgba(232,245,255,0.38)] bg-[rgba(10,12,14,0.35)] p-0 text-[#f4fbff] min-[900px]:hidden"
+                aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+                aria-controls="mobile-nav"
+                aria-expanded={isMobileMenuOpen}
+                onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+              >
+                {isMobileMenuOpen ? (
+                  <>
+                    <span className="block h-[1.5px] w-[0.95rem] translate-y-[3.5px] rotate-45 bg-current" />
+                    <span className="block h-[1.5px] w-[0.95rem] -translate-y-[3.5px] -rotate-45 bg-current" />
+                  </>
+                ) : (
+                  <>
+                    <span className="block h-[1.5px] w-[0.95rem] bg-current" />
+                    <span className="block h-[1.5px] w-[0.95rem] bg-current" />
+                    <span className="block h-[1.5px] w-[0.95rem] bg-current" />
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+
+          {isMobileMenuOpen ? (
+            <nav
+              id="mobile-nav"
+              className="mx-auto mt-3 w-[min(100%,1440px)] px-1 min-[900px]:hidden"
+              aria-label="Mobile"
+            >
+              <div className="flex flex-col gap-0 rounded-[0.9rem] border border-[rgba(232,245,255,0.12)] bg-[rgba(6,8,10,0.96)] px-4 py-2">
                 <a
-                  href="#"
-                  className="inline-flex items-center justify-center px-[0.2rem] leading-none"
+                  href="#how-it-works"
+                  className={navLinkClassName}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   HOW IT WORKS
                 </a>
                 <a
                   href="#"
-                  className="inline-flex items-center justify-center px-[0.2rem] leading-none"
+                  className={navLinkClassName}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   FRANCHISE
                 </a>
                 <a
                   href="#"
-                  className="inline-flex items-center justify-center px-[0.2rem] leading-none"
+                  className={navLinkClassName}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   ABOUT US
                 </a>
                 <a
                   href="#"
-                  className="inline-flex items-center justify-center px-[0.2rem] leading-none"
+                  className={navLinkClassName}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   OUR STUDIOS
                 </a>
                 <a
                   href="#"
-                  className="inline-flex items-center justify-center px-[0.2rem] leading-none"
+                  className={navLinkClassName}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   FAQS
                 </a>
                 <a
                   href="#"
-                  className="ml-0 inline-flex min-h-[2.5rem] items-center justify-center whitespace-nowrap rounded-full border border-[#e8fb76] bg-[#e8fb76] px-[1.05rem] py-[0.42rem] text-[clamp(0.56rem,0.68vw,0.67rem)] font-bold tracking-[0.08em] text-[#111] min-[900px]:hidden max-[899px]:ml-0 max-[899px]:mt-[0.25rem] max-[899px]:min-h-[1.9rem] max-[899px]:px-[0.82rem] max-[899px]:py-[0.32rem] max-[899px]:text-[0.54rem] max-[899px]:tracking-[0.05em]"
+                  className="my-3 inline-flex min-h-[2.6rem] items-center justify-center rounded-full border border-[#e8fb76] bg-[#e8fb76] px-[1.05rem] text-[0.72rem] font-bold tracking-[0.08em] text-[#111]"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   BOOK A TRIAL
                 </a>
               </div>
             </nav>
-
-            <div className="hidden min-[900px]:col-[3] min-[900px]:flex min-[900px]:items-center min-[900px]:justify-self-end">
-              <a
-                href="#"
-                className="inline-flex min-h-[2.2rem] items-center justify-center whitespace-nowrap rounded-full border border-[#e8fb76] bg-[#e8fb76] px-[0.92rem] py-[0.34rem] text-[0.7rem] font-bold tracking-[0.08em] text-[#111]"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                BOOK A TRIAL
-              </a>
-            </div>
-          </div>
+          ) : null}
         </header>
 
-        <section className="relative isolate -mx-[calc(50vw-50%)] h-[100svh] min-h-[36rem] w-screen overflow-hidden bg-[#cbcbcd] max-[899px]:h-[92svh] max-[899px]:min-h-[34rem]">
+        <section className="relative isolate -mx-[calc(50vw-50%)] h-[100svh] min-h-[36rem] w-screen overflow-hidden bg-[#05080c] max-[899px]:min-h-[40rem]">
           <motion.div
             className="absolute inset-0 z-0"
-            initial={reduceMotion ? false : { scale: 1.04 }}
+            initial={reduceMotion ? false : { scale: 1.06 }}
             animate={{ scale: 1 }}
             transition={{ duration: 1.6, ease: premiumEase }}
           >
             <Image
-              src="/images/hero_background.png"
-              alt=""
-              className="object-cover object-center"
+              src="/images/holders/hero.png"
+              alt="Athlete in EMS suit"
+              className="object-cover object-[68%_center] brightness-[0.42] contrast-[1.2] saturate-[0.7] max-[899px]:object-[70%_20%]"
               fill
               sizes="100vw"
               priority
             />
           </motion.div>
 
-          <div className="pointer-events-none absolute inset-0 z-[1] flex items-center justify-center px-3 pt-[4.2rem] max-[899px]:items-start max-[899px]:pt-[5.6rem] min-[900px]:pt-6">
+          <div className="pointer-events-none absolute inset-0 z-[1] overflow-hidden">
+            <div className="absolute left-[-8%] top-[38%] h-[7.5rem] w-[116%] -rotate-[1.5deg] bg-[linear-gradient(90deg,transparent_0%,rgba(0,196,255,0.08)_18%,rgba(70,230,255,0.55)_50%,rgba(0,196,255,0.08)_82%,transparent_100%)] blur-[18px] max-[899px]:top-[36%] max-[899px]:h-[5.2rem]" />
+            <div className="absolute left-[-10%] top-[46%] h-[2.4rem] w-[120%] rotate-[0.8deg] bg-[linear-gradient(90deg,transparent_0%,rgba(110,240,255,0.22)_28%,rgba(180,250,255,0.7)_50%,rgba(110,240,255,0.22)_72%,transparent_100%)] blur-[8px] max-[899px]:top-[44%]" />
+            <div className="absolute left-[-6%] top-[52%] h-[4.8rem] w-[112%] -rotate-[0.4deg] bg-[linear-gradient(90deg,transparent_0%,rgba(0,160,230,0.12)_22%,rgba(40,210,255,0.38)_50%,rgba(0,160,230,0.12)_78%,transparent_100%)] blur-[16px] max-[899px]:top-[50%] max-[899px]:h-[3.4rem]" />
+          </div>
+
+          <div className="pointer-events-none absolute inset-0 z-[2] bg-[linear-gradient(to_bottom,rgba(5,8,12,0.72)_0%,rgba(5,8,12,0.18)_28%,rgba(5,8,12,0.08)_52%,rgba(5,8,12,0.42)_78%,#080a0c_100%)]" />
+
+          <div className="absolute inset-0 z-[3] flex flex-col items-center justify-center px-4 pt-[4.6rem] max-[899px]:justify-start max-[899px]:pt-[7.2rem]">
             <motion.h1
-              className="m-0 text-center text-[clamp(2.55rem,10.8vw,8.35rem)] font-extrabold uppercase leading-[0.82] tracking-[-0.035em] text-[#0c0c0c] [font-family:var(--font-new-science-extended)] max-[899px]:text-[clamp(2.05rem,12.6vw,3.35rem)]"
-              initial={reduceMotion ? false : { opacity: 0, y: 22 }}
+              className="m-0 text-center text-[clamp(2.4rem,7.4vw,6.4rem)] font-extrabold uppercase leading-[0.88] tracking-[0.02em] text-white [font-family:var(--font-new-science-extended)] [text-shadow:0_0_28px_rgba(120,230,255,0.28)] max-[899px]:text-[clamp(1.85rem,10.4vw,2.7rem)]"
+              initial={reduceMotion ? false : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.95, ease: premiumEase }}
             >
-              <span className="block whitespace-nowrap">ADVANCED FITNESS</span>
+              <span className="hidden whitespace-nowrap min-[900px]:block">
+                ADVANCED FITNESS
+              </span>
+              <span className="block whitespace-nowrap min-[900px]:hidden">
+                ADVANCED
+              </span>
+              <span className="block whitespace-nowrap min-[900px]:hidden">
+                FITNESS
+              </span>
               <span className="block whitespace-nowrap">CLUB</span>
             </motion.h1>
           </div>
 
           <motion.div
-            className="absolute inset-x-0 bottom-[4.8rem] z-[2] flex h-[min(78%,46rem)] items-end justify-center max-[899px]:bottom-[6.4rem] max-[899px]:h-[min(64%,28rem)] min-[900px]:bottom-[5.4rem]"
-            initial={reduceMotion ? false : { opacity: 0, y: 28, scale: 1.04 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 1.15, ease: premiumEase, delay: 0.12 }}
-          >
-            <Image
-              src="/images/hero_foreground.png"
-              alt="Athlete in EMS suit"
-              className="h-full w-auto max-w-[min(94vw,44rem)] object-contain object-bottom max-[899px]:max-w-[min(108vw,27rem)]"
-              width={962}
-              height={933}
-              sizes="(max-width: 899px) 100vw, 44rem"
-              priority
-            />
-          </motion.div>
-
-          <motion.div
-            className="absolute bottom-[1.15rem] left-1/2 z-[4] flex w-[min(100%-1.4rem,28rem)] -translate-x-1/2 flex-wrap items-center justify-center gap-[0.55rem] max-[899px]:bottom-[0.95rem] min-[520px]:flex-nowrap min-[900px]:bottom-[1.45rem] min-[900px]:w-auto min-[900px]:gap-[0.75rem]"
+            className="absolute bottom-[1.7rem] left-1/2 z-[4] flex w-[min(100%-1.5rem,22rem)] -translate-x-1/2 flex-col items-center gap-[0.7rem] max-[899px]:bottom-[1.15rem] min-[900px]:bottom-[2.1rem] min-[900px]:w-auto min-[900px]:flex-row min-[900px]:gap-[0.85rem]"
             initial={reduceMotion ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: premiumEase, delay: 0.28 }}
+            transition={{ duration: 0.8, ease: premiumEase, delay: 0.24 }}
           >
             <a
               href="#"
-              className="inline-flex min-h-[2.55rem] min-w-[8.6rem] items-center justify-center rounded-full border border-[#e8fb76] bg-[#e8fb76] px-[1.25rem] py-[0.55rem] text-[0.72rem] font-bold tracking-[0.08em] text-[#111] min-[900px]:min-h-[2.85rem] min-[900px]:min-w-[10rem] min-[900px]:px-[1.55rem] min-[900px]:text-[0.78rem]"
+              className="inline-flex min-h-[2.7rem] w-full items-center justify-center rounded-full border border-[#e8fb76] bg-[#e8fb76] px-[1.4rem] text-[0.72rem] font-bold tracking-[0.1em] text-[#111] min-[900px]:min-h-[2.9rem] min-[900px]:w-auto min-[900px]:min-w-[10.5rem] min-[900px]:text-[0.76rem]"
             >
-              Start trial
+              BOOK A TRIAL
             </a>
             <a
               href="#how-it-works"
-              className="inline-flex min-h-[2.55rem] min-w-[8.6rem] items-center justify-center rounded-full border border-[rgba(255,255,255,0.72)] bg-[rgba(8,10,12,0.42)] px-[1.25rem] py-[0.55rem] text-[0.72rem] font-bold tracking-[0.08em] text-[#f7fdff] backdrop-blur-[8px] min-[900px]:min-h-[2.85rem] min-[900px]:min-w-[10rem] min-[900px]:px-[1.55rem] min-[900px]:text-[0.78rem]"
+              className="inline-flex min-h-[2.7rem] w-full items-center justify-center rounded-full border border-white/80 bg-transparent px-[1.4rem] text-[0.72rem] font-bold tracking-[0.1em] text-white min-[900px]:min-h-[2.9rem] min-[900px]:w-auto min-[900px]:min-w-[10.5rem] min-[900px]:text-[0.76rem]"
             >
-              Know more
+              KNOW MORE
             </a>
+            <span
+              className="mt-1 text-[1.15rem] leading-none text-white/85 min-[900px]:hidden"
+              aria-hidden="true"
+            >
+              ∨
+            </span>
           </motion.div>
-
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[3] h-[7.5rem] bg-[linear-gradient(to_top,#080a0c_0%,rgba(8,10,12,0.62)_42%,transparent_100%)] max-[899px]:h-[6.4rem]" />
         </section>
 
         <STitle
