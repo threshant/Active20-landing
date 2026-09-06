@@ -28,7 +28,7 @@ export default function Footer2() {
         </RevealItem>
         <RevealItem
           as="a"
-          href="#"
+          href="/book-trial"
           className="mt-[clamp(0.8rem,1.5vw,1rem)] inline-flex min-h-[clamp(2rem,2.5vw,2.5rem)] items-center justify-center rounded-full bg-[#e8fb76] px-[1.2rem] py-[0.5rem] text-[clamp(0.66rem,0.86vw,0.82rem)] font-bold tracking-[0.06em] text-[#111]"
           aria-label="Find a studio"
         >
