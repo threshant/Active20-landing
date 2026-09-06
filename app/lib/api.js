@@ -130,6 +130,18 @@ export async function createTrialBookingOrder(payload) {
   }
 }
 
+export async function verifyPineLabsPayment(orderId) {
+  try {
+    return await postJson("/payments/pinelabs-verify", { order_id: orderId });
+  } catch (error) {
+    if (error instanceof ApiError && error.status === 404) {
+      return postJson("/v2/payments/pinelabs-verify", { order_id: orderId });
+    }
+
+    throw error;
+  }
+}
+
 export function normalizeTrialSlot(slot, durationMinutes = 60) {
   const time = String(slot?.time || slot?.time_slot || "");
   const available = slot?.available !== false && !slot?.locked;

@@ -1,12 +1,35 @@
-const DEFAULT_SCRIPT =
-  process.env.NEXT_PUBLIC_PINELABS_CHECKOUT_SCRIPT ||
-  "https://checkout.pluralonline.com/v1/web-sdk.js";
+const PRODUCTION_SCRIPT = "https://checkout.pluralonline.com/v1/web-sdk-checkout.js";
+const STAGING_SCRIPT =
+  "https://checkout-staging.pluralonline.com/v1/web-sdk-checkout.js";
+
+function resolveScriptSrc(redirectUrl = "") {
+  if (process.env.NEXT_PUBLIC_PINELABS_CHECKOUT_SCRIPT) {
+    return process.env.NEXT_PUBLIC_PINELABS_CHECKOUT_SCRIPT;
+  }
+
+  const isStaging =
+    redirectUrl.includes("pluraluat") ||
+    redirectUrl.includes("staging") ||
+    redirectUrl.includes("checkout-staging");
+
+  return isStaging ? STAGING_SCRIPT : PRODUCTION_SCRIPT;
+}
 
 function loadScript(src) {
   return new Promise((resolve, reject) => {
-    const existing = document.querySelector(`script[src="${src}"]`);
-    if (existing && (window.Plural || window.PluralCheckout || window.PluralPG)) {
+    if (typeof window.Plural === "function") {
       resolve(true);
+      return;
+    }
+
+    const existing = document.querySelector(`script[src="${src}"]`);
+    if (existing) {
+      existing.addEventListener("load", () => resolve(true), { once: true });
+      existing.addEventListener(
+        "error",
+        () => reject(new Error("Pine Labs checkout failed to load.")),
+        { once: true },
+      );
       return;
     }
 
@@ -14,73 +37,50 @@ function loadScript(src) {
     script.src = src;
     script.async = true;
     script.onload = () => resolve(true);
-    script.onerror = () => reject(new Error("Pine Labs checkout failed to load."));
+    script.onerror = () =>
+      reject(new Error("Pine Labs checkout failed to load."));
     document.body.appendChild(script);
   });
 }
 
 export async function openPineLabsCheckout({
-  orderId,
   redirectUrl,
-  amount,
-  currency = "INR",
-  customer = {},
-  onSuccess,
-  onFailure,
+  checkoutToken,
+  onTransactionResponse,
+  onCancelTxn,
+  onErrorOccured,
 }) {
-  const checkoutUrl =
-    redirectUrl ||
-    (typeof window !== "undefined"
-      ? new URLSearchParams(window.location.search).get("redirect_url")
-      : null);
+  if (!redirectUrl) {
+    throw new Error("Pine Labs redirect_url is missing.");
+  }
 
-  if (checkoutUrl && !window.Plural && !window.PluralCheckout && !window.PluralPG) {
-    await loadScript(DEFAULT_SCRIPT).catch(() => false);
-  } else {
-    await loadScript(DEFAULT_SCRIPT).catch(() => false);
+  await loadScript(resolveScriptSrc(redirectUrl));
+
+  if (typeof window.Plural !== "function") {
+    throw new Error("Pine Labs Web SDK did not initialize.");
   }
 
   const options = {
-    orderId,
-    order_id: orderId,
-    redirectUrl: checkoutUrl || undefined,
-    redirect_url: checkoutUrl || undefined,
-    amount,
-    currency,
-    theme: {
-      backgroundColor: "#01111e",
-      accentColor: "#e8fb76",
+    redirectUrl,
+    token: checkoutToken,
+    onTransactionResponse: (response) => {
+      onTransactionResponse?.(response);
     },
-    customer,
-    successHandler: (response) => onSuccess?.(response),
-    failedHandler: (response) => onFailure?.(response),
-    onSuccess: (response) => onSuccess?.(response),
-    onFailed: (response) => onFailure?.(response),
-    onFailure: (response) => onFailure?.(response),
+    onCancelTxn: (response) => {
+      onCancelTxn?.(response);
+    },
+    onErrorOccured: (response) => {
+      onErrorOccured?.(response);
+    },
+    successHandler: (response) => {
+      onTransactionResponse?.(response);
+    },
+    failedHandler: (response) => {
+      onCancelTxn?.(response);
+    },
   };
 
-  if (typeof window.Plural === "function") {
-    const plural = new window.Plural(options);
-    plural.open(options);
-    return true;
-  }
-
-  if (typeof window.PluralCheckout === "function") {
-    const checkout = new window.PluralCheckout(options);
-    checkout.open(options);
-    return true;
-  }
-
-  if (typeof window.PluralPG === "function") {
-    const checkout = new window.PluralPG(options);
-    checkout.open();
-    return true;
-  }
-
-  if (checkoutUrl) {
-    window.location.assign(checkoutUrl);
-    return true;
-  }
-
-  return false;
+  const plural = new window.Plural(options);
+  plural.open(options);
+  return true;
 }

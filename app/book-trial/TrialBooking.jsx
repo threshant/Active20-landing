@@ -10,6 +10,7 @@ import {
   fetchTrialAvailableTimeSlots,
   fetchTrialServices,
   normalizeTrialSlot,
+  verifyPineLabsPayment,
 } from "../lib/api";
 import { openPineLabsCheckout } from "../lib/pineLabsCheckout";
 
@@ -267,40 +268,78 @@ export default function TrialBooking() {
     setStep((current) => Math.max(current - 1, 1));
   };
 
-  const startPineLabsCheckout = async (result) => {
-    const opened = await openPineLabsCheckout({
-      orderId: result.order_id,
-      redirectUrl:
-        result.redirect_url || result.checkout_url || result.challenge_url,
-      amount: result.amount,
-      currency: result.currency || "INR",
-      customer: {
-        name: fullName.trim(),
-        email: email.trim(),
-        phone: phone.trim(),
-      },
-      onSuccess: () => {
-        setBookingResult((current) =>
-          current
-            ? {
-                ...current,
-                payment_complete: true,
-                message:
-                  "Payment received. Your trial booking will be confirmed shortly.",
-              }
-            : current,
-        );
-      },
-      onFailure: () => {
-        setFormError(
-          "Payment was not completed. You can try again to confirm this trial.",
-        );
-      },
-    });
+  const verifyPaidOrder = async (orderId) => {
+    const verified = await verifyPineLabsPayment(orderId);
 
-    if (!opened) {
+    setBookingResult((current) =>
+      current
+        ? {
+            ...current,
+            ...verified,
+            payment_complete: Boolean(verified.payment_verified),
+            booking_id: verified.booking_id || current.booking_id,
+            message:
+              verified.message ||
+              current.message ||
+              "Payment received. Your trial booking will be confirmed shortly.",
+          }
+        : current,
+    );
+
+    if (!verified.payment_verified) {
       setFormError(
-        "Complete payment with the Pine Labs order to confirm this trial.",
+        verified.message ||
+          "Payment is not complete yet. Please wait a moment and try again.",
+      );
+      return;
+    }
+
+    setFormError("");
+  };
+
+  const startPineLabsCheckout = async (result) => {
+    const redirectUrl = result.redirect_url;
+
+    if (!redirectUrl) {
+      setFormError(
+        "Checkout link is missing. Please confirm again to generate a new payment.",
+      );
+      return;
+    }
+
+    try {
+      await openPineLabsCheckout({
+        redirectUrl,
+        checkoutToken: result.checkout_token,
+        onTransactionResponse: async (response) => {
+          const orderId = response?.order_id || result.order_id;
+
+          try {
+            await verifyPaidOrder(orderId);
+          } catch (error) {
+            setFormError(
+              error instanceof ApiError
+                ? error.message
+                : "Payment finished, but we could not verify it yet. Please try again.",
+            );
+          }
+        },
+        onCancelTxn: () => {
+          setFormError(
+            "Payment was cancelled. You can try again to confirm this trial.",
+          );
+        },
+        onErrorOccured: () => {
+          setFormError(
+            "Checkout could not be opened. Please try paying again.",
+          );
+        },
+      });
+    } catch (error) {
+      setFormError(
+        error instanceof Error
+          ? error.message
+          : "Unable to open Pine Labs checkout.",
       );
     }
   };
@@ -330,7 +369,7 @@ export default function TrialBooking() {
 
       setBookingResult(result);
 
-      if (result.payment_required && result.order_id) {
+      if (result.payment_required && result.redirect_url) {
         await startPineLabsCheckout(result);
       }
     } catch (error) {
