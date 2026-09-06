@@ -17,7 +17,8 @@ export default function SiteHeader({ variant = "overlay" }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    if (variant === "solid") {
+    if (variant === "solid" || variant === "transparent") {
+      setIsNavScrolled(variant === "solid");
       return undefined;
     }
 
@@ -58,7 +59,9 @@ export default function SiteHeader({ variant = "overlay" }) {
     };
   }, [isMobileMenuOpen]);
 
-  const isNavActive = variant === "solid" || isNavScrolled || isMobileMenuOpen;
+  const isNavActive =
+    variant !== "transparent" &&
+    (variant === "solid" || isNavScrolled || isMobileMenuOpen);
 
   const topbarClassName = `fixed left-0 top-0 z-50 w-full border-none bg-transparent px-[1.2rem] py-[0.85rem] text-[#f4fbff] shadow-none transition-[background-color,backdrop-filter,box-shadow] duration-[220ms] max-[899px]:px-3 max-[899px]:pb-[0.6rem] max-[899px]:pt-[0.55rem] ${
     isNavActive

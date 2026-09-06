@@ -23,18 +23,71 @@ function asArray(payload) {
   return [];
 }
 
+export class ApiError extends Error {
+  constructor(message, status, payload) {
+    super(message);
+    this.name = "ApiError";
+    this.status = status;
+    this.payload = payload;
+  }
+}
+
+function readErrorMessage(payload, status) {
+  if (typeof payload?.message === "string" && payload.message.trim()) {
+    return payload.message;
+  }
+
+  const fieldErrors = payload?.errors;
+  if (fieldErrors && typeof fieldErrors === "object") {
+    const firstError = Object.values(fieldErrors).flat()[0];
+    if (typeof firstError === "string" && firstError.trim()) {
+      return firstError;
+    }
+  }
+
+  return `Request failed with status ${status}`;
+}
+
+async function parseJson(response) {
+  const contentType = response.headers.get("content-type") || "";
+  if (contentType.includes("application/json")) {
+    return response.json();
+  }
+
+  return { message: await response.text() };
+}
+
 async function fetchJson(path) {
   const response = await fetch(`${getApiBase()}${path}`, {
     method: "GET",
     headers: { Accept: "application/json" },
     cache: "no-store",
   });
+  const payload = await parseJson(response);
 
   if (!response.ok) {
-    throw new Error(`Request failed with status ${response.status}`);
+    throw new ApiError(readErrorMessage(payload, response.status), response.status, payload);
   }
 
-  return response.json();
+  return payload;
+}
+
+async function postJson(path, body) {
+  const response = await fetch(`${getApiBase()}${path}`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
+  const payload = await parseJson(response);
+
+  if (!response.ok) {
+    throw new ApiError(readErrorMessage(payload, response.status), response.status, payload);
+  }
+
+  return payload;
 }
 
 export async function fetchLocations() {
@@ -63,6 +116,18 @@ export async function fetchTrialAvailableTimeSlots({ serviceId, date }) {
   return asArray(
     await fetchJson(`/bookings/trial-available-time-slots?${query}`),
   );
+}
+
+export async function createTrialBookingOrder(payload) {
+  try {
+    return await postJson("/bookings/trial-booking-order", payload);
+  } catch (error) {
+    if (error instanceof ApiError && error.status === 404) {
+      return postJson("/v2/bookings/trial-booking-order", payload);
+    }
+
+    throw error;
+  }
 }
 
 export function normalizeTrialSlot(slot, durationMinutes = 60) {

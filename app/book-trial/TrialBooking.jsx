@@ -4,11 +4,14 @@ import { useEffect, useMemo, useState } from "react";
 import Footer2 from "../components/Footer2";
 import SiteHeader from "../components/SiteHeader";
 import {
+  ApiError,
+  createTrialBookingOrder,
   fetchLocations,
   fetchTrialAvailableTimeSlots,
   fetchTrialServices,
   normalizeTrialSlot,
 } from "../lib/api";
+import { openPineLabsCheckout } from "../lib/pineLabsCheckout";
 
 const STEPS = [
   { id: 1, label: "Location" },
@@ -55,6 +58,23 @@ function isValidPhone(phone) {
   return /^[6-9]\d{9}$/.test(phone);
 }
 
+function formatAmount(amount, currency = "INR") {
+  if (amount === null || amount === undefined || amount === "") {
+    return "the trial fee";
+  }
+
+  const value = Number(amount);
+  if (Number.isNaN(value)) {
+    return `${amount} ${currency}`;
+  }
+
+  return new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency,
+    maximumFractionDigits: 0,
+  }).format(value);
+}
+
 const fieldClassName =
   "mt-2 w-full rounded-[0.7rem] border border-[rgba(132,169,193,0.26)] bg-[rgba(8,16,24,0.72)] px-4 py-3 text-[0.95rem] text-[#eff8ff] outline-none transition-[border-color,box-shadow] [font-family:var(--font-inter)] placeholder:text-[rgba(174,191,201,0.55)] focus:border-[#80c5d5] focus:shadow-[0_0_0_3px_rgba(128,197,213,0.16)]";
 
@@ -75,7 +95,8 @@ export default function TrialBooking() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [formError, setFormError] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [bookingResult, setBookingResult] = useState(null);
 
   const dates = useMemo(() => getUpcomingDates(), []);
 
@@ -246,23 +267,89 @@ export default function TrialBooking() {
     setStep((current) => Math.max(current - 1, 1));
   };
 
-  const handleSubmit = (event) => {
+  const startPineLabsCheckout = async (result) => {
+    const opened = await openPineLabsCheckout({
+      orderId: result.order_id,
+      redirectUrl:
+        result.redirect_url || result.checkout_url || result.challenge_url,
+      amount: result.amount,
+      currency: result.currency || "INR",
+      customer: {
+        name: fullName.trim(),
+        email: email.trim(),
+        phone: phone.trim(),
+      },
+      onSuccess: () => {
+        setBookingResult((current) =>
+          current
+            ? {
+                ...current,
+                payment_complete: true,
+                message:
+                  "Payment received. Your trial booking will be confirmed shortly.",
+              }
+            : current,
+        );
+      },
+      onFailure: () => {
+        setFormError(
+          "Payment was not completed. You can try again to confirm this trial.",
+        );
+      },
+    });
+
+    if (!opened) {
+      setFormError(
+        "Complete payment with the Pine Labs order to confirm this trial.",
+      );
+    }
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!canContinue()) {
+    if (!canContinue() || isSubmitting) {
       setFormError("Please enter a valid name, phone number, and email.");
       return;
     }
 
-    setIsSubmitted(true);
+    setFormError("");
+    setIsSubmitting(true);
+
+    try {
+      const result = await createTrialBookingOrder({
+        full_name: fullName.trim(),
+        phone: phone.trim(),
+        email: email.trim(),
+        service_id: selectedService.service_id,
+        booking_date: selectedDate,
+        booking_time_slot: selectedSlot.time,
+        booking_device_id: selectedSlot.device_id || selectedSlot.trainer_id,
+        branch_id: selectedLocation.branch_id,
+      });
+
+      setBookingResult(result);
+
+      if (result.payment_required && result.order_id) {
+        await startPineLabsCheckout(result);
+      }
+    } catch (error) {
+      setFormError(
+        error instanceof ApiError
+          ? error.message
+          : "Unable to confirm your trial booking. Please try again.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <main className="relative isolate flex w-full justify-center overflow-x-hidden bg-[#01111e] p-0">
       <div className="relative z-[1] w-[min(100%,1440px)] px-4 pb-6 max-[899px]:px-3 max-[899px]:pb-4 min-[900px]:px-[1.2rem]">
-        <SiteHeader variant="solid" />
+        <SiteHeader variant="transparent" />
 
-        <section className="mx-auto w-full max-w-[58rem] pt-[clamp(5.6rem,12vw,7.2rem)] min-[900px]:pt-[clamp(6.6rem,10vw,7.8rem)]">
+        <section className="mx-auto mb-16 w-full max-w-[58rem] pt-[clamp(5.6rem,12vw,7.2rem)] max-[899px]:mb-10 min-[900px]:mb-24 min-[900px]:pt-[clamp(6.6rem,10vw,7.8rem)]">
           <p className="m-0 text-[0.78rem] tracking-[0.12em] text-[#80c5d5] [font-family:var(--font-inter)]">
             FREE TRIAL SESSION
           </p>
@@ -276,8 +363,8 @@ export default function TrialBooking() {
 
           <ol className="mt-8 grid grid-cols-3 gap-2" aria-label="Booking steps">
             {STEPS.map((item, index) => {
-              const isComplete = step > item.id;
-              const isCurrent = step === item.id;
+              const isComplete = Boolean(bookingResult) || step > item.id;
+              const isCurrent = !bookingResult && step === item.id;
 
               return (
                 <li key={item.id} className="min-w-0">
@@ -316,21 +403,43 @@ export default function TrialBooking() {
           </ol>
 
           <div className="mt-2 rounded-[1rem] border border-[rgba(132,169,193,0.26)] bg-[linear-gradient(160deg,rgba(36,48,60,0.2)_0%,rgba(11,16,24,0.46)_100%)] p-4 min-[900px]:p-6">
-            {isSubmitted ? (
+            {bookingResult ? (
               <div className="py-8 text-center">
                 <p className="m-0 text-[0.78rem] tracking-[0.12em] text-[#80c5d5] [font-family:var(--font-inter)]">
-                  REQUEST RECEIVED
+                  {bookingResult.payment_required && !bookingResult.payment_complete
+                    ? "PAYMENT REQUIRED"
+                    : "BOOKING CONFIRMED"}
                 </p>
                 <h2 className="mt-3 text-[1.6rem] leading-tight text-[#eff8ff] [font-family:var(--font-new-science-extended)]">
-                  You are all set
+                  {bookingResult.payment_required && !bookingResult.payment_complete
+                    ? "Complete payment"
+                    : "You are all set"}
                 </h2>
                 <p className="mx-auto mt-3 max-w-[28rem] text-[0.95rem] leading-[1.55] text-[#d6e3ee] [font-family:var(--font-inter)]">
-                  {`${fullName}, we have your trial request at ${selectedLocation?.branch_name} on ${formatLongDate(selectedDate)} at ${selectedSlot?.label}. We will reach you at ${phone} and ${email}.`}
+                  {bookingResult.payment_required && !bookingResult.payment_complete
+                    ? `${fullName}, pay ${formatAmount(bookingResult.amount, bookingResult.currency)} to confirm your trial at ${selectedLocation?.branch_name} on ${formatLongDate(selectedDate)} at ${selectedSlot?.label}.`
+                    : bookingResult.booking_id
+                      ? `${fullName}, your trial is booked at ${selectedLocation?.branch_name} on ${formatLongDate(selectedDate)} at ${selectedSlot?.label}. Booking ID ${bookingResult.booking_id}.`
+                      : `${fullName}, ${bookingResult.message || "your trial booking is being confirmed."} We will reach you at ${phone} and ${email}.`}
                 </p>
+                {bookingResult.payment_required && !bookingResult.payment_complete ? (
+                  <button
+                    type="button"
+                    onClick={() => startPineLabsCheckout(bookingResult)}
+                    className="mt-6 inline-flex min-h-[2.7rem] items-center justify-center rounded-full border border-[#e8fb76] bg-[#e8fb76] px-[1.4rem] text-[0.72rem] font-bold tracking-[0.1em] text-[#111]"
+                  >
+                    PAY WITH PINE LABS
+                  </button>
+                ) : null}
+                {formError ? (
+                  <p className="mt-4 text-[0.86rem] text-[#f3b4b4] [font-family:var(--font-inter)]">
+                    {formError}
+                  </p>
+                ) : null}
               </div>
             ) : null}
 
-            {!isSubmitted && step === 1 ? (
+            {!bookingResult && step === 1 ? (
               <div>
                 <h2 className="m-0 text-[1.15rem] text-[#eff8ff] [font-family:var(--font-new-science-extended)]">
                   Search and select a location
@@ -393,7 +502,7 @@ export default function TrialBooking() {
               </div>
             ) : null}
 
-            {!isSubmitted && step === 2 ? (
+            {!bookingResult && step === 2 ? (
               <div>
                 <h2 className="m-0 text-[1.15rem] text-[#eff8ff] [font-family:var(--font-new-science-extended)]">
                   Choose a date
@@ -482,7 +591,7 @@ export default function TrialBooking() {
               </div>
             ) : null}
 
-            {!isSubmitted && step === 3 ? (
+            {!bookingResult && step === 3 ? (
               <form onSubmit={handleSubmit}>
                 <h2 className="m-0 text-[1.15rem] text-[#eff8ff] [font-family:var(--font-new-science-extended)]">
                   Your details
@@ -545,12 +654,12 @@ export default function TrialBooking() {
               </form>
             ) : null}
 
-            {!isSubmitted ? (
+            {!bookingResult ? (
               <div className="mt-6 flex flex-col-reverse gap-3 min-[640px]:flex-row min-[640px]:justify-between">
                 <button
                   type="button"
                   onClick={goBack}
-                  disabled={step === 1}
+                  disabled={step === 1 || isSubmitting}
                   className="inline-flex min-h-[2.7rem] items-center justify-center rounded-full border border-white/80 bg-transparent px-[1.3rem] text-[0.72rem] font-bold tracking-[0.1em] text-white disabled:cursor-not-allowed disabled:opacity-35"
                 >
                   BACK
@@ -558,10 +667,14 @@ export default function TrialBooking() {
                 <button
                   type="button"
                   onClick={step === 3 ? handleSubmit : goNext}
-                  disabled={!canContinue()}
+                  disabled={!canContinue() || isSubmitting}
                   className="inline-flex min-h-[2.7rem] items-center justify-center rounded-full border border-[#e8fb76] bg-[#e8fb76] px-[1.4rem] text-[0.72rem] font-bold tracking-[0.1em] text-[#111] disabled:cursor-not-allowed disabled:opacity-40"
                 >
-                  {step === 3 ? "CONFIRM TRIAL" : "CONTINUE"}
+                  {step === 3
+                    ? isSubmitting
+                      ? "CONFIRMING..."
+                      : "CONFIRM TRIAL"
+                    : "CONTINUE"}
                 </button>
               </div>
             ) : null}
