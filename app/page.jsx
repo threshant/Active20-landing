@@ -5,8 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import BenefitCards from "./components/BenefitCards";
 import Footer2 from "./components/Footer2";
+import HowItWorks from "./components/HowItWorks";
 import {
-  fadeScale,
   premiumEase,
   Reveal,
   RevealItem,
@@ -261,35 +261,7 @@ export default function HomePage() {
 
         <BenefitCards />
 
-        <section id="how-it-works" className="scroll-mt-24">
-          <STitle
-            sectionClassName="px-[0.1rem] pb-4 pt-[1.6rem] min-[900px]:px-12 min-[900px]:pb-[1.2rem] min-[900px]:pt-20"
-            titleClassName="m-0 text-[clamp(1.45rem,7vw,2rem)] leading-none text-[#0d5f72] [font-family:var(--font-new-science-extended)] min-[900px]:text-[2.6rem] min-[900px]:leading-[1.05]"
-            descriptionClassName="mt-[0.55rem] max-w-full text-[0.86rem] leading-[1.42] text-[#243240] [font-family:var(--font-inter)] min-[900px]:mt-[0.65rem] min-[900px]:max-w-[39rem] min-[900px]:text-[1rem] min-[900px]:leading-[1.5]"
-            title="HOW DOES IT WORK"
-            description="During an ACTIVE20 session, low-impact electrical impulses activate multiple muscle groups at once while you move through simple, guided exercises with your coach. This creates deeper, more complete muscle contractions, delivering a full-body workout in just 20 minutes with minimal joint stress."
-          />
-
-          <Reveal className="relative mt-0 overflow-hidden rounded-[0.9rem] border border-[rgba(12,40,56,0.14)] bg-transparent">
-            <Image
-              src="/images/holders/how-it-works.png"
-              alt="Battle rope training"
-              className="block h-[70svh] w-full object-cover min-[900px]:h-[clamp(28rem,56vw,46rem)]"
-              width={0}
-              height={0}
-              sizes="100vw"
-            />
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-              <Reveal
-                as="span"
-                variants={fadeScale}
-                delay={0.18}
-                className="relative block h-[5rem] w-[5rem] cursor-pointer rounded-full border-2 border-[rgba(219,237,246,0.68)] bg-[rgba(8,10,12,0.28)] backdrop-blur-[10px] after:absolute after:left-1/2 after:top-1/2 after:-translate-x-[42%] after:-translate-y-1/2 after:border-b-[0.7rem] after:border-l-[1.1rem] after:border-t-[0.7rem] after:border-b-transparent after:border-l-[rgba(219,237,246,0.9)] after:border-t-transparent after:content-[''] min-[900px]:h-[6.5rem] min-[900px]:w-[6.5rem] min-[900px]:after:border-b-[0.9rem] min-[900px]:after:border-l-[1.45rem] min-[900px]:after:border-t-[0.9rem]"
-                aria-hidden="true"
-              />
-            </div>
-          </Reveal>
-        </section>
+        <HowItWorks />
 
         <section className="pt-0">
           <STitle
