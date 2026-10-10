@@ -1,5 +1,6 @@
 "use client";
 
+import { useLenis } from "lenis/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -13,6 +14,7 @@ const NAV_LINKS = [
 ];
 
 export default function SiteHeader({ variant = "overlay" }) {
+  const lenis = useLenis();
   const [isNavScrolled, setIsNavScrolled] = useState(variant === "solid");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -54,10 +56,16 @@ export default function SiteHeader({ variant = "overlay" }) {
       ? "hidden"
       : originalOverflow;
 
+    if (lenis) {
+      if (isMobileMenuOpen) lenis.stop();
+      else lenis.start();
+    }
+
     return () => {
       document.body.style.overflow = originalOverflow;
+      lenis?.start();
     };
-  }, [isMobileMenuOpen]);
+  }, [isMobileMenuOpen, lenis]);
 
   const isNavActive =
     variant !== "transparent" &&
