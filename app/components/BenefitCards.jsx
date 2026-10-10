@@ -88,6 +88,17 @@ export default function BenefitCards() {
   const preference = useReducedMotion();
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
+  const pausedRef = useRef(false);
+
+  const holdRow = () => {
+    pausedRef.current = true;
+    setPaused(true);
+  };
+
+  const resumeRow = () => {
+    pausedRef.current = false;
+    setPaused(false);
+  };
 
   useEffect(() => {
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -103,8 +114,9 @@ export default function BenefitCards() {
       stop();
       if (motion.matches || !desktop.matches || paused || preference === true) return;
       timer = window.setInterval(() => {
+        if (pausedRef.current) return;
         setActive((current) => (current + 1) % CARDS.length);
-      }, 3000);
+      }, 1600);
     };
 
     start();
@@ -190,8 +202,8 @@ export default function BenefitCards() {
     >
       <div
         className="benefit-row hidden h-[clamp(19rem,30vw,25rem)] w-full min-w-0 gap-[0.55rem] min-[900px]:flex"
-        onPointerEnter={() => setPaused(true)}
-        onPointerLeave={() => setPaused(false)}
+        onPointerEnter={holdRow}
+        onPointerLeave={resumeRow}
       >
         {CARDS.map((card, index) => {
           const isOpen = index === active;
@@ -199,6 +211,7 @@ export default function BenefitCards() {
             <article
               key={card.title}
               data-expanded={isOpen ? "true" : "false"}
+              onPointerEnter={() => setActive(index)}
               className="benefit-card relative h-full min-w-0 overflow-hidden rounded-[1.2rem] bg-[#123044] shadow-[0_10px_28px_rgba(12,27,42,0.07)]"
               style={{
                 flexGrow: isOpen ? 2.15 : 1,

@@ -45,6 +45,14 @@ const STEPS = [
 ];
 
 const PEEK = 18;
+const SLOTS = [
+  { x: 0, y: 2, rotation: -1.6 },
+  { x: PEEK, y: -7, rotation: 2.5 },
+  { x: PEEK * 2, y: 6, rotation: -2.2 },
+  { x: PEEK * 3, y: -3, rotation: 1.8 },
+];
+const FADE_AT = 0.8;
+const FADE_DURATION = 0.18;
 
 export default function HowItWorks() {
   const sectionRef = useRef(null);
@@ -79,12 +87,15 @@ export default function HowItWorks() {
           section.classList.add("is-deck");
 
           gsap.set(cards, {
-            x: (index) => index * PEEK,
+            x: (index) => SLOTS[index].x,
+            y: (index) => SLOTS[index].y,
+            rotation: (index) => SLOTS[index].rotation,
             zIndex: (index) => cards.length - index,
+            transformOrigin: "50% 50%",
           });
 
           const timeline = gsap.timeline({
-            defaults: { ease: "none", duration: 1 },
+            defaults: { ease: "none" },
             scrollTrigger: {
               trigger: section,
               start: "top top",
@@ -97,24 +108,55 @@ export default function HowItWorks() {
             },
           });
 
+          timeline.to({}, { duration: cards.length - 1 }, 0);
+
           for (let step = 0; step < cards.length - 1; step += 1) {
             timeline.set(cards[step], { zIndex: cards.length + 2 }, step);
-            timeline.to(cards[step], { xPercent: -110 }, step);
 
             cards.forEach((card, index) => {
               if (index <= step) return;
               const depth = index - step - 1;
-              timeline.to(
+              const from = SLOTS[depth + 1];
+              const to = SLOTS[depth];
+              timeline.set(card, { zIndex: cards.length - depth }, step);
+              timeline.fromTo(
                 card,
+                { x: from.x, y: from.y, rotation: from.rotation },
                 {
-                  x: depth * PEEK,
-                  zIndex: cards.length - depth,
+                  x: to.x,
+                  y: to.y,
+                  rotation: to.rotation,
+                  duration: 0.18,
+                  ease: "power2.out",
+                  immediateRender: false,
                 },
                 step,
               );
             });
 
-            timeline.set(cards[step], { autoAlpha: 0, zIndex: 0 }, step + 0.98);
+            timeline.fromTo(
+              cards[step],
+              {
+                autoAlpha: 1,
+                y: SLOTS[0].y,
+                rotation: SLOTS[0].rotation,
+              },
+              {
+                autoAlpha: 0,
+                y: SLOTS[0].y - 16,
+                rotation: SLOTS[0].rotation + 4.5,
+                duration: FADE_DURATION,
+                ease: "none",
+                immediateRender: false,
+              },
+              step + FADE_AT,
+            );
+
+            timeline.set(
+              cards[step],
+              { zIndex: 0 },
+              step + FADE_AT + FADE_DURATION,
+            );
           }
 
           return () => {
@@ -144,7 +186,7 @@ export default function HowItWorks() {
     <section
       ref={sectionRef}
       id="how-it-works"
-      className="how-steps scroll-mt-24 -mx-[calc(50vw-50%)] w-screen bg-[#f3f4f6]"
+      className="how-steps scroll-mt-24 -mx-[calc(50vw-50%)] w-screen"
       aria-labelledby="how-it-works-title"
     >
       <div className="how-steps-grid">

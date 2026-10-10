@@ -149,14 +149,14 @@
   overflow: hidden;
   pointer-events: none;
   -webkit-mask-image: radial-gradient(
-    125% 92% at 100% 100%,
+    125% 92% at 0% 100%,
     #000 0%,
     rgba(0, 0, 0, 0.92) 28%,
     rgba(0, 0, 0, 0.45) 48%,
     transparent 68%
   );
   mask-image: radial-gradient(
-    125% 92% at 100% 100%,
+    125% 92% at 0% 100%,
     #000 0%,
     rgba(0, 0, 0, 0.92) 28%,
     rgba(0, 0, 0, 0.45) 48%,
@@ -173,7 +173,7 @@
   position: absolute;
   inset: 0;
   background: radial-gradient(
-    115% 88% at 100% 100%,
+    115% 88% at 0% 100%,
     rgba(1, 8, 16, 0.62) 0%,
     rgba(1, 8, 16, 0.48) 36%,
     rgba(1, 12, 22, 0.18) 58%,
@@ -184,10 +184,10 @@
 .benefit-copy {
   position: absolute;
   z-index: 2;
-  right: 0;
   bottom: 0;
-  width: min(18.75rem, 68%);
-  padding: 0 1.05rem 1.85rem 0.35rem;
+  left: 0;
+  width: min(20rem, 84%);
+  padding: 0 0.85rem 1.85rem 1.05rem;
   text-align: left;
   pointer-events: none;
 }
@@ -203,8 +203,8 @@
 
 @media (min-width: 900px) {
   .benefit-card .benefit-copy {
-    width: min(24rem, 58%);
-    padding: 0 1.35rem 2.2rem 1rem;
+    width: min(22.5rem, 62%);
+    padding: 0 1rem 2.35rem 1.35rem;
   }
 }
 
@@ -237,6 +237,17 @@
 
   .benefit-stack {
     display: flex !important;
+  }
+}
+
+.how-steps {
+  margin-top: 2.5rem;
+  background: transparent;
+}
+
+@media (min-width: 900px) {
+  .how-steps {
+    margin-top: 6rem;
   }
 }
 
@@ -312,9 +323,13 @@
 
 .how-steps.is-deck .how-card {
   position: absolute;
-  inset: 0 auto 0 0;
+  top: 1.05rem;
+  right: auto;
+  bottom: 1.05rem;
+  left: 0;
   width: calc(100% - 3.4rem);
   height: auto;
+  transform-origin: 50% 50%;
   will-change: transform;
 }
 
