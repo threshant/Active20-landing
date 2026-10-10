@@ -93,8 +93,6 @@ export default function SiteHeader({ variant = "overlay" }) {
     return undefined;
   }, [isMobileMenuOpen]);
 
-  const lenis = useLenis();
-
   useEffect(() => {
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = isMobileMenuOpen
