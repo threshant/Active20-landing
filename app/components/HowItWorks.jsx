@@ -135,16 +135,30 @@ export default function HowItWorks() {
             });
 
             timeline.fromTo(
+              cards[step].querySelector(".how-card-copy"),
+              { autoAlpha: 1 },
+              {
+                autoAlpha: 0,
+                duration: 0.06,
+                ease: "none",
+                immediateRender: false,
+              },
+              step + FADE_AT,
+            );
+
+            timeline.fromTo(
               cards[step],
               {
                 autoAlpha: 1,
+                x: SLOTS[0].x,
                 y: SLOTS[0].y,
                 rotation: SLOTS[0].rotation,
               },
               {
                 autoAlpha: 0,
-                y: SLOTS[0].y - 16,
-                rotation: SLOTS[0].rotation + 4.5,
+                x: SLOTS[0].x - 20,
+                y: SLOTS[0].y - 86,
+                rotation: SLOTS[0].rotation + 7,
                 duration: FADE_DURATION,
                 ease: "none",
                 immediateRender: false,
