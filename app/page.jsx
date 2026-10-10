@@ -265,29 +265,6 @@ export default function HomePage() {
 
         <section className="pt-0">
           <STitle
-            sectionClassName="px-[0.1rem] pb-[0.7rem] pt-0 text-center min-[900px]:pb-4"
-            titleClassName="m-0 text-[clamp(1.1rem,5.8vw,1.55rem)] leading-none text-[#0d5f72] [font-family:var(--font-new-science-extended)] min-[900px]:whitespace-nowrap min-[900px]:text-[clamp(0.78rem,2.55vw,1.95rem)]"
-            title="ADVANCED FITNESS FOR EVERY BODY"
-          />
-
-          <Reveal className="relative mt-0 overflow-hidden rounded-[0.9rem] border border-[rgba(12,40,56,0.14)] bg-transparent">
-            <img
-              src="/images/holders/advance-fitness.png"
-              alt="Strength training with age"
-              className="block h-[70svh] w-full object-cover min-[900px]:h-[clamp(28rem,56vw,46rem)]"
-            />
-            <Reveal
-              as="span"
-              delay={0.16}
-              className="absolute bottom-[0.7rem] right-[0.7rem] rounded-full border border-[rgba(180,214,236,0.72)] bg-[rgba(0,8,16,0.68)] px-[0.72rem] py-[0.4rem] text-[0.68rem] font-bold text-[#e5f6ff] [font-family:var(--font-inter)] min-[900px]:bottom-[1.2rem] min-[900px]:right-[1.2rem] min-[900px]:px-[1rem] min-[900px]:py-[0.48rem] min-[900px]:text-[clamp(0.75rem,1.1vw,1.05rem)]"
-            >
-              Those Building Strength with Age
-            </Reveal>
-          </Reveal>
-        </section>
-
-        <section className="pt-0">
-          <STitle
             sectionClassName="px-[0.1rem] pb-4 pt-[1.6rem] min-[900px]:px-12 min-[900px]:pb-4 min-[900px]:pt-20"
             titleClassName="m-0 text-[clamp(1.45rem,7vw,2rem)] leading-none text-[#0d5f72] [font-family:var(--font-new-science-extended)] min-[900px]:text-[2.6rem] min-[900px]:leading-[1.05]"
             descriptionClassName="mt-[0.55rem] max-w-full text-[0.86rem] leading-[1.42] text-[#243240] [font-family:var(--font-inter)] min-[900px]:mt-[0.65rem] min-[900px]:max-w-[39rem] min-[900px]:text-[1rem] min-[900px]:leading-[1.5]"
