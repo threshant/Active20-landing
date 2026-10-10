@@ -60,7 +60,7 @@ export default function RootLayout({ children }) {
       className={`${newScience.variable} ${newScienceExtended.variable} ${inter.variable} text-[18px]`}
     >
       <body
-        className="m-0 bg-[#01111e] text-[#eff8ff] [font-family:var(--font-new-science)] [font-stretch:expanded]"
+        className="m-0 bg-white text-[#0c1b2a] [font-family:var(--font-new-science)] [font-stretch:expanded]"
       >
         <SmoothScroll>{children}</SmoothScroll>
       </body>

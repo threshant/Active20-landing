@@ -14,6 +14,14 @@
 
   body {
     margin: 0;
+    background: #ffffff;
+    color: #0c1b2a;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site-header {
+      transition: none !important;
+    }
   }
 
   a {
@@ -23,6 +31,14 @@
 }
 
 @layer components {
+  .site-header {
+    transition:
+      transform 300ms ease,
+      background-color 220ms ease,
+      backdrop-filter 220ms ease,
+      box-shadow 220ms ease;
+  }
+
   .reveal-statement {
     font-size: clamp(1.4rem, min(4.6vw, 5.8svh), 3.55rem);
     line-height: 1.15;

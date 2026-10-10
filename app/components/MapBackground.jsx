@@ -5,13 +5,13 @@ import { GoogleMap, MarkerF, useJsApiLoader } from "@react-google-maps/api";
 // EMS Xperience, Indiranagar, Bangalore
 const CENTER = { lat: 12.9784, lng: 77.6408 };
 
-const PAGE_BG = "#01111e";
+const PAGE_BG = "#ffffff";
 
-const DARK_STYLES = [
-  { elementType: "geometry", stylers: [{ color: PAGE_BG }] },
+const LIGHT_STYLES = [
+  { elementType: "geometry", stylers: [{ color: "#f3f6f7" }] },
   { elementType: "labels.icon", stylers: [{ visibility: "off" }] },
-  { elementType: "labels.text.fill", stylers: [{ color: "#6f7c86" }] },
-  { elementType: "labels.text.stroke", stylers: [{ color: PAGE_BG }] },
+  { elementType: "labels.text.fill", stylers: [{ color: "#5c6b76" }] },
+  { elementType: "labels.text.stroke", stylers: [{ color: "#ffffff" }] },
   {
     featureType: "administrative",
     elementType: "geometry",
@@ -25,22 +25,22 @@ const DARK_STYLES = [
   {
     featureType: "poi.park",
     elementType: "geometry",
-    stylers: [{ color: "#0a1c2c" }],
+    stylers: [{ color: "#e4f0e6" }],
   },
   {
     featureType: "road",
     elementType: "geometry",
-    stylers: [{ color: "#122536" }],
+    stylers: [{ color: "#ffffff" }],
   },
   {
     featureType: "road",
     elementType: "geometry.stroke",
-    stylers: [{ color: PAGE_BG }],
+    stylers: [{ color: "#d5dee4" }],
   },
   {
     featureType: "road.highway",
     elementType: "geometry",
-    stylers: [{ color: "#1a3348" }],
+    stylers: [{ color: "#e7eef2" }],
   },
   {
     featureType: "road",
@@ -54,7 +54,7 @@ const DARK_STYLES = [
   {
     featureType: "water",
     elementType: "geometry",
-    stylers: [{ color: PAGE_BG }],
+    stylers: [{ color: "#d5eef3" }],
   },
 ];
 
@@ -64,7 +64,7 @@ const MAP_OPTIONS = {
   keyboardShortcuts: false,
   clickableIcons: false,
   backgroundColor: PAGE_BG,
-  styles: DARK_STYLES,
+  styles: LIGHT_STYLES,
 };
 
 export default function MapBackground() {
@@ -75,7 +75,7 @@ export default function MapBackground() {
 
   return (
     <div
-      className="pointer-events-none absolute inset-0 z-0 bg-[#01111e]"
+      className="pointer-events-none absolute inset-0 z-0 bg-white"
       aria-hidden="true"
     >
       {isLoaded ? (
@@ -89,7 +89,7 @@ export default function MapBackground() {
         </GoogleMap>
       ) : null}
 
-      <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(1,17,30,0)_0%,rgba(1,17,30,0.38)_18%,rgba(1,17,30,0.7)_40%,rgba(1,17,30,0.92)_65%,#01111e_100%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.2)_0%,rgba(255,255,255,0.55)_28%,rgba(255,255,255,0.84)_58%,#ffffff_100%)]" />
     </div>
   );
 }

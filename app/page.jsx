@@ -24,28 +24,28 @@ export default function HomePage() {
       alt: "EMS module close-up",
       sizes: "(max-width: 900px) 78vw, 370px",
       className:
-        "block min-h-full w-full rounded-[0.22rem] border border-[rgba(132,169,193,0.26)] object-cover min-[900px]:col-[1] min-[900px]:row-[1]",
+        "block min-h-full w-full rounded-[0.22rem] border border-[rgba(12,40,56,0.14)] object-cover min-[900px]:col-[1] min-[900px]:row-[1]",
     },
     {
       src: "/images/holders/ems-tech-2.png",
       alt: "EMS console",
       sizes: "(max-width: 900px) 78vw, 540px",
       className:
-        "block min-h-full w-full rounded-[0.22rem] border border-[rgba(132,169,193,0.26)] object-cover min-[900px]:col-[2] min-[900px]:row-[1/span_2]",
+        "block min-h-full w-full rounded-[0.22rem] border border-[rgba(12,40,56,0.14)] object-cover min-[900px]:col-[2] min-[900px]:row-[1/span_2]",
     },
     {
       src: "/images/holders/ems-tech-3.png",
       alt: "Resistance and EMS suit",
       sizes: "(max-width: 900px) 78vw, 370px",
       className:
-        "block min-h-full w-full rounded-[0.22rem] border border-[rgba(132,169,193,0.26)] object-cover min-[900px]:col-[3] min-[900px]:row-[1/span_2]",
+        "block min-h-full w-full rounded-[0.22rem] border border-[rgba(12,40,56,0.14)] object-cover min-[900px]:col-[3] min-[900px]:row-[1/span_2]",
     },
     {
       src: "/images/holders/ems-tech-4.png",
       alt: "EMS suit",
       sizes: "(max-width: 900px) 78vw, 370px",
       className:
-        "block min-h-full w-full rounded-[0.22rem] border border-[rgba(132,169,193,0.26)] object-cover min-[900px]:col-[1] min-[900px]:row-[2]",
+        "block min-h-full w-full rounded-[0.22rem] border border-[rgba(12,40,56,0.14)] object-cover min-[900px]:col-[1] min-[900px]:row-[2]",
     },
   ];
 
@@ -134,11 +134,11 @@ export default function HomePage() {
   ];
 
   return (
-    <main className="relative isolate flex w-full justify-center bg-[#01111e] p-0">
+    <main className="relative isolate flex w-full justify-center bg-white p-0">
       <div className="relative z-[1] w-[min(100%,1440px)] px-4 pb-6 max-[899px]:px-3 max-[899px]:pb-4 [&>section+section]:mt-16 max-[899px]:[&>section+section]:mt-[2.6rem] min-[900px]:px-[1.2rem] min-[900px]:[&>section+section]:mt-24">
         <SiteHeader />
 
-        <section className="relative isolate -mx-[calc(50vw-50%)] h-[100svh] min-h-[36rem] w-screen overflow-hidden bg-[#01111e] max-[899px]:min-h-[40rem]">
+        <section className="relative isolate -mx-[calc(50vw-50%)] h-[100svh] w-screen overflow-hidden bg-[#01111e]">
           <motion.div
             className="absolute inset-0 z-0"
             initial={reduceMotion ? false : { scale: 1.06 }}
@@ -157,10 +157,10 @@ export default function HomePage() {
 
           <div className="hero-grain" aria-hidden="true" />
 
-          <div className="absolute inset-0 z-[3] flex flex-col justify-end px-[clamp(1rem,4.2vw,4.5rem)] pb-[clamp(1.35rem,4.6vh,3.15rem)] pt-[5.25rem]">
-            <div className="@container flex w-full min-w-0 flex-col gap-[clamp(0.85rem,2vh,1.45rem)]">
+          <div className="absolute inset-0 z-[3] flex flex-col justify-end px-[clamp(1rem,4.2vw,4.5rem)] pb-[clamp(1rem,3.2vh,2.4rem)] pt-[4.35rem] max-[899px]:pt-[4.15rem]">
+            <div className="@container flex w-full min-w-0 flex-col gap-[clamp(0.7rem,1.6vh,1.15rem)]">
               <motion.h1
-                className="m-0 max-w-full text-left text-[clamp(1.9rem,10.2vw,2.65rem)] font-extrabold uppercase leading-[0.88] tracking-[0.01em] text-white [font-family:var(--font-new-science-extended)] [font-stretch:normal] [text-shadow:0_1px_2px_rgba(0,0,0,0.35)] min-[900px]:text-[clamp(2.45rem,6.35cqw,5.85rem)] min-[900px]:leading-[0.86]"
+                className="m-0 max-w-full text-left text-[clamp(1.65rem,8vw,2.05rem)] font-extrabold uppercase leading-[0.9] tracking-[0.01em] text-white [font-family:var(--font-new-science-extended)] [font-stretch:normal] [text-shadow:0_1px_2px_rgba(0,0,0,0.35)] min-[900px]:text-[clamp(2rem,4.05cqw,3.25rem)] min-[900px]:leading-[0.88]"
                 initial={reduceMotion ? false : { opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.95, ease: premiumEase }}
@@ -177,9 +177,9 @@ export default function HomePage() {
                 <span className="block whitespace-nowrap">CLUB</span>
               </motion.h1>
 
-              <div className="flex w-full min-w-0 flex-col items-stretch gap-4 min-[1100px]:flex-row min-[1100px]:items-end min-[1100px]:justify-between min-[1100px]:gap-8">
+              <div className="flex w-full min-w-0 flex-col items-stretch gap-3.5 min-[1100px]:flex-row min-[1100px]:items-end min-[1100px]:justify-between min-[1100px]:gap-8">
                 <motion.p
-                  className="m-0 max-w-[34rem] text-left text-[clamp(0.92rem,2.15vw,1.05rem)] font-normal leading-[1.4] text-white/90 [font-family:var(--font-inter)] [text-shadow:0_1px_2px_rgba(0,0,0,0.4)]"
+                  className="m-0 max-w-[34rem] self-start text-left text-[clamp(0.88rem,2.05vw,1.02rem)] font-normal leading-[1.4] text-white/90 [font-family:var(--font-inter)] [text-shadow:0_1px_2px_rgba(0,0,0,0.4)]"
                   initial={reduceMotion ? false : { opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, ease: premiumEase, delay: 0.16 }}
@@ -189,23 +189,66 @@ export default function HomePage() {
                 </motion.p>
 
                 <motion.div
-                  className="flex shrink-0 flex-nowrap items-center justify-end gap-2 self-end min-[900px]:gap-[0.85rem]"
+                  className="flex w-full shrink-0 flex-col items-end gap-2 self-end min-[1100px]:w-auto"
                   initial={reduceMotion ? false : { opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, ease: premiumEase, delay: 0.24 }}
                 >
-                  <a
-                    href="#how-it-works"
-                    className="inline-flex min-h-[2.7rem] items-center justify-center whitespace-nowrap rounded-full border border-white/75 bg-transparent px-3 text-[0.72rem] font-bold tracking-[0.1em] text-white min-[900px]:min-h-[2.95rem] min-[900px]:px-[1.35rem] min-[900px]:text-[0.76rem]"
-                  >
-                    KNOW MORE
-                  </a>
                   <Link
                     href="/book-trial"
-                    className="inline-flex min-h-[2.7rem] items-center justify-center whitespace-nowrap rounded-full border border-[#e8fb76] bg-[#e8fb76] px-4 text-[0.72rem] font-bold tracking-[0.1em] text-[#111] min-[900px]:min-h-[2.95rem] min-[900px]:min-w-[10.5rem] min-[900px]:px-[1.45rem] min-[900px]:text-[0.76rem]"
+                    className="flex w-full max-w-[19.5rem] items-center justify-between gap-3 rounded-[1.15rem] bg-[#e8fb76] py-2.5 pl-3.5 pr-2 text-[#111] shadow-[0_12px_28px_rgba(0,0,0,0.22)] min-[900px]:w-auto min-[900px]:min-w-[16.75rem] min-[900px]:py-3 min-[900px]:pl-4"
                   >
-                    BOOK A TRIAL
+                    <span className="flex min-w-0 flex-col items-start">
+                      <span className="inline-flex items-center gap-1.5 text-[0.7rem] font-medium leading-none text-[#111]/75 [font-family:var(--font-inter)]">
+                        <svg
+                          width="14"
+                          height="14"
+                          viewBox="0 0 16 16"
+                          aria-hidden="true"
+                          className="shrink-0"
+                        >
+                          <circle
+                            cx="8"
+                            cy="8"
+                            r="6.15"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.4"
+                          />
+                          <path
+                            d="M8 4.7V8.1l2.15 1.35"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.4"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                        20-min session
+                      </span>
+                      <span className="mt-1.5 text-[1.12rem] font-semibold leading-none tracking-[-0.01em] text-[#111] [font-family:var(--font-inter)] min-[900px]:text-[1.22rem]">
+                        Book a trial
+                      </span>
+                    </span>
+                    <span
+                      className="grid h-11 w-11 shrink-0 place-items-center rounded-[0.85rem] bg-[#111] text-[#e8fb76]"
+                      aria-hidden="true"
+                    >
+                      <svg width="18" height="18" viewBox="0 0 18 18">
+                        <path
+                          d="M3.5 9h10M9.75 5.25 13.5 9l-3.75 3.75"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.7"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </span>
                   </Link>
+                  <p className="m-0 text-right text-[0.75rem] leading-none text-white/88 [font-family:var(--font-inter)] [text-shadow:0_1px_2px_rgba(0,0,0,0.45)]">
+                    No pressure. Just 20 minutes.
+                  </p>
                 </motion.div>
               </div>
             </div>
@@ -221,7 +264,7 @@ export default function HomePage() {
         >
           <RevealItem
             as="article"
-            className="relative m-0 aspect-[16/12] overflow-hidden rounded-[0.3rem] border border-[rgba(132,169,193,0.26)] bg-transparent min-[900px]:aspect-[3/4]"
+            className="relative m-0 aspect-[16/12] overflow-hidden rounded-[0.3rem] border border-[rgba(12,40,56,0.14)] bg-transparent min-[900px]:aspect-[3/4]"
           >
             <Image
               src="/images/holders/gentle-on-joints.png"
@@ -236,7 +279,7 @@ export default function HomePage() {
           </RevealItem>
           <RevealItem
             as="article"
-            className="relative m-0 aspect-[16/12] overflow-hidden rounded-[0.3rem] border border-[rgba(132,169,193,0.26)] bg-transparent min-[900px]:aspect-[3/4]"
+            className="relative m-0 aspect-[16/12] overflow-hidden rounded-[0.3rem] border border-[rgba(12,40,56,0.14)] bg-transparent min-[900px]:aspect-[3/4]"
           >
             <Image
               src="/images/holders/powerful-on-muscles.png"
@@ -251,7 +294,7 @@ export default function HomePage() {
           </RevealItem>
           <RevealItem
             as="article"
-            className="relative m-0 aspect-[16/12] overflow-hidden rounded-[0.3rem] border border-[rgba(132,169,193,0.26)] bg-transparent min-[900px]:aspect-[3/4]"
+            className="relative m-0 aspect-[16/12] overflow-hidden rounded-[0.3rem] border border-[rgba(12,40,56,0.14)] bg-transparent min-[900px]:aspect-[3/4]"
           >
             <img
               src="/images/holders/science-backed-results.png"
@@ -267,13 +310,13 @@ export default function HomePage() {
         <section id="how-it-works" className="scroll-mt-24">
           <STitle
             sectionClassName="px-[0.1rem] pb-4 pt-[1.6rem] min-[900px]:px-12 min-[900px]:pb-[1.2rem] min-[900px]:pt-20"
-            titleClassName="m-0 text-[clamp(1.45rem,7vw,2rem)] leading-none text-[#80c5d5] [font-family:var(--font-new-science-extended)] min-[900px]:text-[2.6rem] min-[900px]:leading-[1.05]"
-            descriptionClassName="mt-[0.55rem] max-w-full text-[0.86rem] leading-[1.42] text-[#f2fbff] [font-family:var(--font-inter)] min-[900px]:mt-[0.65rem] min-[900px]:max-w-[39rem] min-[900px]:text-[1rem] min-[900px]:leading-[1.5]"
+            titleClassName="m-0 text-[clamp(1.45rem,7vw,2rem)] leading-none text-[#0d5f72] [font-family:var(--font-new-science-extended)] min-[900px]:text-[2.6rem] min-[900px]:leading-[1.05]"
+            descriptionClassName="mt-[0.55rem] max-w-full text-[0.86rem] leading-[1.42] text-[#243240] [font-family:var(--font-inter)] min-[900px]:mt-[0.65rem] min-[900px]:max-w-[39rem] min-[900px]:text-[1rem] min-[900px]:leading-[1.5]"
             title="HOW DOES IT WORK"
             description="During an ACTIVE20 session, low-impact electrical impulses activate multiple muscle groups at once while you move through simple, guided exercises with your coach. This creates deeper, more complete muscle contractions, delivering a full-body workout in just 20 minutes with minimal joint stress."
           />
 
-          <Reveal className="relative mt-0 overflow-hidden rounded-[0.9rem] border border-[rgba(132,169,193,0.26)] bg-transparent">
+          <Reveal className="relative mt-0 overflow-hidden rounded-[0.9rem] border border-[rgba(12,40,56,0.14)] bg-transparent">
             <Image
               src="/images/holders/how-it-works.png"
               alt="Battle rope training"
@@ -297,11 +340,11 @@ export default function HomePage() {
         <section className="pt-0">
           <STitle
             sectionClassName="px-[0.1rem] pb-[0.7rem] pt-0 text-center min-[900px]:pb-4"
-            titleClassName="m-0 text-[clamp(1.1rem,5.8vw,1.55rem)] leading-none text-[#80c5d5] [font-family:var(--font-new-science-extended)] min-[900px]:whitespace-nowrap min-[900px]:text-[clamp(0.78rem,2.55vw,1.95rem)]"
+            titleClassName="m-0 text-[clamp(1.1rem,5.8vw,1.55rem)] leading-none text-[#0d5f72] [font-family:var(--font-new-science-extended)] min-[900px]:whitespace-nowrap min-[900px]:text-[clamp(0.78rem,2.55vw,1.95rem)]"
             title="ADVANCED FITNESS FOR EVERY BODY"
           />
 
-          <Reveal className="relative mt-0 overflow-hidden rounded-[0.9rem] border border-[rgba(132,169,193,0.26)] bg-transparent">
+          <Reveal className="relative mt-0 overflow-hidden rounded-[0.9rem] border border-[rgba(12,40,56,0.14)] bg-transparent">
             <img
               src="/images/holders/advance-fitness.png"
               alt="Strength training with age"
@@ -320,8 +363,8 @@ export default function HomePage() {
         <section className="pt-0">
           <STitle
             sectionClassName="px-[0.1rem] pb-4 pt-[1.6rem] min-[900px]:px-12 min-[900px]:pb-4 min-[900px]:pt-20"
-            titleClassName="m-0 text-[clamp(1.45rem,7vw,2rem)] leading-none text-[#80c5d5] [font-family:var(--font-new-science-extended)] min-[900px]:text-[2.6rem] min-[900px]:leading-[1.05]"
-            descriptionClassName="mt-[0.55rem] max-w-full text-[0.86rem] leading-[1.42] text-[#f2fbff] [font-family:var(--font-inter)] min-[900px]:mt-[0.65rem] min-[900px]:max-w-[39rem] min-[900px]:text-[1rem] min-[900px]:leading-[1.5]"
+            titleClassName="m-0 text-[clamp(1.45rem,7vw,2rem)] leading-none text-[#0d5f72] [font-family:var(--font-new-science-extended)] min-[900px]:text-[2.6rem] min-[900px]:leading-[1.05]"
+            descriptionClassName="mt-[0.55rem] max-w-full text-[0.86rem] leading-[1.42] text-[#243240] [font-family:var(--font-inter)] min-[900px]:mt-[0.65rem] min-[900px]:max-w-[39rem] min-[900px]:text-[1rem] min-[900px]:leading-[1.5]"
             title="THE EMS TECH"
             description="Wear a state-of-the-art EMS suit connected to a tablet-controlled system and guided by your certified coach. Every session is personalised in real time, with intensity, muscle activation, and training programmes precisely adjusted to match your body, fitness level, and goals."
           />
@@ -334,7 +377,7 @@ export default function HomePage() {
                     key={`${image.src}-${copy}`}
                     src={image.src}
                     alt={image.alt}
-                    className="h-[13.5rem] w-[78vw] shrink-0 rounded-[0.22rem] border border-[rgba(132,169,193,0.26)] object-cover"
+                    className="h-[13.5rem] w-[78vw] shrink-0 rounded-[0.22rem] border border-[rgba(12,40,56,0.14)] object-cover"
                     width={0}
                     height={0}
                     sizes={image.sizes}
@@ -362,7 +405,7 @@ export default function HomePage() {
         <section className="pt-0">
           <STitle
             sectionClassName="px-[0.1rem] pb-4 pt-0 text-center min-[900px]:pb-6"
-            titleClassName="m-0 text-[clamp(1.45rem,7vw,2rem)] leading-none text-[#80c5d5] [font-family:var(--font-new-science-extended)] min-[900px]:text-[2.6rem] min-[900px]:leading-[1.05]"
+            titleClassName="m-0 text-[clamp(1.45rem,7vw,2rem)] leading-none text-[#0d5f72] [font-family:var(--font-new-science-extended)] min-[900px]:text-[2.6rem] min-[900px]:leading-[1.05]"
             title="REAL PEOPLE. REAL PROGRESS."
           />
 
@@ -374,30 +417,30 @@ export default function HomePage() {
               <RevealItem
                 as="article"
                 key={testimonial.id}
-                className="relative isolate mb-[1rem] overflow-hidden rounded-[1rem] px-[1.2rem] pb-[1.15rem] pt-[1.15rem] shadow-[inset_0_1px_0_rgba(168,209,235,0.08)] [break-inside:avoid] min-[900px]:px-[1.55rem] min-[900px]:pb-[1.32rem] min-[900px]:pt-[1.32rem]"
+                className="relative isolate mb-[1rem] overflow-hidden rounded-[1rem] border border-[rgba(12,40,56,0.12)] px-[1.2rem] pb-[1.15rem] pt-[1.15rem] shadow-[0_10px_28px_rgba(12,27,42,0.05)] [break-inside:avoid] min-[900px]:px-[1.55rem] min-[900px]:pb-[1.32rem] min-[900px]:pt-[1.32rem]"
                 style={{
                   minHeight: testimonial.minHeight,
-                  backgroundImage: `linear-gradient(${testimonial.gradientAngle}deg, rgba(36,48,60,0.24) 0%, rgba(20,28,38,0.34) 42%, rgba(11,16,24,0.46) 100%)`,
+                  backgroundImage: `linear-gradient(${testimonial.gradientAngle}deg, #ffffff 0%, #f4f8f6 52%, #e7f1ef 100%)`,
                 }}
               >
-                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_16%_0%,rgba(122,210,248,0.03)_0%,rgba(122,210,248,0)_36%)]" />
-                <p className="relative z-[1] m-0 text-[0.9rem] leading-[1.55] text-[rgba(214,227,238,0.72)] [font-family:var(--font-inter)] min-[900px]:text-[1.08rem] min-[900px]:leading-[1.5]">
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_16%_0%,rgba(232,251,118,0.34)_0%,rgba(232,251,118,0)_42%)]" />
+                <p className="relative z-[1] m-0 text-[0.9rem] leading-[1.55] text-[#31414d] [font-family:var(--font-inter)] min-[900px]:text-[1.08rem] min-[900px]:leading-[1.5]">
                   &quot;{testimonial.quote}&quot;
                 </p>
                 <div className="relative z-[1] mt-[0.85rem] flex items-center gap-[0.52rem] min-[900px]:mt-[1rem]">
                   <div className="flex -space-x-2">
-                    <span className="inline-grid h-[1.9rem] w-[1.9rem] place-items-center rounded-full border border-[rgba(151,209,240,0.34)] bg-[linear-gradient(145deg,rgba(105,198,237,0.34),rgba(37,84,114,0.9))] text-[0.5rem] font-semibold tracking-[0.03em] text-[#f4fcff] min-[900px]:h-[2.35rem] min-[900px]:w-[2.35rem] min-[900px]:text-[0.62rem]">
+                    <span className="inline-grid h-[1.9rem] w-[1.9rem] place-items-center rounded-full border border-[rgba(12,40,56,0.12)] bg-[linear-gradient(145deg,#e8fb76,#9fd7e2)] text-[0.5rem] font-semibold tracking-[0.03em] text-[#0c1b2a] min-[900px]:h-[2.35rem] min-[900px]:w-[2.35rem] min-[900px]:text-[0.62rem]">
                       {testimonial.initials}
                     </span>
-                    <span className="inline-grid h-[1.9rem] w-[1.9rem] place-items-center rounded-full border border-[rgba(160,194,214,0.28)] bg-[linear-gradient(145deg,rgba(53,72,94,0.95),rgba(16,30,45,0.98))] text-[0.48rem] font-semibold tracking-[0.03em] text-[#e8f2f9] min-[900px]:h-[2.35rem] min-[900px]:w-[2.35rem] min-[900px]:text-[0.6rem]">
+                    <span className="inline-grid h-[1.9rem] w-[1.9rem] place-items-center rounded-full border border-[rgba(12,40,56,0.12)] bg-[linear-gradient(145deg,#eef3f6,#c9d7e0)] text-[0.48rem] font-semibold tracking-[0.03em] text-[#0c1b2a] min-[900px]:h-[2.35rem] min-[900px]:w-[2.35rem] min-[900px]:text-[0.6rem]">
                       M
                     </span>
                   </div>
                   <div>
-                    <strong className="block text-[0.86rem] font-medium text-[rgba(225,237,247,0.8)] [font-family:var(--font-inter)] min-[900px]:text-[1.02rem]">
+                    <strong className="block text-[0.86rem] font-medium text-[#0c1b2a] [font-family:var(--font-inter)] min-[900px]:text-[1.02rem]">
                       {testimonial.name}
                     </strong>
-                    <span className="block text-[0.68rem] text-[rgba(166,188,206,0.62)] [font-family:var(--font-inter)] min-[900px]:text-[0.82rem]">
+                    <span className="block text-[0.68rem] text-[#5c6b76] [font-family:var(--font-inter)] min-[900px]:text-[0.82rem]">
                       Active20 Member
                     </span>
                   </div>
