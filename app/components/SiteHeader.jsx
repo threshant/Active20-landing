@@ -16,6 +16,7 @@ const NAV_LINKS = [
 const HIDE_DISTANCE = 10;
 
 export default function SiteHeader({ variant = "overlay" }) {
+  const lenis = useLenis();
   const [isNavScrolled, setIsNavScrolled] = useState(variant === "solid");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isHeaderHidden, setIsHeaderHidden] = useState(false);
