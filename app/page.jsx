@@ -6,15 +6,11 @@ import Link from "next/link";
 import BenefitCards from "./components/BenefitCards";
 import Footer2 from "./components/Footer2";
 import HowItWorks from "./components/HowItWorks";
-import {
-  premiumEase,
-  Reveal,
-  RevealItem,
-  RevealStagger,
-} from "./components/Reveal";
+import { premiumEase, Reveal } from "./components/Reveal";
 import ScrollRevealText from "./components/ScrollRevealText";
 import SiteHeader from "./components/SiteHeader";
 import STitle from "./components/STitle";
+import TestimonialMarquee from "./components/TestimonialMarquee";
 
 export default function HomePage() {
   const reduceMotion = useReducedMotion();
@@ -47,90 +43,6 @@ export default function HomePage() {
       sizes: "(max-width: 900px) 78vw, 370px",
       className:
         "block min-h-full w-full rounded-[0.22rem] border border-[rgba(12,40,56,0.14)] object-cover min-[900px]:col-[1] min-[900px]:row-[2]",
-    },
-  ];
-
-  const testimonials = [
-    {
-      id: "sushant",
-      quote:
-        "Active20 made training feel easy to stick with. The workouts are fast, focused, and I noticed meaningful strength gains within weeks. It finally fits my schedule without compromising results.",
-      name: "Sushant, Age 37",
-      initials: "SU",
-      gradientAngle: 160,
-      minHeight: "15.8rem",
-    },
-    {
-      id: "ananya",
-      quote:
-        "The coaching and EMS pairing has been incredible. I get a full-body session in just 20 minutes and still feel challenged every time. Recovery is smoother and my energy is better all week.",
-      name: "Ananya, Age 28",
-      initials: "AN",
-      gradientAngle: 230,
-      minHeight: "14.5rem",
-    },
-    {
-      id: "girish",
-      quote:
-        "I expected it to be a trend, but the progress has been very real. The sessions are efficient, my posture improved, and I feel stronger without putting unnecessary stress on my joints.",
-      name: "Girish, Age 52",
-      initials: "GI",
-      gradientAngle: 312,
-      minHeight: "16.3rem",
-    },
-    {
-      id: "rahul",
-      quote:
-        "Active20 keeps me consistent in a way no gym plan ever did. Short sessions, expert guidance, and visible improvement made it easy to build a routine I actually enjoy.",
-      name: "Rahul, Age 41",
-      initials: "RK",
-      gradientAngle: 28,
-      minHeight: "14.1rem",
-    },
-    {
-      id: "meera",
-      quote:
-        "I joined with lower back concerns and was surprised by how controlled every movement felt. My coach adjusted intensity each week, and I can now train consistently without flare-ups.",
-      name: "Meera, Age 46",
-      initials: "ME",
-      gradientAngle: 188,
-      minHeight: "17.1rem",
-    },
-    {
-      id: "arjun",
-      quote:
-        "As a founder, time is always tight. Active20 gave me a practical routine that actually fits my calendar. The 20-minute format is efficient, and the strength improvements are clear.",
-      name: "Arjun, Age 34",
-      initials: "AR",
-      gradientAngle: 256,
-      minHeight: "13.8rem",
-    },
-    {
-      id: "naina",
-      quote:
-        "I wanted better muscle tone without long gym sessions. Within the first month, I noticed better definition and stamina. The structure keeps me motivated week after week.",
-      name: "Naina, Age 31",
-      initials: "NA",
-      gradientAngle: 330,
-      minHeight: "15.1rem",
-    },
-    {
-      id: "dev",
-      quote:
-        "From day one, the coaching felt premium and personal. The session quality is consistent, the effort feels focused, and recovery has been far better than my old routine.",
-      name: "Dev, Age 39",
-      initials: "DE",
-      gradientAngle: 96,
-      minHeight: "16.7rem",
-    },
-    {
-      id: "isha",
-      quote:
-        "I came in looking for a smarter routine, and the accountability here made all the difference. The sessions are short, progress is measurable, and I feel stronger in daily life.",
-      name: "Isha, Age 33",
-      initials: "IS",
-      gradientAngle: 142,
-      minHeight: "15.4rem",
     },
   ];
 
@@ -305,53 +217,7 @@ export default function HomePage() {
           </Reveal>
         </section>
 
-        <section className="pt-0">
-          <STitle
-            sectionClassName="px-[0.1rem] pb-4 pt-0 text-center min-[900px]:pb-6"
-            titleClassName="m-0 text-[clamp(1.45rem,7vw,2rem)] leading-none text-[#0d5f72] [font-family:var(--font-new-science-extended)] min-[900px]:text-[2.6rem] min-[900px]:leading-[1.05]"
-            title="REAL PEOPLE. REAL PROGRESS."
-          />
-
-          <RevealStagger
-            className="mt-4 columns-1 gap-[1rem] min-[760px]:columns-2 min-[1160px]:columns-3"
-            stagger={0.07}
-          >
-            {testimonials.map((testimonial) => (
-              <RevealItem
-                as="article"
-                key={testimonial.id}
-                className="relative isolate mb-[1rem] overflow-hidden rounded-[1rem] border border-[rgba(12,40,56,0.12)] px-[1.2rem] pb-[1.15rem] pt-[1.15rem] shadow-[0_10px_28px_rgba(12,27,42,0.05)] [break-inside:avoid] min-[900px]:px-[1.55rem] min-[900px]:pb-[1.32rem] min-[900px]:pt-[1.32rem]"
-                style={{
-                  minHeight: testimonial.minHeight,
-                  backgroundImage: `linear-gradient(${testimonial.gradientAngle}deg, #ffffff 0%, #f4f8f6 52%, #e7f1ef 100%)`,
-                }}
-              >
-                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_16%_0%,rgba(232,251,118,0.34)_0%,rgba(232,251,118,0)_42%)]" />
-                <p className="relative z-[1] m-0 text-[0.9rem] leading-[1.55] text-[#31414d] [font-family:var(--font-inter)] min-[900px]:text-[1.08rem] min-[900px]:leading-[1.5]">
-                  &quot;{testimonial.quote}&quot;
-                </p>
-                <div className="relative z-[1] mt-[0.85rem] flex items-center gap-[0.52rem] min-[900px]:mt-[1rem]">
-                  <div className="flex -space-x-2">
-                    <span className="inline-grid h-[1.9rem] w-[1.9rem] place-items-center rounded-full border border-[rgba(12,40,56,0.12)] bg-[linear-gradient(145deg,#e8fb76,#9fd7e2)] text-[0.5rem] font-semibold tracking-[0.03em] text-[#0c1b2a] min-[900px]:h-[2.35rem] min-[900px]:w-[2.35rem] min-[900px]:text-[0.62rem]">
-                      {testimonial.initials}
-                    </span>
-                    <span className="inline-grid h-[1.9rem] w-[1.9rem] place-items-center rounded-full border border-[rgba(12,40,56,0.12)] bg-[linear-gradient(145deg,#eef3f6,#c9d7e0)] text-[0.48rem] font-semibold tracking-[0.03em] text-[#0c1b2a] min-[900px]:h-[2.35rem] min-[900px]:w-[2.35rem] min-[900px]:text-[0.6rem]">
-                      M
-                    </span>
-                  </div>
-                  <div>
-                    <strong className="block text-[0.86rem] font-medium text-[#0c1b2a] [font-family:var(--font-inter)] min-[900px]:text-[1.02rem]">
-                      {testimonial.name}
-                    </strong>
-                    <span className="block text-[0.68rem] text-[#5c6b76] [font-family:var(--font-inter)] min-[900px]:text-[0.82rem]">
-                      Active20 Member
-                    </span>
-                  </div>
-                </div>
-              </RevealItem>
-            ))}
-          </RevealStagger>
-        </section>
+        <TestimonialMarquee />
 
         <Footer2 />
       </div>
