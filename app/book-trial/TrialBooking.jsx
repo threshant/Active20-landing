@@ -77,7 +77,7 @@ function formatAmount(amount, currency = "INR") {
 }
 
 const fieldClassName =
-  "mt-2 w-full rounded-[0.7rem] border border-[rgba(132,169,193,0.26)] bg-[rgba(8,16,24,0.72)] px-4 py-3 text-[0.95rem] text-[#eff8ff] outline-none transition-[border-color,box-shadow] [font-family:var(--font-inter)] placeholder:text-[rgba(174,191,201,0.55)] focus:border-[#80c5d5] focus:shadow-[0_0_0_3px_rgba(128,197,213,0.16)]";
+  "mt-2 w-full rounded-[0.7rem] border border-[rgba(12,40,56,0.16)] bg-white px-4 py-3 text-[0.95rem] text-[#0c1b2a] outline-none transition-[border-color,box-shadow] [font-family:var(--font-inter)] placeholder:text-[#8b98a3] focus:border-[#0d5f72] focus:shadow-[0_0_0_3px_rgba(13,95,114,0.16)]";
 
 export default function TrialBooking() {
   const [step, setStep] = useState(1);
@@ -384,18 +384,18 @@ export default function TrialBooking() {
   };
 
   return (
-    <main className="relative isolate flex w-full justify-center bg-[#01111e] p-0">
+    <main className="relative isolate flex w-full justify-center bg-white p-0">
       <div className="relative z-[1] w-[min(100%,1440px)] px-4 pb-6 max-[899px]:px-3 max-[899px]:pb-4 min-[900px]:px-[1.2rem]">
-        <SiteHeader variant="transparent" />
+        <SiteHeader variant="solid" />
 
         <section className="mx-auto mb-16 w-full max-w-[58rem] pt-[clamp(5.6rem,12vw,7.2rem)] max-[899px]:mb-10 min-[900px]:mb-24 min-[900px]:pt-[clamp(6.6rem,10vw,7.8rem)]">
-          <p className="m-0 text-[0.78rem] tracking-[0.12em] text-[#80c5d5] [font-family:var(--font-inter)]">
+          <p className="m-0 text-[0.78rem] tracking-[0.12em] text-[#0d5f72] [font-family:var(--font-inter)]">
             FREE TRIAL SESSION
           </p>
-          <h1 className="mt-3 text-[clamp(1.8rem,6vw,2.8rem)] leading-[1.05] text-[#80c5d5] [font-family:var(--font-new-science-extended)] min-[900px]:text-[2.6rem]">
+          <h1 className="mt-3 text-[clamp(1.8rem,6vw,2.8rem)] leading-[1.05] text-[#0c1b2a] [font-family:var(--font-new-science-extended)] min-[900px]:text-[2.6rem]">
             Book your trial session
           </h1>
-          <p className="mt-3 max-w-[38rem] text-[0.92rem] leading-[1.55] text-[#d6e3ee] [font-family:var(--font-inter)] min-[900px]:text-[1rem]">
+          <p className="mt-3 max-w-[38rem] text-[0.92rem] leading-[1.55] text-[#243240] [font-family:var(--font-inter)] min-[900px]:text-[1rem]">
             Choose a studio, pick a time that works, and leave your details. We
             will confirm your 20-minute EMS trial.
           </p>
@@ -413,15 +413,15 @@ export default function TrialBooking() {
                         isCurrent
                           ? "bg-[#e8fb76] text-[#111]"
                           : isComplete
-                            ? "bg-[#80c5d5] text-[#01111e]"
-                            : "border border-[rgba(132,169,193,0.35)] text-[#aebfc9]"
+                            ? "bg-[#0d5f72] text-white"
+                            : "border border-[rgba(12,40,56,0.22)] text-[#5c6b76]"
                       }`}
                     >
                       {isComplete ? "✓" : item.id}
                     </span>
                     <span
                       className={`truncate text-[0.68rem] tracking-[0.08em] uppercase [font-family:var(--font-inter)] min-[900px]:text-[0.74rem] ${
-                        isCurrent ? "text-[#eff8ff]" : "text-[#aebfc9]"
+                        isCurrent ? "text-[#0c1b2a]" : "text-[#5c6b76]"
                       }`}
                     >
                       {item.label}
@@ -430,7 +430,7 @@ export default function TrialBooking() {
                   {index < STEPS.length - 1 ? (
                     <div
                       className={`mt-3 h-px w-full ${
-                        step > item.id ? "bg-[#80c5d5]" : "bg-[rgba(132,169,193,0.22)]"
+                        step > item.id ? "bg-[#0d5f72]" : "bg-[rgba(12,40,56,0.16)]"
                       }`}
                     />
                   ) : (
@@ -441,20 +441,20 @@ export default function TrialBooking() {
             })}
           </ol>
 
-          <div className="mt-2 rounded-[1rem] border border-[rgba(132,169,193,0.26)] bg-[linear-gradient(160deg,rgba(36,48,60,0.2)_0%,rgba(11,16,24,0.46)_100%)] p-4 min-[900px]:p-6">
+          <div className="mt-2 rounded-[1rem] border border-[rgba(12,40,56,0.14)] bg-[#f7f9fa] p-4 min-[900px]:p-6">
             {bookingResult ? (
               <div className="py-8 text-center">
-                <p className="m-0 text-[0.78rem] tracking-[0.12em] text-[#80c5d5] [font-family:var(--font-inter)]">
+                <p className="m-0 text-[0.78rem] tracking-[0.12em] text-[#0d5f72] [font-family:var(--font-inter)]">
                   {bookingResult.payment_required && !bookingResult.payment_complete
                     ? "PAYMENT REQUIRED"
                     : "BOOKING CONFIRMED"}
                 </p>
-                <h2 className="mt-3 text-[1.6rem] leading-tight text-[#eff8ff] [font-family:var(--font-new-science-extended)]">
+                <h2 className="mt-3 text-[1.6rem] leading-tight text-[#0c1b2a] [font-family:var(--font-new-science-extended)]">
                   {bookingResult.payment_required && !bookingResult.payment_complete
                     ? "Complete payment"
                     : "You are all set"}
                 </h2>
-                <p className="mx-auto mt-3 max-w-[28rem] text-[0.95rem] leading-[1.55] text-[#d6e3ee] [font-family:var(--font-inter)]">
+                <p className="mx-auto mt-3 max-w-[28rem] text-[0.95rem] leading-[1.55] text-[#243240] [font-family:var(--font-inter)]">
                   {bookingResult.payment_required && !bookingResult.payment_complete
                     ? `${fullName}, pay ${formatAmount(bookingResult.amount, bookingResult.currency)} to confirm your trial at ${selectedLocation?.branch_name} on ${formatLongDate(selectedDate)} at ${selectedSlot?.label}.`
                     : bookingResult.booking_id
@@ -471,7 +471,7 @@ export default function TrialBooking() {
                   </button>
                 ) : null}
                 {formError ? (
-                  <p className="mt-4 text-[0.86rem] text-[#f3b4b4] [font-family:var(--font-inter)]">
+                  <p className="mt-4 text-[0.86rem] text-[#b42318] [font-family:var(--font-inter)]">
                     {formError}
                   </p>
                 ) : null}
@@ -480,7 +480,7 @@ export default function TrialBooking() {
 
             {!bookingResult && step === 1 ? (
               <div>
-                <h2 className="m-0 text-[1.15rem] text-[#eff8ff] [font-family:var(--font-new-science-extended)]">
+                <h2 className="m-0 text-[1.15rem] text-[#0c1b2a] [font-family:var(--font-new-science-extended)]">
                   Search and select a location
                 </h2>
                 <label className="mt-4 block">
@@ -495,19 +495,19 @@ export default function TrialBooking() {
                 </label>
 
                 {isLocationsLoading ? (
-                  <p className="mt-6 text-[0.92rem] text-[#aebfc9] [font-family:var(--font-inter)]">
+                  <p className="mt-6 text-[0.92rem] text-[#5c6b76] [font-family:var(--font-inter)]">
                     Loading studios...
                   </p>
                 ) : null}
 
                 {locationsError ? (
-                  <p className="mt-6 text-[0.92rem] text-[#f3b4b4] [font-family:var(--font-inter)]">
+                  <p className="mt-6 text-[0.92rem] text-[#b42318] [font-family:var(--font-inter)]">
                     {locationsError}
                   </p>
                 ) : null}
 
                 {!isLocationsLoading && !locationsError && filteredLocations.length === 0 ? (
-                  <p className="mt-6 text-[0.92rem] text-[#aebfc9] [font-family:var(--font-inter)]">
+                  <p className="mt-6 text-[0.92rem] text-[#5c6b76] [font-family:var(--font-inter)]">
                     No studios match that search.
                   </p>
                 ) : null}
@@ -524,14 +524,14 @@ export default function TrialBooking() {
                         onClick={() => setSelectedLocation(location)}
                         className={`rounded-[0.8rem] border p-4 text-left transition-[border-color,background-color] ${
                           isSelected
-                            ? "border-[#e8fb76] bg-[rgba(232,251,118,0.08)]"
-                            : "border-[rgba(132,169,193,0.26)] bg-[rgba(8,16,24,0.5)] hover:border-[rgba(128,197,213,0.55)]"
+                            ? "border-[#c6de4a] bg-[rgba(232,251,118,0.45)]"
+                            : "border-[rgba(12,40,56,0.16)] bg-white hover:border-[#0d5f72]"
                         }`}
                       >
-                        <strong className="block text-[1rem] font-semibold text-[#eff8ff] [font-family:var(--font-new-science)]">
+                        <strong className="block text-[1rem] font-semibold text-[#0c1b2a] [font-family:var(--font-new-science)]">
                           {location.branch_name}
                         </strong>
-                        <span className="mt-2 block text-[0.86rem] leading-[1.45] text-[#aebfc9] [font-family:var(--font-inter)]">
+                        <span className="mt-2 block text-[0.86rem] leading-[1.45] text-[#5c6b76] [font-family:var(--font-inter)]">
                           {location.address || "Address coming soon"}
                         </span>
                       </button>
@@ -543,10 +543,10 @@ export default function TrialBooking() {
 
             {!bookingResult && step === 2 ? (
               <div>
-                <h2 className="m-0 text-[1.15rem] text-[#eff8ff] [font-family:var(--font-new-science-extended)]">
+                <h2 className="m-0 text-[1.15rem] text-[#0c1b2a] [font-family:var(--font-new-science-extended)]">
                   Choose a date
                 </h2>
-                <p className="mt-2 text-[0.86rem] text-[#aebfc9] [font-family:var(--font-inter)]">
+                <p className="mt-2 text-[0.86rem] text-[#5c6b76] [font-family:var(--font-inter)]">
                   {selectedLocation?.branch_name}
                   {selectedService?.name || selectedService?.service_name
                     ? ` · ${selectedService.name || selectedService.service_name}`
@@ -565,17 +565,17 @@ export default function TrialBooking() {
                         onClick={() => setSelectedDate(value)}
                         className={`w-[4.6rem] shrink-0 rounded-[0.75rem] border px-2 py-3 text-center ${
                           isSelected
-                            ? "border-[#e8fb76] bg-[rgba(232,251,118,0.1)] text-[#eff8ff]"
-                            : "border-[rgba(132,169,193,0.26)] bg-[rgba(8,16,24,0.5)] text-[#d6e3ee]"
+                            ? "border-[#c6de4a] bg-[rgba(232,251,118,0.55)] text-[#0c1b2a]"
+                            : "border-[rgba(12,40,56,0.16)] bg-white text-[#243240]"
                         }`}
                       >
-                        <span className="block text-[0.62rem] uppercase tracking-[0.08em] text-[#80c5d5] [font-family:var(--font-inter)]">
+                        <span className="block text-[0.62rem] uppercase tracking-[0.08em] text-[#0d5f72] [font-family:var(--font-inter)]">
                           {date.toLocaleDateString("en-IN", { weekday: "short" })}
                         </span>
                         <span className="mt-1 block text-[1.15rem] font-semibold leading-none [font-family:var(--font-new-science)]">
                           {date.getDate()}
                         </span>
-                        <span className="mt-1 block text-[0.62rem] uppercase tracking-[0.06em] text-[#aebfc9] [font-family:var(--font-inter)]">
+                        <span className="mt-1 block text-[0.62rem] uppercase tracking-[0.06em] text-[#5c6b76] [font-family:var(--font-inter)]">
                           {date.toLocaleDateString("en-IN", { month: "short" })}
                         </span>
                       </button>
@@ -583,24 +583,24 @@ export default function TrialBooking() {
                   })}
                 </div>
 
-                <h3 className="mt-6 text-[0.95rem] text-[#eff8ff] [font-family:var(--font-new-science-extended)]">
+                <h3 className="mt-6 text-[0.95rem] text-[#0c1b2a] [font-family:var(--font-new-science-extended)]">
                   Available time slots
                 </h3>
 
                 {isSlotsLoading ? (
-                  <p className="mt-4 text-[0.92rem] text-[#aebfc9] [font-family:var(--font-inter)]">
+                  <p className="mt-4 text-[0.92rem] text-[#5c6b76] [font-family:var(--font-inter)]">
                     Checking available times...
                   </p>
                 ) : null}
 
                 {slotsError ? (
-                  <p className="mt-4 text-[0.92rem] text-[#f3b4b4] [font-family:var(--font-inter)]">
+                  <p className="mt-4 text-[0.92rem] text-[#b42318] [font-family:var(--font-inter)]">
                     {slotsError}
                   </p>
                 ) : null}
 
                 {!isSlotsLoading && !slotsError && slots.length === 0 ? (
-                  <p className="mt-4 text-[0.92rem] text-[#aebfc9] [font-family:var(--font-inter)]">
+                  <p className="mt-4 text-[0.92rem] text-[#5c6b76] [font-family:var(--font-inter)]">
                     No slots left for this date. Please pick another day.
                   </p>
                 ) : null}
@@ -618,8 +618,8 @@ export default function TrialBooking() {
                         onClick={() => setSelectedSlot(slot)}
                         className={`rounded-[0.7rem] border px-3 py-3 text-[0.82rem] [font-family:var(--font-inter)] ${
                           isSelected
-                            ? "border-[#e8fb76] bg-[rgba(232,251,118,0.1)] text-[#eff8ff]"
-                            : "border-[rgba(132,169,193,0.26)] bg-[rgba(8,16,24,0.5)] text-[#d6e3ee] hover:border-[rgba(128,197,213,0.55)]"
+                            ? "border-[#c6de4a] bg-[rgba(232,251,118,0.55)] text-[#0c1b2a]"
+                            : "border-[rgba(12,40,56,0.16)] bg-white text-[#243240] hover:border-[#0d5f72]"
                         }`}
                       >
                         {slot.label}
@@ -632,16 +632,16 @@ export default function TrialBooking() {
 
             {!bookingResult && step === 3 ? (
               <form onSubmit={handleSubmit}>
-                <h2 className="m-0 text-[1.15rem] text-[#eff8ff] [font-family:var(--font-new-science-extended)]">
+                <h2 className="m-0 text-[1.15rem] text-[#0c1b2a] [font-family:var(--font-new-science-extended)]">
                   Your details
                 </h2>
-                <p className="mt-2 text-[0.86rem] text-[#aebfc9] [font-family:var(--font-inter)]">
+                <p className="mt-2 text-[0.86rem] text-[#5c6b76] [font-family:var(--font-inter)]">
                   {selectedLocation?.branch_name} · {formatLongDate(selectedDate)}{" "}
                   · {selectedSlot?.label}
                 </p>
 
                 <label className="mt-5 block">
-                  <span className="text-[0.78rem] tracking-[0.08em] uppercase text-[#80c5d5] [font-family:var(--font-inter)]">
+                  <span className="text-[0.78rem] tracking-[0.08em] uppercase text-[#0d5f72] [font-family:var(--font-inter)]">
                     Full name
                   </span>
                   <input
@@ -655,7 +655,7 @@ export default function TrialBooking() {
                 </label>
 
                 <label className="mt-4 block">
-                  <span className="text-[0.78rem] tracking-[0.08em] uppercase text-[#80c5d5] [font-family:var(--font-inter)]">
+                  <span className="text-[0.78rem] tracking-[0.08em] uppercase text-[#0d5f72] [font-family:var(--font-inter)]">
                     Phone number
                   </span>
                   <input
@@ -672,7 +672,7 @@ export default function TrialBooking() {
                 </label>
 
                 <label className="mt-4 block">
-                  <span className="text-[0.78rem] tracking-[0.08em] uppercase text-[#80c5d5] [font-family:var(--font-inter)]">
+                  <span className="text-[0.78rem] tracking-[0.08em] uppercase text-[#0d5f72] [font-family:var(--font-inter)]">
                     Email
                   </span>
                   <input
@@ -686,7 +686,7 @@ export default function TrialBooking() {
                 </label>
 
                 {formError ? (
-                  <p className="mt-4 text-[0.86rem] text-[#f3b4b4] [font-family:var(--font-inter)]">
+                  <p className="mt-4 text-[0.86rem] text-[#b42318] [font-family:var(--font-inter)]">
                     {formError}
                   </p>
                 ) : null}
@@ -699,7 +699,7 @@ export default function TrialBooking() {
                   type="button"
                   onClick={goBack}
                   disabled={step === 1 || isSubmitting}
-                  className="inline-flex min-h-[2.7rem] items-center justify-center rounded-full border border-white/80 bg-transparent px-[1.3rem] text-[0.72rem] font-bold tracking-[0.1em] text-white disabled:cursor-not-allowed disabled:opacity-35"
+                  className="inline-flex min-h-[2.7rem] items-center justify-center rounded-full border border-[#0c1b2a] bg-transparent px-[1.3rem] text-[0.72rem] font-bold tracking-[0.1em] text-[#0c1b2a] disabled:cursor-not-allowed disabled:opacity-35"
                 >
                   BACK
                 </button>

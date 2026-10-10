@@ -15,13 +15,13 @@ export default function Footer2() {
       >
         <RevealItem
           as="h2"
-          className="m-0 text-[clamp(1.55rem,4.2vw,3.05rem)] leading-none tracking-[0.015em] text-[#80c5d5] [font-family:var(--font-new-science-extended)] max-[899px]:text-[clamp(1.3rem,8.2vw,2rem)]"
+          className="m-0 text-[clamp(1.55rem,4.2vw,3.05rem)] leading-none tracking-[0.015em] text-[#0d5f72] [font-family:var(--font-new-science-extended)] max-[899px]:text-[clamp(1.3rem,8.2vw,2rem)]"
         >
           FIND A STUDIO NEAR YOU TODAY
         </RevealItem>
         <RevealItem
           as="p"
-          className="mx-auto mt-[clamp(0.55rem,1.2vw,0.9rem)] max-w-[34rem] text-[clamp(0.68rem,1.02vw,0.9rem)] leading-[1.35] text-[#aebfc9] [font-family:var(--font-inter)] max-[899px]:max-w-[18rem]"
+          className="mx-auto mt-[clamp(0.55rem,1.2vw,0.9rem)] max-w-[34rem] text-[clamp(0.68rem,1.02vw,0.9rem)] leading-[1.35] text-[#5c6b76] [font-family:var(--font-inter)] max-[899px]:max-w-[18rem]"
         >
           Get moving with ACTIVE20. Fast, personalised sessions designed to fit
           your lifestyle and goals.
@@ -42,37 +42,37 @@ export default function Footer2() {
       >
         <a
           href="#"
-          className="text-[clamp(0.68rem,0.9vw,0.84rem)] text-[#a9b2b9] [font-family:var(--font-inter)]"
+          className="text-[clamp(0.68rem,0.9vw,0.84rem)] text-[#5c6b76] [font-family:var(--font-inter)]"
         >
           Home
         </a>
         <a
           href="#"
-          className="text-[clamp(0.68rem,0.9vw,0.84rem)] text-[#a9b2b9] [font-family:var(--font-inter)]"
+          className="text-[clamp(0.68rem,0.9vw,0.84rem)] text-[#5c6b76] [font-family:var(--font-inter)]"
         >
           About
         </a>
         <a
           href="#"
-          className="text-[clamp(0.68rem,0.9vw,0.84rem)] text-[#a9b2b9] [font-family:var(--font-inter)]"
+          className="text-[clamp(0.68rem,0.9vw,0.84rem)] text-[#5c6b76] [font-family:var(--font-inter)]"
         >
           Feature
         </a>
         <a
           href="#"
-          className="text-[clamp(0.68rem,0.9vw,0.84rem)] text-[#a9b2b9] [font-family:var(--font-inter)]"
+          className="text-[clamp(0.68rem,0.9vw,0.84rem)] text-[#5c6b76] [font-family:var(--font-inter)]"
         >
           Pricing
         </a>
         <Link
           href="/privacy-policy"
-          className="text-[clamp(0.68rem,0.9vw,0.84rem)] text-[#a9b2b9] [font-family:var(--font-inter)]"
+          className="text-[clamp(0.68rem,0.9vw,0.84rem)] text-[#5c6b76] [font-family:var(--font-inter)]"
         >
           Privacy Policy
         </Link>
         <Link
           href="/terms"
-          className="text-[clamp(0.68rem,0.9vw,0.84rem)] text-[#a9b2b9] [font-family:var(--font-inter)]"
+          className="text-[clamp(0.68rem,0.9vw,0.84rem)] text-[#5c6b76] [font-family:var(--font-inter)]"
         >
           Terms and Conditions
         </Link>
@@ -80,7 +80,7 @@ export default function Footer2() {
 
       <Reveal
         as="p"
-        className="relative z-[2] mt-auto w-full max-w-full overflow-hidden whitespace-nowrap px-[clamp(0.25rem,1vw,0.8rem)] pt-[clamp(1rem,2.2vw,2rem)] text-center text-[clamp(2rem,12.4vw,11rem)] font-extrabold leading-[0.84] tracking-[clamp(0rem,0.04vw,0.05rem)] text-[rgba(210,223,234,0.2)] max-[899px]:mt-[1.15rem] max-[899px]:text-[clamp(1.7rem,11.6vw,5.2rem)] max-[899px]:tracking-[0]"
+        className="relative z-[2] mt-auto w-full max-w-full overflow-hidden whitespace-nowrap px-[clamp(0.25rem,1vw,0.8rem)] pt-[clamp(1rem,2.2vw,2rem)] text-center text-[clamp(2rem,12.4vw,11rem)] font-extrabold leading-[0.84] tracking-[clamp(0rem,0.04vw,0.05rem)] text-[rgba(12,27,42,0.1)] max-[899px]:mt-[1.15rem] max-[899px]:text-[clamp(1.7rem,11.6vw,5.2rem)] max-[899px]:tracking-[0]"
         aria-hidden="true"
       >
         ACTIVE20

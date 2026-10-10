@@ -71,6 +71,25 @@ function SmoothScrollLinks() {
   useEffect(() => {
     if (!lenis) return undefined;
 
+    let alive = true;
+    let detach = () => {};
+
+    import("gsap/ScrollTrigger").then(({ ScrollTrigger }) => {
+      if (!alive) return;
+      const onScroll = () => ScrollTrigger.update();
+      lenis.on("scroll", onScroll);
+      detach = () => lenis.off("scroll", onScroll);
+    });
+
+    return () => {
+      alive = false;
+      detach();
+    };
+  }, [lenis]);
+
+  useEffect(() => {
+    if (!lenis) return undefined;
+
     const hash = window.location.hash;
     if (!hash || hash === "#") return undefined;
 

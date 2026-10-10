@@ -3,7 +3,7 @@
 import { useLenis } from "lenis/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const NAV_LINKS = [
   { href: "/#how-it-works", label: "HOW IT WORKS" },
@@ -13,28 +13,61 @@ const NAV_LINKS = [
   { href: "/#", label: "FAQS" },
 ];
 
+const HIDE_DISTANCE = 10;
+
 export default function SiteHeader({ variant = "overlay" }) {
   const lenis = useLenis();
   const [isNavScrolled, setIsNavScrolled] = useState(variant === "solid");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isHeaderHidden, setIsHeaderHidden] = useState(false);
+  const menuOpenRef = useRef(false);
+  const lastScrollRef = useRef(0);
+  const accumRef = useRef(0);
+  const hiddenRef = useRef(false);
+
+  menuOpenRef.current = isMobileMenuOpen;
 
   useEffect(() => {
-    if (variant === "solid" || variant === "transparent") {
-      setIsNavScrolled(variant === "solid");
-      return undefined;
-    }
-
-    const onScroll = () => {
-      setIsNavScrolled(window.scrollY > 30);
-    };
-
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-    };
+    if (variant === "solid") setIsNavScrolled(true);
+    if (variant === "transparent") setIsNavScrolled(false);
   }, [variant]);
+
+  const onLenisScroll = useCallback(
+    (lenis) => {
+      const current = Math.max(0, lenis?.scroll ?? 0);
+      const delta = current - lastScrollRef.current;
+
+      if (variant === "overlay") {
+        const nextScrolled = current > 30;
+        setIsNavScrolled((prev) => (prev === nextScrolled ? prev : nextScrolled));
+      }
+
+      let nextHidden = hiddenRef.current;
+
+      if (menuOpenRef.current || current <= 4) {
+        nextHidden = false;
+        accumRef.current = 0;
+      } else if (delta !== 0) {
+        const accum = accumRef.current;
+        if ((delta > 0 && accum < 0) || (delta < 0 && accum > 0)) {
+          accumRef.current = 0;
+        }
+        accumRef.current += delta;
+        if (accumRef.current > HIDE_DISTANCE) nextHidden = true;
+        else if (accumRef.current < -HIDE_DISTANCE) nextHidden = false;
+      }
+
+      if (nextHidden !== hiddenRef.current) {
+        hiddenRef.current = nextHidden;
+        setIsHeaderHidden(nextHidden);
+      }
+
+      lastScrollRef.current = current;
+    },
+    [variant],
+  );
+
+  useLenis(onLenisScroll, [variant]);
 
   useEffect(() => {
     const onResize = () => {
@@ -49,6 +82,18 @@ export default function SiteHeader({ variant = "overlay" }) {
       window.removeEventListener("resize", onResize);
     };
   }, []);
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) return undefined;
+
+    hiddenRef.current = false;
+    accumRef.current = 0;
+    setIsHeaderHidden(false);
+
+    return undefined;
+  }, [isMobileMenuOpen]);
+
+  const lenis = useLenis();
 
   useEffect(() => {
     const originalOverflow = document.body.style.overflow;
@@ -70,18 +115,22 @@ export default function SiteHeader({ variant = "overlay" }) {
   const isNavActive =
     variant !== "transparent" &&
     (variant === "solid" || isNavScrolled || isMobileMenuOpen);
+  const onLightSurface = variant !== "overlay" || isNavActive;
+  const isHidden = isHeaderHidden && !isMobileMenuOpen;
 
-  const topbarClassName = `fixed left-0 top-0 z-50 w-full border-none bg-transparent px-[1.2rem] py-[0.85rem] text-[#f4fbff] shadow-none transition-[background-color,backdrop-filter,box-shadow] duration-[220ms] max-[899px]:px-3 max-[899px]:pb-[0.6rem] max-[899px]:pt-[0.55rem] ${
-    isNavActive
-      ? "bg-[linear-gradient(135deg,rgba(12,12,12,0.92),rgba(4,4,4,0.94))] shadow-[0_8px_24px_rgba(0,0,0,0.4)] backdrop-blur-[10px]"
-      : ""
+  const topbarClassName = `site-header fixed left-0 top-0 z-50 w-full border-none px-[1.2rem] py-[0.85rem] shadow-none max-[899px]:px-3 max-[899px]:pb-[0.6rem] max-[899px]:pt-[0.55rem] ${
+    isHidden ? "-translate-y-full pointer-events-none" : "translate-y-0"
+  } ${
+    onLightSurface
+      ? "bg-white/95 text-[#0c1b2a] shadow-[0_8px_24px_rgba(12,27,42,0.08)] backdrop-blur-[10px]"
+      : "bg-transparent text-white"
   }`;
 
   const navLinkClassName =
-    "inline-flex min-h-[2.4rem] items-center justify-center px-[0.2rem] leading-none max-[899px]:min-h-[2.75rem] max-[899px]:w-full max-[899px]:justify-start max-[899px]:border-b max-[899px]:border-[rgba(232,245,255,0.12)] max-[899px]:px-0 max-[899px]:text-[0.78rem] max-[899px]:tracking-[0.12em]";
+    "inline-flex min-h-[2.4rem] items-center justify-center px-[0.2rem] leading-none max-[899px]:min-h-[2.75rem] max-[899px]:w-full max-[899px]:justify-start max-[899px]:border-b max-[899px]:border-[rgba(12,40,56,0.1)] max-[899px]:px-0 max-[899px]:text-[0.78rem] max-[899px]:tracking-[0.12em]";
 
   return (
-    <header className={topbarClassName}>
+    <header className={topbarClassName} inert={isHidden ? true : undefined}>
       <div className="mx-auto flex w-[min(100%,1440px)] items-center justify-between gap-[1.2rem] px-[1.2rem] max-[899px]:gap-[0.65rem] max-[899px]:px-1">
         <Link
           href="/"
@@ -91,7 +140,7 @@ export default function SiteHeader({ variant = "overlay" }) {
           <Image
             src="/images/logo.png"
             alt="Active20"
-            className="block h-8 w-auto"
+            className={`block h-8 w-auto ${onLightSurface ? "brightness-0" : ""}`}
             width={252}
             height={48}
             priority
@@ -122,7 +171,7 @@ export default function SiteHeader({ variant = "overlay" }) {
           </Link>
           <button
             type="button"
-            className="inline-flex h-8 w-8 cursor-pointer flex-col items-center justify-center gap-[0.28rem] border-0 bg-transparent p-0 text-[#f4fbff] min-[900px]:hidden"
+            className="inline-flex h-8 w-8 cursor-pointer flex-col items-center justify-center gap-[0.28rem] border-0 bg-transparent p-0 text-current min-[900px]:hidden"
             aria-label={
               isMobileMenuOpen
                 ? "Close navigation menu"
@@ -154,7 +203,7 @@ export default function SiteHeader({ variant = "overlay" }) {
           className="mx-auto mt-3 w-[min(100%,1440px)] px-1 min-[900px]:hidden"
           aria-label="Mobile"
         >
-          <div className="flex flex-col gap-0 rounded-[0.9rem] border border-[rgba(232,245,255,0.12)] bg-[rgba(6,8,10,0.96)] px-4 py-2">
+          <div className="flex flex-col gap-0 rounded-[0.9rem] border border-[rgba(12,40,56,0.12)] bg-white px-4 py-2 text-[#0c1b2a] shadow-[0_12px_32px_rgba(12,27,42,0.08)]">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.label}
