@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import BenefitCards from "./components/BenefitCards";
 import Footer2 from "./components/Footer2";
 import {
   fadeScale,
@@ -156,6 +157,7 @@ export default function HomePage() {
           </motion.div>
 
           <div className="hero-grain" aria-hidden="true" />
+          <div className="hero-readability" aria-hidden="true" />
 
           <div className="absolute inset-0 z-[3] flex flex-col justify-end px-[clamp(1rem,4.2vw,4.5rem)] pb-[clamp(1rem,3.2vh,2.4rem)] pt-[4.35rem] max-[899px]:pt-[4.15rem]">
             <div className="@container flex w-full min-w-0 flex-col gap-[clamp(0.7rem,1.6vh,1.15rem)]">
@@ -257,55 +259,7 @@ export default function HomePage() {
 
         <ScrollRevealText />
 
-        <RevealStagger
-          as="section"
-          className="mt-0 grid grid-cols-1 gap-[0.65rem] min-[900px]:grid-cols-3 min-[900px]:gap-[0.8rem]"
-          stagger={0.12}
-        >
-          <RevealItem
-            as="article"
-            className="relative m-0 aspect-[16/12] overflow-hidden rounded-[0.3rem] border border-[rgba(12,40,56,0.14)] bg-transparent min-[900px]:aspect-[3/4]"
-          >
-            <Image
-              src="/images/holders/gentle-on-joints.png"
-              alt="Gentle on joints"
-              className="object-cover"
-              fill
-              sizes="(max-width: 900px) 33vw, 360px"
-            />
-            <h3 className="absolute inset-x-0 bottom-0 m-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.72)_0%,transparent_100%)] px-[0.7rem] pb-[0.7rem] pt-[1.65rem] text-[0.7rem] font-semibold tracking-[0.05em] text-[#f7fdff] min-[900px]:pt-[2.5rem] min-[900px]:text-[0.9rem]">
-              GENTLE ON JOINTS
-            </h3>
-          </RevealItem>
-          <RevealItem
-            as="article"
-            className="relative m-0 aspect-[16/12] overflow-hidden rounded-[0.3rem] border border-[rgba(12,40,56,0.14)] bg-transparent min-[900px]:aspect-[3/4]"
-          >
-            <Image
-              src="/images/holders/powerful-on-muscles.png"
-              alt="Powerful on muscles"
-              className="object-cover"
-              fill
-              sizes="(max-width: 900px) 33vw, 360px"
-            />
-            <h3 className="absolute inset-x-0 bottom-0 m-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.72)_0%,transparent_100%)] px-[0.7rem] pb-[0.7rem] pt-[1.65rem] text-[0.7rem] font-semibold tracking-[0.05em] text-[#f7fdff] min-[900px]:pt-[2.5rem] min-[900px]:text-[0.9rem]">
-              POWERFUL ON MUSCLES
-            </h3>
-          </RevealItem>
-          <RevealItem
-            as="article"
-            className="relative m-0 aspect-[16/12] overflow-hidden rounded-[0.3rem] border border-[rgba(12,40,56,0.14)] bg-transparent min-[900px]:aspect-[3/4]"
-          >
-            <img
-              src="/images/holders/science-backed-results.png"
-              alt="Science backed results"
-              className="block h-full w-full object-cover"
-            />
-            <h3 className="absolute inset-x-0 bottom-0 m-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.72)_0%,transparent_100%)] px-[0.7rem] pb-[0.7rem] pt-[1.65rem] text-[0.7rem] font-semibold tracking-[0.05em] text-[#f7fdff] min-[900px]:pt-[2.5rem] min-[900px]:text-[0.9rem]">
-              SCIENCE BACKED RESULTS
-            </h3>
-          </RevealItem>
-        </RevealStagger>
+        <BenefitCards />
 
         <section id="how-it-works" className="scroll-mt-24">
           <STitle
