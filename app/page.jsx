@@ -6,45 +6,14 @@ import Link from "next/link";
 import BenefitCards from "./components/BenefitCards";
 import Footer2 from "./components/Footer2";
 import HowItWorks from "./components/HowItWorks";
-import { premiumEase, Reveal } from "./components/Reveal";
+import { premiumEase } from "./components/Reveal";
 import ScrollRevealText from "./components/ScrollRevealText";
 import SiteHeader from "./components/SiteHeader";
-import STitle from "./components/STitle";
+import StudioBento from "./components/StudioBento";
 import TestimonialMarquee from "./components/TestimonialMarquee";
 
 export default function HomePage() {
   const reduceMotion = useReducedMotion();
-
-  const emsTechImages = [
-    {
-      src: "/images/holders/ems-tech1.png",
-      alt: "EMS module close-up",
-      sizes: "(max-width: 900px) 78vw, 370px",
-      className:
-        "block min-h-full w-full rounded-[0.22rem] border border-[rgba(12,40,56,0.14)] object-cover min-[900px]:col-[1] min-[900px]:row-[1]",
-    },
-    {
-      src: "/images/holders/ems-tech-2.png",
-      alt: "EMS console",
-      sizes: "(max-width: 900px) 78vw, 540px",
-      className:
-        "block min-h-full w-full rounded-[0.22rem] border border-[rgba(12,40,56,0.14)] object-cover min-[900px]:col-[2] min-[900px]:row-[1/span_2]",
-    },
-    {
-      src: "/images/holders/ems-tech-3.png",
-      alt: "Resistance and EMS suit",
-      sizes: "(max-width: 900px) 78vw, 370px",
-      className:
-        "block min-h-full w-full rounded-[0.22rem] border border-[rgba(12,40,56,0.14)] object-cover min-[900px]:col-[3] min-[900px]:row-[1/span_2]",
-    },
-    {
-      src: "/images/holders/ems-tech-4.png",
-      alt: "EMS suit",
-      sizes: "(max-width: 900px) 78vw, 370px",
-      className:
-        "block min-h-full w-full rounded-[0.22rem] border border-[rgba(12,40,56,0.14)] object-cover min-[900px]:col-[1] min-[900px]:row-[2]",
-    },
-  ];
 
   return (
     <main className="relative isolate flex w-full justify-center bg-white p-0">
@@ -175,47 +144,7 @@ export default function HomePage() {
 
         <HowItWorks />
 
-        <section className="pt-0">
-          <STitle
-            sectionClassName="px-[0.1rem] pb-4 pt-[1.6rem] min-[900px]:px-12 min-[900px]:pb-4 min-[900px]:pt-20"
-            titleClassName="m-0 text-[clamp(1.45rem,7vw,2rem)] leading-none text-[#0d5f72] [font-family:var(--font-new-science-extended)] min-[900px]:text-[2.6rem] min-[900px]:leading-[1.05]"
-            descriptionClassName="mt-[0.55rem] max-w-full text-[0.86rem] leading-[1.42] text-[#243240] [font-family:var(--font-inter)] min-[900px]:mt-[0.65rem] min-[900px]:max-w-[39rem] min-[900px]:text-[1rem] min-[900px]:leading-[1.5]"
-            title="THE EMS TECH"
-            description="Wear a state-of-the-art EMS suit connected to a tablet-controlled system and guided by your certified coach. Every session is personalised in real time, with intensity, muscle activation, and training programmes precisely adjusted to match your body, fitness level, and goals."
-          />
-
-          <div className="ems-tech-marquee mt-0 min-[900px]:hidden">
-            <div className="ems-tech-marquee-track">
-              {[0, 1].flatMap((copy) =>
-                emsTechImages.map((image) => (
-                  <Image
-                    key={`${image.src}-${copy}`}
-                    src={image.src}
-                    alt={image.alt}
-                    className="h-[13.5rem] w-[78vw] shrink-0 rounded-[0.22rem] border border-[rgba(12,40,56,0.14)] object-cover"
-                    width={0}
-                    height={0}
-                    sizes={image.sizes}
-                  />
-                )),
-              )}
-            </div>
-          </div>
-
-          <Reveal className="mt-0 hidden grid-cols-[1fr_1.45fr_1fr] grid-rows-2 gap-[0.3rem] min-[900px]:grid">
-            {emsTechImages.map((image) => (
-              <Image
-                key={image.src}
-                src={image.src}
-                alt={image.alt}
-                className={image.className}
-                width={0}
-                height={0}
-                sizes={image.sizes}
-              />
-            ))}
-          </Reveal>
-        </section>
+        <StudioBento />
 
         <TestimonialMarquee />
 

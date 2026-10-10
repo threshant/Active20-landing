@@ -87,6 +87,8 @@ export default function HowItWorks() {
           section.classList.add("is-deck");
 
           gsap.set(cards, {
+            xPercent: -50,
+            yPercent: -50,
             x: (index) => SLOTS[index].x,
             y: (index) => SLOTS[index].y,
             rotation: (index) => SLOTS[index].rotation,
@@ -121,8 +123,16 @@ export default function HowItWorks() {
               timeline.set(card, { zIndex: cards.length - depth }, step);
               timeline.fromTo(
                 card,
-                { x: from.x, y: from.y, rotation: from.rotation },
                 {
+                  xPercent: -50,
+                  yPercent: -50,
+                  x: from.x,
+                  y: from.y,
+                  rotation: from.rotation,
+                },
+                {
+                  xPercent: -50,
+                  yPercent: -50,
                   x: to.x,
                   y: to.y,
                   rotation: to.rotation,
@@ -150,15 +160,19 @@ export default function HowItWorks() {
               cards[step],
               {
                 autoAlpha: 1,
+                xPercent: -50,
+                yPercent: -50,
                 x: SLOTS[0].x,
                 y: SLOTS[0].y,
                 rotation: SLOTS[0].rotation,
               },
               {
                 autoAlpha: 0,
-                x: SLOTS[0].x - 20,
-                y: SLOTS[0].y - 86,
-                rotation: SLOTS[0].rotation + 7,
+                xPercent: -50,
+                yPercent: -50,
+                x: SLOTS[0].x - 6,
+                y: SLOTS[0].y - 14,
+                rotation: SLOTS[0].rotation + 1.5,
                 duration: FADE_DURATION,
                 ease: "none",
                 immediateRender: false,
@@ -223,23 +237,25 @@ export default function HowItWorks() {
         <ol className="how-steps-deck">
           {STEPS.map((step) => (
             <li key={step.number} className="how-card">
-              <Image
-                src={step.src}
-                alt={step.alt}
-                fill
-                sizes="(max-width: 899px) 92vw, 48vw"
-                className="object-cover"
-                style={{ objectPosition: step.objectPosition }}
-              />
-              <div className="how-card-shade" aria-hidden="true" />
-              <div className="how-card-copy">
-                <span className="how-card-number">{step.number}</span>
-                <h3 className="m-0 text-[clamp(1.25rem,2.1vw,1.7rem)] leading-[1.05] text-white [font-family:var(--font-new-science-extended)] [text-wrap:balance]">
-                  {step.title}
-                </h3>
-                <p className="m-0 mt-2 max-w-[28rem] text-[0.92rem] leading-[1.45] text-white/82 [font-family:var(--font-inter)] min-[900px]:text-[0.98rem]">
-                  {step.description}
-                </p>
+              <div className="how-card-frame">
+                <Image
+                  src={step.src}
+                  alt={step.alt}
+                  fill
+                  sizes="(max-width: 899px) 68vw, 400px"
+                  className="object-cover"
+                  style={{ objectPosition: step.objectPosition }}
+                />
+                <div className="how-card-shade" aria-hidden="true" />
+                <div className="how-card-copy">
+                  <span className="how-card-number">{step.number}</span>
+                  <h3 className="m-0 text-white [font-family:var(--font-new-science-extended)] [text-wrap:balance]">
+                    {step.title}
+                  </h3>
+                  <p className="m-0 mt-2 text-white/82 [font-family:var(--font-inter)] [text-wrap:pretty]">
+                    {step.description}
+                  </p>
+                </div>
               </div>
             </li>
           ))}
