@@ -155,44 +155,60 @@ export default function HomePage() {
             />
           </motion.div>
 
-          <div className="absolute inset-0 z-[3] flex flex-col items-center justify-center px-4">
-            <motion.h1
-              className="m-0 text-center text-[clamp(2.4rem,7.4vw,6.4rem)] font-extrabold uppercase leading-[0.88] tracking-[0.02em] text-white [font-family:var(--font-new-science-extended)] [text-shadow:0_1px_2px_rgba(0,0,0,0.35)] max-[899px]:text-[clamp(1.85rem,10.4vw,2.7rem)]"
-              initial={reduceMotion ? false : { opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.95, ease: premiumEase }}
-            >
-              <span className="hidden whitespace-nowrap min-[900px]:block">
-                ADVANCED FITNESS
-              </span>
-              <span className="block whitespace-nowrap min-[900px]:hidden">
-                ADVANCED
-              </span>
-              <span className="block whitespace-nowrap min-[900px]:hidden">
-                FITNESS
-              </span>
-              <span className="block whitespace-nowrap">CLUB</span>
-            </motion.h1>
+          <div className="hero-grain" aria-hidden="true" />
 
-            <motion.div
-              className="mt-7 flex w-[min(100%,22rem)] flex-col items-center justify-center gap-[0.7rem] min-[900px]:mt-8 min-[900px]:w-auto min-[900px]:flex-row min-[900px]:gap-[0.85rem]"
-              initial={reduceMotion ? false : { opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: premiumEase, delay: 0.24 }}
-            >
-              <Link
-                href="/book-trial"
-                className="inline-flex min-h-[2.7rem] w-full items-center justify-center rounded-full border border-[#e8fb76] bg-[#e8fb76] px-[1.4rem] text-[0.72rem] font-bold tracking-[0.1em] text-[#111] min-[900px]:min-h-[2.9rem] min-[900px]:w-auto min-[900px]:min-w-[10.5rem] min-[900px]:text-[0.76rem]"
+          <div className="absolute inset-0 z-[3] flex flex-col justify-end px-[clamp(1rem,4.2vw,4.5rem)] pb-[clamp(1.35rem,4.6vh,3.15rem)] pt-[5.25rem]">
+            <div className="@container flex w-full min-w-0 flex-col gap-[clamp(0.85rem,2vh,1.45rem)]">
+              <motion.h1
+                className="m-0 max-w-full text-left text-[clamp(1.9rem,10.2vw,2.65rem)] font-extrabold uppercase leading-[0.88] tracking-[0.01em] text-white [font-family:var(--font-new-science-extended)] [font-stretch:normal] [text-shadow:0_1px_2px_rgba(0,0,0,0.35)] min-[900px]:text-[clamp(2.45rem,6.35cqw,5.85rem)] min-[900px]:leading-[0.86]"
+                initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.95, ease: premiumEase }}
               >
-                BOOK A TRIAL
-              </Link>
-              <a
-                href="#how-it-works"
-                className="inline-flex min-h-[2.7rem] w-full items-center justify-center rounded-full border border-white/80 bg-transparent px-[1.4rem] text-[0.72rem] font-bold tracking-[0.1em] text-white min-[900px]:min-h-[2.9rem] min-[900px]:w-auto min-[900px]:min-w-[10.5rem] min-[900px]:text-[0.76rem]"
-              >
-                KNOW MORE
-              </a>
-            </motion.div>
+                <span className="hidden whitespace-nowrap min-[900px]:block">
+                  ADVANCED FITNESS
+                </span>
+                <span className="block whitespace-nowrap min-[900px]:hidden">
+                  ADVANCED
+                </span>
+                <span className="block whitespace-nowrap min-[900px]:hidden">
+                  FITNESS
+                </span>
+                <span className="block whitespace-nowrap">CLUB</span>
+              </motion.h1>
+
+              <div className="flex w-full min-w-0 flex-col items-stretch gap-4 min-[1100px]:flex-row min-[1100px]:items-end min-[1100px]:justify-between min-[1100px]:gap-8">
+                <motion.p
+                  className="m-0 max-w-[34rem] text-left text-[clamp(0.92rem,2.15vw,1.05rem)] font-normal leading-[1.4] text-white/90 [font-family:var(--font-inter)] [text-shadow:0_1px_2px_rgba(0,0,0,0.4)]"
+                  initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, ease: premiumEase, delay: 0.16 }}
+                >
+                  Experience one of the world&apos;s most effective full-body
+                  workouts in just 20 minutes.
+                </motion.p>
+
+                <motion.div
+                  className="flex shrink-0 flex-nowrap items-center justify-end gap-2 self-end min-[900px]:gap-[0.85rem]"
+                  initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, ease: premiumEase, delay: 0.24 }}
+                >
+                  <a
+                    href="#how-it-works"
+                    className="inline-flex min-h-[2.7rem] items-center justify-center whitespace-nowrap rounded-full border border-white/75 bg-transparent px-3 text-[0.72rem] font-bold tracking-[0.1em] text-white min-[900px]:min-h-[2.95rem] min-[900px]:px-[1.35rem] min-[900px]:text-[0.76rem]"
+                  >
+                    KNOW MORE
+                  </a>
+                  <Link
+                    href="/book-trial"
+                    className="inline-flex min-h-[2.7rem] items-center justify-center whitespace-nowrap rounded-full border border-[#e8fb76] bg-[#e8fb76] px-4 text-[0.72rem] font-bold tracking-[0.1em] text-[#111] min-[900px]:min-h-[2.95rem] min-[900px]:min-w-[10.5rem] min-[900px]:px-[1.45rem] min-[900px]:text-[0.76rem]"
+                  >
+                    BOOK A TRIAL
+                  </Link>
+                </motion.div>
+              </div>
+            </div>
           </div>
         </section>
 

@@ -2,7 +2,7 @@
 
 import { useReducedMotion } from "framer-motion";
 import { useLenis } from "lenis/react";
-import { useEffect, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const SEGMENTS = [
   {
@@ -27,11 +27,21 @@ const WORDS = SEGMENTS.flatMap((segment) =>
 export default function ScrollRevealText() {
   const sectionRef = useRef(null);
   const lenis = useLenis();
-  const reduce = useReducedMotion();
+  const preference = useReducedMotion();
+  const [systemReduce, setSystemReduce] = useState(false);
+  const shouldReduce = systemReduce || preference === true;
+
+  useEffect(() => {
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const sync = () => setSystemReduce(media.matches);
+    sync();
+    media.addEventListener("change", sync);
+    return () => media.removeEventListener("change", sync);
+  }, []);
 
   useEffect(() => {
     const section = sectionRef.current;
-    if (!section || reduce !== false) return undefined;
+    if (!section || shouldReduce) return undefined;
 
     let context;
     let alive = true;
@@ -86,20 +96,21 @@ export default function ScrollRevealText() {
       alive = false;
       context?.revert();
     };
-  }, [lenis, reduce]);
+  }, [lenis, shouldReduce]);
 
   return (
     <section
       ref={sectionRef}
       className="relative z-[2] !mt-0 -mx-[calc(50vw-50%)] flex h-[100svh] min-h-[100svh] w-screen items-center bg-[#01111e] px-[clamp(1.25rem,8vw,8.5rem)] pb-10 pt-20"
     >
-      <p className="reveal-statement m-0 w-full text-left font-extrabold tracking-[-0.015em] text-[#f4fbff] [font-family:var(--font-new-science-extended)] [font-stretch:normal]">
+      <p className="reveal-statement m-0 w-full text-center font-extrabold tracking-[-0.015em] text-[#f4fbff] [font-family:var(--font-new-science-extended)] [font-stretch:normal]">
         {WORDS.map((item, index) => (
           <span
-            key={`${item.word}-${index}`}
+            key={`${item.word}-${index}-${shouldReduce ? "still" : "motion"}`}
             className={`reveal-word inline ${
-              reduce ? "opacity-100" : "opacity-20"
+              shouldReduce ? "opacity-100" : "opacity-20"
             } ${item.accent ? "text-[#80c5d5]" : ""}`}
+            style={shouldReduce ? { opacity: 1 } : undefined}
           >
             {item.word}{" "}
           </span>
