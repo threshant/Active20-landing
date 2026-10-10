@@ -26,11 +26,9 @@ const CARDS = [
   },
 ];
 
-const EASE = "cubic-bezier(0.16, 1, 0.3, 1)";
-
 function CardDots({ active }) {
   return (
-    <div className="benefit-dots pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-center gap-[0.42rem] bg-[linear-gradient(to_top,rgba(0,0,0,0.42)_0%,rgba(0,0,0,0)_72%)] px-3 pb-[0.85rem] pt-9">
+    <div className="benefit-dots pointer-events-none absolute inset-x-0 bottom-0 z-[1] flex items-end justify-center gap-[0.42rem] bg-[linear-gradient(to_top,rgba(0,0,0,0.42)_0%,rgba(0,0,0,0)_72%)] px-3 pb-[0.85rem] pt-9">
       {CARDS.map((card, index) => (
         <span
           key={card.title}
@@ -43,21 +41,42 @@ function CardDots({ active }) {
   );
 }
 
-function CardCopy({ card, tone }) {
-  const titleClass =
-    tone === "light"
-      ? "m-0 text-[clamp(1.05rem,4.6vw,1.45rem)] font-extrabold uppercase leading-[1.02] tracking-[0.02em] text-white [font-family:var(--font-new-science-extended)] [font-stretch:normal]"
-      : "m-0 text-[1.02rem] font-extrabold uppercase leading-[1.02] tracking-[0.01em] text-[#0c1b2a] [font-family:var(--font-new-science-extended)] [font-stretch:normal] min-[1100px]:text-[1.28rem] min-[1300px]:text-[1.48rem]";
-  const bodyClass =
-    tone === "light"
-      ? "m-0 mt-2 max-w-[26rem] text-[0.92rem] font-normal leading-[1.45] text-white/90 [font-family:var(--font-inter)] [font-stretch:normal] min-[700px]:text-[1rem]"
-      : "m-0 max-w-[24rem] text-[0.84rem] font-normal leading-[1.45] text-[#3c4b57] [font-family:var(--font-inter)] [font-stretch:normal] min-[1100px]:text-[0.95rem]";
-
+function CardPhoto({ card, alt, sizes, className }) {
   return (
-    <>
-      <h3 className={titleClass}>{card.title}</h3>
-      <p className={bodyClass}>{card.description}</p>
-    </>
+    <Image
+      src={card.src}
+      alt={alt}
+      fill
+      sizes={sizes}
+      className={className}
+    />
+  );
+}
+
+function CardBlur({ card, sizes }) {
+  return (
+    <div className="benefit-blur" aria-hidden="true">
+      <CardPhoto
+        card={card}
+        alt=""
+        sizes={sizes}
+        className="benefit-blur-image object-cover object-[center_18%]"
+      />
+      <div className="benefit-blur-wash" />
+    </div>
+  );
+}
+
+function CardCopy({ card }) {
+  return (
+    <div className="benefit-copy">
+      <h3 className="m-0 w-full text-left text-[clamp(1.02rem,4.4vw,1.28rem)] font-extrabold uppercase leading-[1.04] tracking-[0.01em] text-white [font-family:var(--font-new-science-extended)] [font-stretch:normal] [text-shadow:0_1px_3px_rgba(0,0,0,0.55)] [text-wrap:balance] min-[1100px]:text-[1.3rem] min-[1300px]:text-[1.42rem]">
+        {card.title}
+      </h3>
+      <p className="m-0 mt-2 w-full text-left text-[0.9rem] font-normal leading-[1.45] text-white/92 [font-family:var(--font-inter)] [font-stretch:normal] [text-shadow:0_1px_2px_rgba(0,0,0,0.5)] [text-wrap:pretty] min-[700px]:text-[0.98rem]">
+        {card.description}
+      </p>
+    </div>
   );
 }
 
@@ -180,30 +199,22 @@ export default function BenefitCards() {
             <article
               key={card.title}
               data-expanded={isOpen ? "true" : "false"}
-              className="benefit-card grid h-full min-w-0 overflow-hidden rounded-[1.2rem] bg-white shadow-[0_10px_28px_rgba(12,27,42,0.07)]"
+              className="benefit-card relative h-full min-w-0 overflow-hidden rounded-[1.2rem] bg-[#123044] shadow-[0_10px_28px_rgba(12,27,42,0.07)]"
               style={{
                 flexGrow: isOpen ? 2.15 : 1,
                 flexBasis: "0%",
                 flexShrink: 1,
-                gridTemplateColumns: isOpen ? "1.05fr 0.95fr" : "1fr 0fr",
-                transition: `flex-grow 700ms ${EASE}, grid-template-columns 700ms ${EASE}`,
               }}
             >
-              <div className="relative h-full min-h-0 min-w-0 overflow-hidden">
-                <Image
-                  src={card.src}
-                  alt={card.title}
-                  fill
-                  sizes="(max-width: 899px) 100vw, 34vw"
-                  className="object-cover object-[center_18%]"
-                />
-                <CardDots active={active} />
-              </div>
-              <div className="h-full min-h-0 min-w-0 overflow-hidden bg-white">
-                <div className="flex h-full min-w-0 flex-col justify-between px-[1.05rem] py-[1.15rem] min-[1100px]:px-[1.4rem] min-[1100px]:py-[1.4rem] min-[1300px]:px-[1.65rem] min-[1300px]:py-[1.6rem]">
-                  <CardCopy card={card} tone="dark" />
-                </div>
-              </div>
+              <CardPhoto
+                card={card}
+                alt={isOpen ? "" : card.title}
+                sizes="(max-width: 899px) 100vw, 55vw"
+                className="object-cover object-[center_18%]"
+              />
+              <CardBlur card={card} sizes="(max-width: 899px) 100vw, 55vw" />
+              <CardCopy card={card} />
+              <CardDots active={active} />
             </article>
           );
         })}
@@ -216,16 +227,14 @@ export default function BenefitCards() {
         <div ref={trackRef} className="flex h-full w-[300%] will-change-transform">
           {CARDS.map((card) => (
             <article key={card.title} className="relative h-full w-1/3 shrink-0">
-              <Image
-                src={card.src}
+              <CardPhoto
+                card={card}
                 alt=""
-                fill
                 sizes="100vw"
                 className="object-cover object-[center_18%]"
               />
-              <div className="absolute inset-x-0 bottom-0 bg-[linear-gradient(to_top,rgba(1,8,16,0.86)_0%,rgba(1,8,16,0.48)_42%,rgba(1,8,16,0)_100%)] px-5 pb-8 pt-28">
-                <CardCopy card={card} tone="light" />
-              </div>
+              <CardBlur card={card} sizes="100vw" />
+              <CardCopy card={card} />
             </article>
           ))}
         </div>
@@ -237,16 +246,14 @@ export default function BenefitCards() {
             key={card.title}
             className="relative m-0 aspect-[3/4] overflow-hidden rounded-[0.9rem] border border-[rgba(12,40,56,0.14)]"
           >
-            <Image
-              src={card.src}
+            <CardPhoto
+              card={card}
               alt=""
-              fill
               sizes="100vw"
               className="object-cover object-[center_18%]"
             />
-            <div className="absolute inset-x-0 bottom-0 bg-[linear-gradient(to_top,rgba(1,8,16,0.86)_0%,rgba(1,8,16,0.46)_46%,rgba(1,8,16,0)_100%)] px-4 pb-4 pt-16">
-              <CardCopy card={card} tone="light" />
-            </div>
+            <CardBlur card={card} sizes="100vw" />
+            <CardCopy card={card} />
           </article>
         ))}
       </div>

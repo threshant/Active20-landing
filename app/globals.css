@@ -131,11 +131,98 @@
   }
 }
 
+.benefit-card {
+  transition: flex-grow 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.benefit-blur,
+.benefit-copy {
+  transition:
+    opacity 420ms cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0s linear 0s;
+}
+
+.benefit-blur {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+  -webkit-mask-image: radial-gradient(
+    125% 92% at 100% 100%,
+    #000 0%,
+    rgba(0, 0, 0, 0.92) 28%,
+    rgba(0, 0, 0, 0.45) 48%,
+    transparent 68%
+  );
+  mask-image: radial-gradient(
+    125% 92% at 100% 100%,
+    #000 0%,
+    rgba(0, 0, 0, 0.92) 28%,
+    rgba(0, 0, 0, 0.45) 48%,
+    transparent 68%
+  );
+}
+
+.benefit-blur-image {
+  filter: blur(22px);
+  transform: scale(1.12);
+}
+
+.benefit-blur-wash {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    120% 90% at 100% 100%,
+    rgba(1, 8, 16, 0.78) 0%,
+    rgba(1, 8, 16, 0.66) 34%,
+    rgba(1, 12, 22, 0.28) 56%,
+    rgba(1, 17, 30, 0) 72%
+  );
+}
+
+.benefit-copy {
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  bottom: 0;
+  width: min(22rem, 84%);
+  padding: 0 1.05rem 1.85rem 0.85rem;
+  text-align: left;
+  pointer-events: none;
+}
+
+.benefit-card:not([data-expanded="true"]) .benefit-blur,
+.benefit-card:not([data-expanded="true"]) .benefit-copy {
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 180ms ease,
+    visibility 0s linear 180ms;
+}
+
+@media (min-width: 900px) {
+  .benefit-card .benefit-copy {
+    width: min(24rem, 58%);
+    padding: 0 1.35rem 2.2rem 1rem;
+  }
+}
+
 @media (min-width: 900px) and (prefers-reduced-motion: reduce) {
   .benefit-card {
     flex-grow: 1 !important;
-    grid-template-columns: 1.05fr 0.95fr !important;
     transition: none !important;
+  }
+
+  .benefit-card .benefit-blur,
+  .benefit-card .benefit-copy {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transition: none !important;
+  }
+
+  .benefit-card .benefit-copy {
+    width: min(22rem, 92%) !important;
   }
 
   .benefit-dots {
