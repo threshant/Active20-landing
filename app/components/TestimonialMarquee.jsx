@@ -121,7 +121,7 @@ function TestimonialCard({ testimonial, index }) {
           <strong className="testimonial-card-name">
             {displayName}
             {ageLabel ? (
-              <span className="testimonial-card-age">{ageLabel}</span>
+              <span className="testimonial-card-age"> {ageLabel}</span>
             ) : null}
           </strong>
           <span className="testimonial-card-role">Active20 Member</span>
