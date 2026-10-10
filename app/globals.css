@@ -55,6 +55,46 @@
     opacity: 0.22;
     mix-blend-mode: overlay;
   }
+
+  .hero-readability {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    height: 68%;
+    pointer-events: none;
+    background: linear-gradient(
+      to top,
+      rgba(1, 8, 16, 0.66) 0%,
+      rgba(1, 12, 22, 0.4) 22%,
+      rgba(1, 16, 28, 0.16) 46%,
+      rgba(1, 17, 30, 0) 100%
+    );
+  }
+
+  .hero-readability::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    -webkit-mask-image: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.85) 0%,
+      rgba(0, 0, 0, 0.45) 28%,
+      rgba(0, 0, 0, 0.12) 58%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.85) 0%,
+      rgba(0, 0, 0, 0.45) 28%,
+      rgba(0, 0, 0, 0.12) 58%,
+      transparent 100%
+    );
+  }
 }
 
 @layer utilities {
@@ -88,5 +128,27 @@
     .ems-tech-marquee-track {
       animation: none;
     }
+  }
+}
+
+@media (min-width: 900px) and (prefers-reduced-motion: reduce) {
+  .benefit-card {
+    flex-grow: 1 !important;
+    grid-template-columns: 1.05fr 0.95fr !important;
+    transition: none !important;
+  }
+
+  .benefit-dots {
+    display: none !important;
+  }
+}
+
+@media (max-width: 899px) and (prefers-reduced-motion: reduce) {
+  .benefit-pin {
+    display: none !important;
+  }
+
+  .benefit-stack {
+    display: flex !important;
   }
 }
