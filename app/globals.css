@@ -22,6 +22,13 @@
   }
 }
 
+@layer components {
+  .reveal-statement {
+    font-size: clamp(1.4rem, min(4.6vw, 5.8svh), 3.55rem);
+    line-height: 1.15;
+  }
+}
+
 @layer utilities {
   @keyframes ems-tech-scroll {
     from {

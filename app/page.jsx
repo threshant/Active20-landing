@@ -11,6 +11,7 @@ import {
   RevealItem,
   RevealStagger,
 } from "./components/Reveal";
+import ScrollRevealText from "./components/ScrollRevealText";
 import SiteHeader from "./components/SiteHeader";
 import STitle from "./components/STitle";
 
@@ -195,22 +196,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <STitle
-          sectionClassName="relative z-[3] mt-0 px-[0.2rem] pb-[1.2rem] text-left min-[900px]:px-[7.5rem] min-[900px]:pb-[2rem] min-[900px]:text-center"
-          descriptionClassName="mx-auto max-w-[90rem] text-[clamp(0.82rem,3.9vw,0.96rem)] font-semibold leading-[1.42] text-[#f2fbff] [font-family:var(--font-new-science-extended)] [font-stretch:normal] min-[900px]:text-[clamp(1.28rem,1.95vw,1.82rem)] min-[900px]:leading-[1.45]"
-          description={
-            <>
-              Experience one of the world&apos;s most effective full-body
-              workouts. ACTIVE20&apos;s advanced
-              <span className="text-[#80c5d5]">
-                {" "}
-                Electro-Muscle Stimulation (EMS)
-              </span>{" "}
-              technology delivers the benefits of up to a 90-minute conventional
-              workout in just 20 minutes.
-            </>
-          }
-        />
+        <ScrollRevealText />
 
         <RevealStagger
           as="section"
