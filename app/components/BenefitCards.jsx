@@ -137,12 +137,6 @@ export default function BenefitCards() {
               anticipatePin: 1,
               invalidateOnRefresh: true,
               fastScrollEnd: true,
-              snap: {
-                snapTo: 1 / (CARDS.length - 1),
-                duration: { min: 0.15, max: 0.4 },
-                delay: 0.05,
-                ease: "power1.inOut",
-              },
             },
           });
 
