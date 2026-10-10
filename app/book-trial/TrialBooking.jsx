@@ -384,7 +384,7 @@ export default function TrialBooking() {
   };
 
   return (
-    <main className="relative isolate flex w-full justify-center overflow-x-hidden bg-[#01111e] p-0">
+    <main className="relative isolate flex w-full justify-center bg-[#01111e] p-0">
       <div className="relative z-[1] w-[min(100%,1440px)] px-4 pb-6 max-[899px]:px-3 max-[899px]:pb-4 min-[900px]:px-[1.2rem]">
         <SiteHeader variant="transparent" />
 
