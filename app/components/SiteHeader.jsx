@@ -6,11 +6,11 @@ import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const NAV_LINKS = [
-  { href: "/#how-it-works", label: "HOW IT WORKS" },
-  { href: "/#", label: "FRANCHISE" },
-  { href: "/#", label: "ABOUT US" },
-  { href: "/#", label: "OUR STUDIOS" },
-  { href: "/#faq", label: "FAQS" },
+  { href: "/#how-it-works", label: "How it works" },
+  { href: "/#", label: "Franchise" },
+  { href: "/#", label: "About us" },
+  { href: "/#", label: "Our studios" },
+  { href: "/#faq", label: "FAQs" },
 ];
 
 const HIDE_DISTANCE = 10;
@@ -165,7 +165,7 @@ export default function SiteHeader({ variant = "overlay" }) {
             href="/book-trial"
             className="hidden min-h-[2.2rem] items-center justify-center whitespace-nowrap rounded-full border border-[#e8fb76] bg-[#e8fb76] px-[0.92rem] py-[0.34rem] text-[0.7rem] font-bold tracking-[0.08em] text-[#111] min-[900px]:inline-flex"
           >
-            BOOK A TRIAL
+            Book a trial
           </Link>
           <button
             type="button"
@@ -217,7 +217,7 @@ export default function SiteHeader({ variant = "overlay" }) {
               className="my-3 inline-flex min-h-[2.6rem] items-center justify-center rounded-full border border-[#e8fb76] bg-[#e8fb76] px-[1.05rem] text-[0.72rem] font-bold tracking-[0.08em] text-[#111]"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              BOOK A TRIAL
+              Book a trial
             </Link>
           </div>
         </nav>

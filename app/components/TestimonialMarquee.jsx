@@ -1,3 +1,5 @@
+import { TitleReveal } from "./Reveal";
+
 const TESTIMONIALS = [
   {
     id: "sushant",
@@ -173,10 +175,9 @@ export default function TestimonialMarquee() {
       aria-labelledby="testimonials-heading"
     >
       <header className="testimonial-marquee-heading">
-        <p className="testimonial-marquee-eyebrow">Testimonials</p>
-        <h2 id="testimonials-heading" className="testimonial-marquee-title">
-          REAL PEOPLE. REAL PROGRESS.
-        </h2>
+        <TitleReveal id="testimonials-heading" className="testimonial-marquee-title">
+          Real people. Real progress.
+        </TitleReveal>
       </header>
       <div className="testimonial-marquee-bleed">
         <div className="testimonial-marquee-rows">

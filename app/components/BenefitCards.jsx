@@ -4,23 +4,24 @@ import { useReducedMotion } from "framer-motion";
 import { useLenis } from "lenis/react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { TitleReveal } from "./Reveal";
 
 const CARDS = [
   {
     src: "/images/holders/gentle-on-joints.png",
-    title: "GENTLE ON JOINTS",
+    title: "Gentle on joints",
     description:
       "Low-impact EMS training protects your joints while your muscles do the work. You get a full session without the pounding of a conventional workout.",
   },
   {
     src: "/images/holders/powerful-on-muscles.png",
-    title: "POWERFUL ON MUSCLES",
+    title: "Powerful on muscles",
     description:
       "Deep, full-body activation in a 20-minute session. Multiple muscle groups fire together while your coach keeps the work focused.",
   },
   {
     src: "/images/holders/science-backed-results.png",
-    title: "SCIENCE BACKED RESULTS",
+    title: "Science backed results",
     description:
       "Coached sessions, adjusted to your level and goals. Intensity and muscle activation change with you as you progress.",
   },
@@ -46,8 +47,8 @@ function CardDots({ active }) {
 function CardCopy({ card, tone }) {
   const titleClass =
     tone === "light"
-      ? "m-0 text-[clamp(1.05rem,4.6vw,1.45rem)] font-extrabold uppercase leading-[1.02] tracking-[0.02em] text-white [font-family:var(--font-new-science-extended)] [font-stretch:normal]"
-      : "m-0 text-[1.02rem] font-extrabold uppercase leading-[1.02] tracking-[0.01em] text-[#0c1b2a] [font-family:var(--font-new-science-extended)] [font-stretch:normal] min-[1100px]:text-[1.28rem] min-[1300px]:text-[1.48rem]";
+      ? "m-0 text-[clamp(1.05rem,4.6vw,1.45rem)] font-extrabold leading-[1.02] tracking-[0.02em] text-white [font-family:var(--font-new-science-extended)] [font-stretch:normal]"
+      : "m-0 text-[1.02rem] font-extrabold leading-[1.02] tracking-[0.01em] text-[#0c1b2a] [font-family:var(--font-new-science-extended)] [font-stretch:normal] min-[1100px]:text-[1.28rem] min-[1300px]:text-[1.48rem]";
   const bodyClass =
     tone === "light"
       ? "m-0 mt-2 max-w-[26rem] text-[0.92rem] font-normal leading-[1.45] text-white/90 [font-family:var(--font-inter)] [font-stretch:normal] min-[700px]:text-[1rem]"
@@ -55,7 +56,9 @@ function CardCopy({ card, tone }) {
 
   return (
     <>
-      <h3 className={titleClass}>{card.title}</h3>
+      <TitleReveal as="h3" className={titleClass}>
+        {card.title}
+      </TitleReveal>
       <p className={bodyClass}>{card.description}</p>
     </>
   );

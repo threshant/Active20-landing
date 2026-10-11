@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { TitleReveal } from "./Reveal";
 
 export default function Footer2() {
   return (
@@ -9,7 +10,7 @@ export default function Footer2() {
           <path d="M8 36c8-17 21-23 39-19M39 9l9 8-11 4" />
         </svg>
         <div className="trial-cta-copy">
-          <h2 id="trial-cta-title">BOOK YOUR 30-MINUTE TRIAL</h2>
+          <TitleReveal id="trial-cta-title">Book your 30-minute trial</TitleReveal>
           <p>
             Meet your certified coach, try EMS training, and find the training
             style that fits your goals.
@@ -43,20 +44,20 @@ export default function Footer2() {
 
           <div className="site-footer-links">
             <nav aria-label="Explore">
-              <h3>Explore</h3>
+              <TitleReveal as="h3">Explore</TitleReveal>
               <Link href="/#about">About Active20</Link>
               <Link href="/#how-it-works">How it works</Link>
               <Link href="/#training">Training</Link>
               <Link href="/#faq">FAQs</Link>
             </nav>
             <nav aria-label="Get started">
-              <h3>Get started</h3>
+              <TitleReveal as="h3">Get started</TitleReveal>
               <Link href="/book-trial">Book a trial</Link>
               <Link href="/#testimonials">Testimonials</Link>
               <Link href="/">Home</Link>
             </nav>
             <nav aria-label="Legal">
-              <h3>Legal</h3>
+              <TitleReveal as="h3">Legal</TitleReveal>
               <Link href="/privacy-policy">Privacy policy</Link>
               <Link href="/terms">Terms and conditions</Link>
             </nav>

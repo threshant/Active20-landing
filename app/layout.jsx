@@ -6,18 +6,23 @@ import SmoothScroll from "./components/SmoothScroll";
 const newScience = localFont({
   src: [
     {
-      path: "../public/fonts/NewScience-BoldExtended.woff2",
-      weight: "800",
+      path: "../public/fonts/fonnts.com-New_Science_Regular.woff2",
+      weight: "400",
       style: "normal",
     },
     {
-      path: "../public/fonts/fonnts.com-New_Science_SemiBold_Extended.woff2",
-      weight: "600",
+      path: "../public/fonts/fonnts.com-New_Science_Medium.woff2",
+      weight: "500",
       style: "normal",
     },
     {
       path: "../public/fonts/NewScience-Semibold.woff2",
-      weight: "500",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/fonnts.com-New_Science_Bold.woff2",
+      weight: "700",
       style: "normal",
     },
   ],
@@ -28,13 +33,28 @@ const newScience = localFont({
 const newScienceExtended = localFont({
   src: [
     {
-      path: "../public/fonts/NewScience-BoldExtended.woff2",
-      weight: "800",
+      path: "../public/fonts/fonnts.com-New_Science_Regular_Extended.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/fonnts.com-New_Science_Medium_Extended.woff2",
+      weight: "500",
       style: "normal",
     },
     {
       path: "../public/fonts/fonnts.com-New_Science_SemiBold_Extended.woff2",
       weight: "600",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/NewScience-BoldExtended.woff2",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/NewScience-BoldExtended.woff2",
+      weight: "800",
       style: "normal",
     },
   ],
@@ -59,9 +79,7 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${newScience.variable} ${newScienceExtended.variable} ${inter.variable} text-[18px]`}
     >
-      <body
-        className="m-0 bg-white text-[#0c1b2a] [font-family:var(--font-new-science)] [font-stretch:expanded]"
-      >
+      <body className="m-0 bg-white text-[#0c1b2a] [font-family:var(--font-inter)]">
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>

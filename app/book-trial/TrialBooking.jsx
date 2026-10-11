@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Footer2 from "../components/Footer2";
+import { TitleReveal } from "../components/Reveal";
 import SiteHeader from "../components/SiteHeader";
 import {
   ApiError,
@@ -389,12 +390,12 @@ export default function TrialBooking() {
         <SiteHeader variant="solid" />
 
         <section className="mx-auto mb-16 w-full max-w-[58rem] pt-[clamp(5.6rem,12vw,7.2rem)] max-[899px]:mb-10 min-[900px]:mb-24 min-[900px]:pt-[clamp(6.6rem,10vw,7.8rem)]">
-          <p className="m-0 text-[0.78rem] tracking-[0.12em] text-[#0d5f72] [font-family:var(--font-inter)]">
-            FREE TRIAL SESSION
-          </p>
-          <h1 className="mt-3 text-[clamp(1.8rem,6vw,2.8rem)] leading-[1.05] text-[#0c1b2a] [font-family:var(--font-new-science-extended)] min-[900px]:text-[2.6rem]">
+          <TitleReveal
+            as="h1"
+            className="text-[clamp(1.8rem,6vw,2.8rem)] leading-[1.05] text-[#0c1b2a] [font-family:var(--font-new-science-extended)] min-[900px]:text-[2.6rem]"
+          >
             Book your trial session
-          </h1>
+          </TitleReveal>
           <p className="mt-3 max-w-[38rem] text-[0.92rem] leading-[1.55] text-[#243240] [font-family:var(--font-inter)] min-[900px]:text-[1rem]">
             Choose a studio, pick a time that works, and leave your details. We
             will confirm your 30-minute EMS trial.
@@ -420,7 +421,7 @@ export default function TrialBooking() {
                       {isComplete ? "✓" : item.id}
                     </span>
                     <span
-                      className={`truncate text-[0.68rem] tracking-[0.08em] uppercase [font-family:var(--font-inter)] min-[900px]:text-[0.74rem] ${
+                      className={`truncate text-[0.68rem] tracking-[0.01em] [font-family:var(--font-inter)] min-[900px]:text-[0.74rem] ${
                         isCurrent ? "text-[#0c1b2a]" : "text-[#5c6b76]"
                       }`}
                     >
@@ -446,14 +447,17 @@ export default function TrialBooking() {
               <div className="py-8 text-center">
                 <p className="m-0 text-[0.78rem] tracking-[0.12em] text-[#0d5f72] [font-family:var(--font-inter)]">
                   {bookingResult.payment_required && !bookingResult.payment_complete
-                    ? "PAYMENT REQUIRED"
-                    : "BOOKING CONFIRMED"}
+                    ? "Payment required"
+                    : "Booking confirmed"}
                 </p>
-                <h2 className="mt-3 text-[1.6rem] leading-tight text-[#0c1b2a] [font-family:var(--font-new-science-extended)]">
+                <TitleReveal
+                  as="h2"
+                  className="mt-3 text-[1.6rem] leading-tight text-[#0c1b2a] [font-family:var(--font-new-science-extended)]"
+                >
                   {bookingResult.payment_required && !bookingResult.payment_complete
                     ? "Complete payment"
                     : "You are all set"}
-                </h2>
+                </TitleReveal>
                 <p className="mx-auto mt-3 max-w-[28rem] text-[0.95rem] leading-[1.55] text-[#243240] [font-family:var(--font-inter)]">
                   {bookingResult.payment_required && !bookingResult.payment_complete
                     ? `${fullName}, pay ${formatAmount(bookingResult.amount, bookingResult.currency)} to confirm your trial at ${selectedLocation?.branch_name} on ${formatLongDate(selectedDate)} at ${selectedSlot?.label}.`
@@ -467,7 +471,7 @@ export default function TrialBooking() {
                     onClick={() => startPineLabsCheckout(bookingResult)}
                     className="mt-6 inline-flex min-h-[2.7rem] items-center justify-center rounded-full border border-[#e8fb76] bg-[#e8fb76] px-[1.4rem] text-[0.72rem] font-bold tracking-[0.1em] text-[#111]"
                   >
-                    PAY WITH PINE LABS
+                    Pay with Pine Labs
                   </button>
                 ) : null}
                 {formError ? (
@@ -480,9 +484,12 @@ export default function TrialBooking() {
 
             {!bookingResult && step === 1 ? (
               <div>
-                <h2 className="m-0 text-[1.15rem] text-[#0c1b2a] [font-family:var(--font-new-science-extended)]">
+                <TitleReveal
+                  as="h2"
+                  className="m-0 text-[1.15rem] text-[#0c1b2a] [font-family:var(--font-new-science-extended)]"
+                >
                   Search and select a location
-                </h2>
+                </TitleReveal>
                 <label className="mt-4 block">
                   <span className="sr-only">Search studios</span>
                   <input
@@ -543,9 +550,12 @@ export default function TrialBooking() {
 
             {!bookingResult && step === 2 ? (
               <div>
-                <h2 className="m-0 text-[1.15rem] text-[#0c1b2a] [font-family:var(--font-new-science-extended)]">
+                <TitleReveal
+                  as="h2"
+                  className="m-0 text-[1.15rem] text-[#0c1b2a] [font-family:var(--font-new-science-extended)]"
+                >
                   Choose a date
-                </h2>
+                </TitleReveal>
                 <p className="mt-2 text-[0.86rem] text-[#5c6b76] [font-family:var(--font-inter)]">
                   {selectedLocation?.branch_name}
                   {selectedService?.name || selectedService?.service_name
@@ -569,13 +579,13 @@ export default function TrialBooking() {
                             : "border-[rgba(12,40,56,0.16)] bg-white text-[#243240]"
                         }`}
                       >
-                        <span className="block text-[0.62rem] uppercase tracking-[0.08em] text-[#0d5f72] [font-family:var(--font-inter)]">
+                        <span className="block text-[0.62rem] tracking-[0.01em] text-[#0d5f72] [font-family:var(--font-inter)]">
                           {date.toLocaleDateString("en-IN", { weekday: "short" })}
                         </span>
                         <span className="mt-1 block text-[1.15rem] font-semibold leading-none [font-family:var(--font-new-science)]">
                           {date.getDate()}
                         </span>
-                        <span className="mt-1 block text-[0.62rem] uppercase tracking-[0.06em] text-[#5c6b76] [font-family:var(--font-inter)]">
+                        <span className="mt-1 block text-[0.62rem] tracking-[0.01em] text-[#5c6b76] [font-family:var(--font-inter)]">
                           {date.toLocaleDateString("en-IN", { month: "short" })}
                         </span>
                       </button>
@@ -583,9 +593,12 @@ export default function TrialBooking() {
                   })}
                 </div>
 
-                <h3 className="mt-6 text-[0.95rem] text-[#0c1b2a] [font-family:var(--font-new-science-extended)]">
+                <TitleReveal
+                  as="h3"
+                  className="mt-6 text-[0.95rem] text-[#0c1b2a] [font-family:var(--font-new-science-extended)]"
+                >
                   Available time slots
-                </h3>
+                </TitleReveal>
 
                 {isSlotsLoading ? (
                   <p className="mt-4 text-[0.92rem] text-[#5c6b76] [font-family:var(--font-inter)]">
@@ -632,16 +645,19 @@ export default function TrialBooking() {
 
             {!bookingResult && step === 3 ? (
               <form onSubmit={handleSubmit}>
-                <h2 className="m-0 text-[1.15rem] text-[#0c1b2a] [font-family:var(--font-new-science-extended)]">
+                <TitleReveal
+                  as="h2"
+                  className="m-0 text-[1.15rem] text-[#0c1b2a] [font-family:var(--font-new-science-extended)]"
+                >
                   Your details
-                </h2>
+                </TitleReveal>
                 <p className="mt-2 text-[0.86rem] text-[#5c6b76] [font-family:var(--font-inter)]">
                   {selectedLocation?.branch_name} · {formatLongDate(selectedDate)}{" "}
                   · {selectedSlot?.label}
                 </p>
 
                 <label className="mt-5 block">
-                  <span className="text-[0.78rem] tracking-[0.08em] uppercase text-[#0d5f72] [font-family:var(--font-inter)]">
+                  <span className="text-[0.78rem] tracking-[0.08em] text-[#0d5f72] [font-family:var(--font-inter)]">
                     Full name
                   </span>
                   <input
@@ -655,7 +671,7 @@ export default function TrialBooking() {
                 </label>
 
                 <label className="mt-4 block">
-                  <span className="text-[0.78rem] tracking-[0.08em] uppercase text-[#0d5f72] [font-family:var(--font-inter)]">
+                  <span className="text-[0.78rem] tracking-[0.08em] text-[#0d5f72] [font-family:var(--font-inter)]">
                     Phone number
                   </span>
                   <input
@@ -672,7 +688,7 @@ export default function TrialBooking() {
                 </label>
 
                 <label className="mt-4 block">
-                  <span className="text-[0.78rem] tracking-[0.08em] uppercase text-[#0d5f72] [font-family:var(--font-inter)]">
+                  <span className="text-[0.78rem] tracking-[0.08em] text-[#0d5f72] [font-family:var(--font-inter)]">
                     Email
                   </span>
                   <input
@@ -701,7 +717,7 @@ export default function TrialBooking() {
                   disabled={step === 1 || isSubmitting}
                   className="inline-flex min-h-[2.7rem] items-center justify-center rounded-full border border-[#0c1b2a] bg-transparent px-[1.3rem] text-[0.72rem] font-bold tracking-[0.1em] text-[#0c1b2a] disabled:cursor-not-allowed disabled:opacity-35"
                 >
-                  BACK
+                  Back
                 </button>
                 <button
                   type="button"
@@ -711,9 +727,9 @@ export default function TrialBooking() {
                 >
                   {step === 3
                     ? isSubmitting
-                      ? "CONFIRMING..."
-                      : "CONFIRM TRIAL"
-                    : "CONTINUE"}
+                      ? "Confirming..."
+                      : "Confirm trial"
+                    : "Continue"}
                 </button>
               </div>
             ) : null}

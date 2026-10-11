@@ -1,327 +1,249 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { motion, useMotionValue, useReducedMotion, useScroll } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { useLayoutEffect, useRef, useState } from "react";
+import { TitleReveal } from "./Reveal";
 
-const CARDS = [
-  {
-    id: "session",
-    motion: "drift",
-    title: "Twenty minutes",
-    body: "A full-body EMS session with your coach. Simple, guided exercises and deeper muscle work, finished in 20 minutes.",
-    src: "/images/holders/how-it-works.png",
-    alt: "Member training with battle ropes in an EMS suit",
-    objectPosition: "72% 42%",
-  },
-  {
-    id: "suit",
-    motion: "breathe",
-    title: "Suit and coach",
-    body: "No gym clothes needed. You train in a sterilized EMS suit while your coach adjusts the intensity live.",
-    src: "/images/holders/ems-tech-4.png",
-    alt: "Close view of the EMS suit, training pack, and resistance band",
-    objectPosition: "76% 28%",
-  },
-  {
-    id: "joints",
-    motion: "drift-y",
-    title: "Easy on joints",
-    body: "The effort stays in the muscle, so you can train with your coach without the pounding of a conventional workout.",
-    src: "/images/holders/gentle-on-joints.png",
-    alt: "Member moving through a low-impact drill in an EMS suit",
-    objectPosition: "24% 16%",
-  },
+const CARD_SLIDE = [
+  ["start 96%", "start 42%"],
+  ["start 84%", "start 28%"],
+  ["start 72%", "start 16%"],
+  ["start 92%", "start 34%"],
 ];
 
-const STYLES = [
-  {
-    name: "Strength",
-    icon: (
-      <svg viewBox="0 0 32 32" aria-hidden="true">
-        <path
-          d="M6.5 12.5v7M10.5 8.5v15M21.5 8.5v15M25.5 12.5v7M10.5 16h11"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.7"
-          strokeLinecap="round"
-        />
-      </svg>
-    ),
-  },
-  {
-    name: "Endurance",
-    icon: (
-      <svg viewBox="0 0 32 32" aria-hidden="true">
-        <path
-          d="M16 8.5a7.5 7.5 0 1 1-6.2 3.3"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.7"
-          strokeLinecap="round"
-        />
-        <path
-          d="M8.2 7.2v5.1h5"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.7"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    ),
-  },
-  {
-    name: "Performance",
-    icon: (
-      <svg viewBox="0 0 32 32" aria-hidden="true">
-        <path
-          d="M17.6 6.2 8.4 17.4h6.6l-1.5 8.4 10.1-12.2h-6.8l.8-7.4Z"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.7"
-          strokeLinejoin="round"
-        />
-      </svg>
-    ),
-  },
+const SLIDE_FROM_LEFT = [true, false, false, true];
+
+const VISITS = [
+  { id: "trial", name: "First visit", detail: "30 min", with: "with your certified coach" },
+  { id: "strength", name: "Strength", detail: "20 min", with: "with your certified coach" },
+  { id: "endurance", name: "Endurance", detail: "20 min", with: "with your certified coach" },
+  { id: "performance", name: "Performance", detail: "20 min", with: "with your certified coach" },
+  { id: "scan", name: "Body composition scan", detail: "included", with: "part of your first visit" },
 ];
 
-function PhotoCard({ card }) {
+const VISIT_LINES = [
+  ["Meet your coach", "Included"],
+  ["Body composition scan", "Included"],
+  ["Strength, Endurance, Performance", "Sampled"],
+  ["Recommended plan", "Included"],
+];
+
+const BLOCKS = 18;
+
+export default function StudioBento() {
+  const [selectedId, setSelectedId] = useState(VISITS[0].id);
+  const selected = VISITS.find((visit) => visit.id === selectedId) ?? VISITS[0];
+
   return (
-    <article
-      className={`bento-card bento-photo bento-${card.id}`}
-      data-bento-card
-      data-motion={card.motion}
-    >
-      <div className={`bento-media bento-media-${card.motion}`}>
-        <Image
-          src={card.src}
-          alt={card.alt}
-          fill
-          sizes={
-            card.id === "session"
-              ? "(max-width: 899px) 92vw, 760px"
-              : "(max-width: 899px) 92vw, 640px"
-          }
-          className="object-cover"
-          style={{ objectPosition: card.objectPosition }}
-        />
+    <section id="training" className="studio-bento-section" aria-labelledby="training-title">
+      <header className="bento-heading">
+        <TitleReveal id="training-title">
+          A session you can follow,
+          <br />
+          from first visit to your plan
+        </TitleReveal>
+      </header>
+
+      <div className="bento-grid">
+        <SlideCard order={0} className="bento-panel bento-book">
+          <div className="bento-panel-top">
+            <TitleReveal as="h3">Book a trial</TitleReveal>
+            <p className="bento-live">
+              <span aria-hidden="true" />
+              30-min visit
+            </p>
+          </div>
+          <p className="bento-panel-lead">
+            Pick a session, then book a time. Your first visit is 30 minutes,
+            with a coach from the start.
+          </p>
+          <p className="bento-field-label">Session</p>
+          <div className="bento-options" role="radiogroup" aria-label="Session">
+            {VISITS.map((visit) => {
+              const isSelected = visit.id === selected.id;
+              return (
+                <button
+                  key={visit.id}
+                  type="button"
+                  role="radio"
+                  aria-checked={isSelected}
+                  className="bento-option"
+                  data-selected={isSelected ? "true" : "false"}
+                  onClick={() => setSelectedId(visit.id)}
+                >
+                  {visit.name}
+                  <span> · {visit.detail}</span>
+                </button>
+              );
+            })}
+          </div>
+          <div className="bento-book-foot">
+            <p>
+              <span>Your visit</span>
+              <strong>{selected.name}</strong>
+              <em>{selected.with}</em>
+            </p>
+            <Link href="/book-trial" className="bento-book-btn">
+              Book a trial
+              <Arrow />
+            </Link>
+          </div>
+        </SlideCard>
+
+        <div className="bento-stack">
+          <SlideCard order={1} className="bento-panel bento-plan">
+            <div className="bento-panel-top">
+              <TitleReveal as="h3">Training plan</TitleReveal>
+              <p className="bento-pill">On track</p>
+            </div>
+            <div className="bento-plan-main">
+              <p className="bento-plan-figure">
+                <strong>20</strong>
+                <span>min</span>
+              </p>
+              <p className="bento-plan-next">
+                <span>First visit</span>
+                <strong>30 min</strong>
+              </p>
+            </div>
+            <div className="bento-blocks" aria-hidden="true">
+              {Array.from({ length: BLOCKS }, (_, index) => (
+                <span
+                  key={index}
+                  data-fill={index < 11 ? "full" : index < 14 ? "mid" : "empty"}
+                />
+              ))}
+            </div>
+            <div className="bento-block-labels">
+              <span>Warm-up</span>
+              <span>Full body</span>
+            </div>
+            <div className="bento-stats">
+              <p>
+                <span>Coach with you</span>
+                <strong>1:1</strong>
+              </p>
+              <p>
+                <span>Styles in a trial</span>
+                <strong>3</strong>
+              </p>
+            </div>
+          </SlideCard>
+
+          <SlideCard order={3} className="bento-panel bento-visit">
+            <div className="bento-panel-top">
+              <TitleReveal as="h3">First visit</TitleReveal>
+              <p className="bento-pill bento-pill-quiet">30 minutes</p>
+            </div>
+            <ul className="bento-lines">
+              {VISIT_LINES.map(([label, value]) => (
+                <li key={label}>
+                  <span>{label}</span>
+                  <span>{value}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="bento-total">
+              <p>
+                <span>You leave with</span>
+                <strong>A plan</strong>
+              </p>
+              <p>Mapped with your coach after the session.</p>
+            </div>
+          </SlideCard>
+        </div>
+
+        <SlideCard order={2} className="bento-panel bento-promo">
+          <p className="bento-promo-kicker">Every session</p>
+          <TitleReveal as="h3">Stay with the work, twenty minutes at a time</TitleReveal>
+          <p>
+            EMS and your coach, in one focused session. The suit does the deep
+            muscle work while you move through simple exercises.
+          </p>
+          <Link href="/book-trial" className="bento-promo-link">
+            Book a trial
+            <Arrow />
+          </Link>
+          <div className="bento-promo-photo">
+            <Image
+              src="/images/holders/ems-tech-4.png"
+              alt="Member training in the EMS suit"
+              fill
+              sizes="(max-width: 899px) 92vw, 380px"
+              className="object-cover"
+              style={{ objectPosition: "center 38%" }}
+            />
+          </div>
+        </SlideCard>
       </div>
-      <div className="bento-scrim" aria-hidden="true" />
-      <div className="bento-photo-copy">
-        <h3>{card.title}</h3>
-        <p>{card.body}</p>
-      </div>
-    </article>
+    </section>
   );
 }
 
-export default function StudioBento() {
-  const rootRef = useRef(null);
-  const gridRef = useRef(null);
+function SlideCard({ order, className, children }) {
+  const reduce = useReducedMotion();
+  const ref = useRef(null);
+  const fromLeft = SLIDE_FROM_LEFT[order];
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: CARD_SLIDE[order],
+  });
+  const x = useMotionValue(0);
+  const zIndex = useMotionValue(1);
 
-  useEffect(() => {
-    const root = rootRef.current;
-    if (!root) return undefined;
-
-    const cards = [...root.querySelectorAll("[data-bento-card]")];
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
+  useLayoutEffect(() => {
     if (reduce) {
-      cards.forEach((card) => card.classList.add("is-in"));
+      x.set(0);
+      zIndex.set(1);
       return undefined;
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add("is-in");
-          observer.unobserve(entry.target);
-        });
-      },
-      { threshold: 0.38, rootMargin: "0px 0px -6% 0px" },
-    );
-
-    cards.forEach((card) => observer.observe(card));
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const root = rootRef.current;
-    const grid = gridRef.current;
-    if (!root || !grid) return undefined;
-
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) {
-      grid.style.transform = "translate3d(0, 0, 0) scale(1)";
-      return undefined;
-    }
-
-    let context;
-    let alive = true;
-
-    (async () => {
-      const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
-        import("gsap"),
-        import("gsap/ScrollTrigger"),
-      ]);
-
-      if (!alive) return;
-      gsap.registerPlugin(ScrollTrigger);
-
-      context = gsap.context(() => {
-        gsap.fromTo(
-          grid,
-          { scale: 1.1, y: 90 },
-          {
-            scale: 1,
-            y: 0,
-            ease: "none",
-            scrollTrigger: {
-              trigger: root,
-              start: "top 95%",
-              end: "top 28%",
-              scrub: 0.8,
-              pin: false,
-              invalidateOnRefresh: true,
-            },
-          },
-        );
-      }, root);
-    })();
-
-    return () => {
-      alive = false;
-      context?.revert();
+    const update = () => {
+      const el = ref.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const progress = scrollYProgress.get();
+      const offscreen = fromLeft
+        ? -(rect.left + rect.width)
+        : window.innerWidth - rect.left;
+      x.set(offscreen * (1 - progress));
+      zIndex.set(progress < 0.98 ? 2 : 1);
     };
-  }, []);
+
+    update();
+    const unsubscribe = scrollYProgress.on("change", update);
+    window.addEventListener("resize", update);
+    return () => {
+      unsubscribe();
+      window.removeEventListener("resize", update);
+    };
+  }, [fromLeft, reduce, scrollYProgress, x, zIndex]);
 
   return (
-    <section
-      ref={rootRef}
-      id="training"
-      className="studio-bento-section"
-      aria-label="An Active20 session"
-    >
-      <div ref={gridRef} className="studio-bento">
-        {CARDS.filter((card) => card.id === "session").map((card) => (
-          <PhotoCard key={card.id} card={card} />
-        ))}
-        {CARDS.filter((card) => card.id === "suit").map((card) => (
-          <PhotoCard key={card.id} card={card} />
-        ))}
+    <div className="bento-slide" ref={ref}>
+      <motion.article
+        className={className}
+        style={reduce ? undefined : { x, zIndex, position: "relative" }}
+      >
+        {children}
+      </motion.article>
+    </div>
+  );
+}
 
-        <article
-          className="bento-card bento-surface bento-styles"
-          data-bento-card
-          data-motion="icons"
-        >
-          <h3>How you train</h3>
-          <p>
-            Your trial samples each style. Your coach keeps the session matched
-            to your level and goals.
-          </p>
-          <ul className="bento-style-row">
-            {STYLES.map((style) => (
-              <li key={style.name} className="bento-style">
-                <span className="bento-style-icon">{style.icon}</span>
-                <span className="bento-style-name">{style.name}</span>
-              </li>
-            ))}
-          </ul>
-        </article>
-
-        {CARDS.filter((card) => card.id === "joints").map((card) => (
-          <PhotoCard key={card.id} card={card} />
-        ))}
-
-        <article
-          className="bento-card bento-surface bento-plan"
-          data-bento-card
-          data-motion="draw"
-        >
-          <h3>After the trial</h3>
-          <p>
-            You and your coach go through how the session felt and map out a
-            plan that fits you.
-          </p>
-          <div className="bento-track-wrap">
-            <div className="bento-track" aria-hidden="true">
-              <span className="bento-track-line" />
-              <span className="bento-track-dot" />
-              <span className="bento-track-dot" />
-              <span className="bento-track-dot bento-track-dot-accent" />
-            </div>
-            <div className="bento-track-labels">
-              <span>Trial</span>
-              <span>Review</span>
-              <span>Plan</span>
-            </div>
-          </div>
-        </article>
-
-        <article
-          className="bento-card bento-photo bento-book"
-          data-bento-card
-          data-motion="float"
-        >
-          <div className="bento-media bento-media-book">
-            <Image
-              src="/images/holders/hero.png"
-              alt="Members training in EMS suits"
-              fill
-              sizes="(max-width: 899px) 92vw, 360px"
-              className="object-cover"
-              style={{ objectPosition: "center 42%" }}
-            />
-          </div>
-          <div className="bento-scrim" aria-hidden="true" />
-          <div className="bento-photo-copy">
-            <h3>Book a trial</h3>
-            <p>Your first visit takes 30 minutes.</p>
-            <Link href="/book-trial" className="bento-book-link">
-              <span className="bento-book-copy">
-                <span className="bento-book-kicker">
-                  <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true">
-                    <circle
-                      cx="8"
-                      cy="8"
-                      r="6.15"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.4"
-                    />
-                    <path
-                      d="M8 4.7V8.1l2.15 1.35"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.4"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                  30-min trial
-                </span>
-                <span className="bento-book-label">Book a trial</span>
-              </span>
-              <span className="bento-book-arrow" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 18 18">
-                  <path
-                    d="M3.5 9h10M9.75 5.25 13.5 9l-3.75 3.75"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.7"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </span>
-            </Link>
-          </div>
-        </article>
-      </div>
-    </section>
+function Arrow() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+      <path
+        d="M3 7h8M7.5 3.5 11 7 7.5 10.5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }

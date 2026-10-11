@@ -1,8 +1,5 @@
-"use client";
-
-import { useReducedMotion } from "framer-motion";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { TitleReveal } from "./Reveal";
 
 const STEPS = [
   {
@@ -38,170 +35,73 @@ const STEPS = [
 const FACES = STEPS.slice(0, 3);
 
 export default function HowItWorks() {
-  const railRef = useRef(null);
-  const preference = useReducedMotion();
-  const [atStart, setAtStart] = useState(true);
-  const [atEnd, setAtEnd] = useState(false);
-
-  useEffect(() => {
-    const rail = railRef.current;
-    if (!rail) return undefined;
-
-    const update = () => {
-      setAtStart(rail.scrollLeft <= 2);
-      setAtEnd(rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 2);
-    };
-
-    update();
-    rail.addEventListener("scroll", update, { passive: true });
-    const observer = new ResizeObserver(update);
-    observer.observe(rail);
-
-    return () => {
-      rail.removeEventListener("scroll", update);
-      observer.disconnect();
-    };
-  }, []);
-
-  const scrollByCard = (direction) => {
-    const rail = railRef.current;
-    const card = rail?.querySelector(".how-works-card");
-    const track = rail?.querySelector("ol");
-    if (!rail || !card || !track) return;
-    const gap = Number.parseFloat(getComputedStyle(track).columnGap) || 14;
-    const step = card.getBoundingClientRect().width + gap;
-    const index = Math.round(rail.scrollLeft / step);
-    const maxIndex = Math.max(0, track.children.length - 1);
-    const next = Math.min(Math.max(index + direction, 0), maxIndex);
-    rail.scrollTo({
-      left: next * step,
-      behavior: preference ? "auto" : "smooth",
-    });
-  };
-
   return (
     <section
       id="how-it-works"
       className="how-works scroll-mt-24"
       aria-labelledby="how-it-works-title"
     >
-      <div className="how-works-head">
-        <div>
-          <p className="how-works-kicker">How it works /</p>
-          <h2 id="how-it-works-title">
+      <div className="how-works-layout">
+        <div className="how-works-copy">
+          <TitleReveal id="how-it-works-title">
             How does
             <br />
             it work
-          </h2>
-        </div>
-        <p className="how-works-lead">
-          During an ACTIVE20 session, low-impact electrical impulses activate
-          multiple muscle groups at once while you move through simple, guided
-          exercises with your coach.
-        </p>
-      </div>
-
-      <div className="how-works-stage">
-        <div className="how-works-aside">
-          <div>
-            <div className="how-works-stat">
-              <div className="how-works-faces" aria-hidden="true">
-                {FACES.map((face) => (
-                  <span key={face.src}>
-                    <Image
-                      src={face.src}
-                      alt=""
-                      fill
-                      sizes="48px"
-                      className="object-cover"
-                      style={{ objectPosition: face.objectPosition }}
-                    />
-                  </span>
-                ))}
-              </div>
-              <p>
-                <strong>20</strong>
-                <span>minutes per session</span>
-              </p>
+          </TitleReveal>
+          <p className="how-works-lead">
+            During an Active20 session, low-impact electrical impulses activate
+            multiple muscle groups at once while you move through simple, guided
+            exercises with your coach.
+          </p>
+          <div className="how-works-stat">
+            <div className="how-works-faces" aria-hidden="true">
+              {FACES.map((face) => (
+                <span key={face.src}>
+                  <Image
+                    src={face.src}
+                    alt=""
+                    fill
+                    sizes="48px"
+                    className="object-cover"
+                    style={{ objectPosition: face.objectPosition }}
+                  />
+                </span>
+              ))}
             </div>
-            <p className="how-works-note">
-              Swipe through a first visit, from preparation to your plan.
+            <p>
+              <strong>20</strong>
+              <span>minutes per session</span>
             </p>
           </div>
-          <div className="how-works-controls">
-            <button
-              type="button"
-              aria-label="Previous step"
-              disabled={atStart}
-              onClick={() => scrollByCard(-1)}
-            >
-              <Chevron direction="left" />
-            </button>
-            <button
-              type="button"
-              aria-label="Next step"
-              disabled={atEnd}
-              onClick={() => scrollByCard(1)}
-            >
-              <Chevron direction="right" />
-            </button>
-          </div>
         </div>
 
-        <div
-          ref={railRef}
-          className="how-works-rail"
-          tabIndex={0}
-          onKeyDown={(event) => {
-            if (event.key === "ArrowRight") {
-              event.preventDefault();
-              scrollByCard(1);
-            }
-            if (event.key === "ArrowLeft") {
-              event.preventDefault();
-              scrollByCard(-1);
-            }
-          }}
-        >
-          <ol>
-            {STEPS.map((step) => (
-              <li key={step.title} className="how-works-card">
-                <Image
-                  src={step.src}
-                  alt={step.alt}
-                  fill
-                  sizes="(max-width: 899px) 78vw, 280px"
-                  className="object-cover"
-                  style={{ objectPosition: step.objectPosition }}
-                />
-                <div className="how-works-card-copy">
-                  <p>{step.meta}</p>
-                  <h3>{step.title}</h3>
-                </div>
-                <span className="how-works-card-arrow" aria-hidden="true">
-                  <ArrowUpRight />
-                </span>
-              </li>
-            ))}
-          </ol>
-        </div>
+        <ol className="how-works-stack">
+          {STEPS.map((step, index) => (
+            <li
+              key={step.title}
+              className="how-works-card"
+              style={{ "--stack": index, zIndex: index + 1 }}
+            >
+              <Image
+                src={step.src}
+                alt={step.alt}
+                fill
+                sizes="(max-width: 899px) 92vw, 640px"
+                className="object-cover"
+                style={{ objectPosition: step.objectPosition }}
+              />
+              <div className="how-works-card-copy">
+                <p>{step.meta}</p>
+                  <TitleReveal as="h3">{step.title}</TitleReveal>
+              </div>
+              <span className="how-works-card-arrow" aria-hidden="true">
+                <ArrowUpRight />
+              </span>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
-  );
-}
-
-function Chevron({ direction }) {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
-      <path
-        d={direction === "left" ? "M10 3.5 5.5 8 10 12.5" : "M6 3.5 10.5 8 6 12.5"}
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
   );
 }
 

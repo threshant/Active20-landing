@@ -2,9 +2,10 @@
 
 import { useReducedMotion } from "framer-motion";
 import { useEffect, useRef } from "react";
+import { TitleReveal } from "./Reveal";
 
 const COPY =
-  "ACTIVE20 combines Electro-Muscle Stimulation with certified coach guidance for a focused, full-body workout in just 20 minutes, with minimal stress on your joints.";
+  "Active20 combines Electro-Muscle Stimulation with certified coach guidance for a focused, full-body workout in just 20 minutes, with minimal stress on your joints.";
 
 const METRICS = [
   { value: 20, display: "20", label: "minutes per workout" },
@@ -34,7 +35,6 @@ export default function AboutActive20() {
       gsap.registerPlugin(ScrollTrigger);
 
       context = gsap.context(() => {
-        const words = gsap.utils.toArray(".about-word");
         const counters = gsap.utils.toArray("[data-counter]");
         const counterState = counters.map(() => ({ value: 0 }));
 
@@ -47,13 +47,6 @@ export default function AboutActive20() {
             pin: false,
           },
         });
-
-        timeline.fromTo(
-          words,
-          { opacity: 0.18 },
-          { opacity: 1, ease: "none", stagger: 0.035, duration: 0.7 },
-          0,
-        );
 
         counters.forEach((counter, index) => {
           const target = Number(counter.dataset.counter);
@@ -91,18 +84,9 @@ export default function AboutActive20() {
       aria-labelledby="about-active20-title"
     >
       <div className="about-active20-intro">
-        <p className="about-active20-label">ABOUT ACTIVE20</p>
-        <h2 id="about-active20-title" className="about-active20-statement">
-          {COPY.split(/\s+/).map((word, index) => (
-            <span
-              key={`${word}-${index}`}
-              className="about-word"
-              style={preference === true ? { opacity: 1 } : undefined}
-            >
-              {word}{" "}
-            </span>
-          ))}
-        </h2>
+        <TitleReveal id="about-active20-title" className="about-active20-statement">
+          {COPY}
+        </TitleReveal>
       </div>
 
       <dl className="about-active20-metrics">

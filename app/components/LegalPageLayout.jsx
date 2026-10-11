@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Footer2 from "./Footer2";
+import { TitleReveal } from "./Reveal";
 
 const sectionHeadingClassName =
   "mt-8 mb-3 text-[clamp(1.05rem,2.4vw,1.35rem)] font-semibold leading-[1.2] text-[#0d5f72] [font-family:var(--font-new-science-extended)] first:mt-0";
@@ -16,7 +17,9 @@ const listClassName =
 export function LegalSection({ title, children }) {
   return (
     <section>
-      <h2 className={sectionHeadingClassName}>{title}</h2>
+      <TitleReveal as="h2" className={sectionHeadingClassName}>
+        {title}
+      </TitleReveal>
       {children}
     </section>
   );
@@ -77,13 +80,13 @@ export default function LegalPageLayout({ title, lastUpdated, children }) {
                   href="/privacy-policy"
                   className="inline-flex items-center justify-center px-[0.2rem] leading-none transition-opacity hover:opacity-80"
                 >
-                  PRIVACY POLICY
+                  Privacy policy
                 </Link>
                 <Link
                   href="/terms"
                   className="inline-flex items-center justify-center px-[0.2rem] leading-none transition-opacity hover:opacity-80"
                 >
-                  TERMS
+                  Terms
                 </Link>
               </div>
             </nav>
@@ -93,7 +96,7 @@ export default function LegalPageLayout({ title, lastUpdated, children }) {
                 href="/"
                 className="inline-flex min-h-[2.2rem] items-center justify-center whitespace-nowrap rounded-full border border-[#e8fb76] bg-[#e8fb76] px-[0.92rem] py-[0.34rem] text-[0.7rem] font-bold tracking-[0.08em] text-[#111]"
               >
-                BACK TO HOME
+                Back to home
               </Link>
             </div>
           </div>
@@ -103,9 +106,12 @@ export default function LegalPageLayout({ title, lastUpdated, children }) {
           <p className="m-0 text-[0.78rem] tracking-[0.08em] text-[#0d5f72] [font-family:var(--font-inter)] min-[900px]:text-[0.84rem]">
             Last updated: {lastUpdated}
           </p>
-          <h1 className="mt-3 text-[clamp(1.8rem,6vw,2.8rem)] leading-[1.05] text-[#0c1b2a] [font-family:var(--font-new-science-extended)] min-[900px]:text-[2.6rem]">
+          <TitleReveal
+            as="h1"
+            className="mt-3 text-[clamp(1.8rem,6vw,2.8rem)] leading-[1.05] text-[#0c1b2a] [font-family:var(--font-new-science-extended)] min-[900px]:text-[2.6rem]"
+          >
             {title}
-          </h1>
+          </TitleReveal>
           <div className="mt-8">{children}</div>
         </article>
 

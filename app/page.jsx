@@ -8,7 +8,7 @@ import BenefitCards from "./components/BenefitCards";
 import FaqSection from "./components/FaqSection";
 import Footer2 from "./components/Footer2";
 import HowItWorks from "./components/HowItWorks";
-import { premiumEase } from "./components/Reveal";
+import { premiumEase, TitleReveal } from "./components/Reveal";
 import SiteHeader from "./components/SiteHeader";
 import StudioBento from "./components/StudioBento";
 import TestimonialMarquee from "./components/TestimonialMarquee";
@@ -43,23 +43,26 @@ export default function HomePage() {
 
           <div className="absolute inset-0 z-[3] flex flex-col justify-end px-[clamp(1rem,4.2vw,4.5rem)] pb-[clamp(1rem,3.2vh,2.4rem)] pt-[4.35rem] max-[899px]:pt-[4.15rem]">
             <div className="@container flex w-full min-w-0 flex-col gap-[clamp(0.7rem,1.6vh,1.15rem)]">
-              <motion.h1
-                className="m-0 max-w-full text-left text-[clamp(1.65rem,8vw,2.05rem)] font-extrabold uppercase leading-[0.9] tracking-[0.01em] text-white [font-family:var(--font-new-science-extended)] [font-stretch:normal] [text-shadow:0_1px_2px_rgba(0,0,0,0.35)] min-[900px]:text-[clamp(2rem,4.05cqw,3.25rem)] min-[900px]:leading-[0.88]"
-                initial={reduceMotion ? false : { opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.95, ease: premiumEase }}
+              <h1
+                className="m-0 max-w-full text-left text-[clamp(1.65rem,8vw,2.05rem)] font-extrabold leading-[0.9] tracking-[0.01em] text-white [font-family:var(--font-new-science-extended)] [font-stretch:normal] [text-shadow:0_1px_2px_rgba(0,0,0,0.35)] min-[900px]:text-[clamp(2rem,4.05cqw,3.25rem)] min-[900px]:leading-[0.88]"
               >
                 <span className="hidden whitespace-nowrap min-[900px]:block">
-                  ADVANCED FITNESS
+                  <TitleReveal as="span">ADVANCED FITNESS</TitleReveal>
                 </span>
                 <span className="block whitespace-nowrap min-[900px]:hidden">
-                  ADVANCED
+                  <TitleReveal as="span">ADVANCED</TitleReveal>
                 </span>
                 <span className="block whitespace-nowrap min-[900px]:hidden">
-                  FITNESS
+                  <TitleReveal as="span" delay={0.06}>
+                    FITNESS
+                  </TitleReveal>
                 </span>
-                <span className="block whitespace-nowrap">CLUB</span>
-              </motion.h1>
+                <span className="block whitespace-nowrap">
+                  <TitleReveal as="span" delay={0.12}>
+                    CLUB
+                  </TitleReveal>
+                </span>
+              </h1>
 
               <div className="flex w-full min-w-0 flex-col items-stretch gap-3.5 min-[1100px]:flex-row min-[1100px]:items-end min-[1100px]:justify-between min-[1100px]:gap-8">
                 <motion.p

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { TitleReveal } from "./Reveal";
 
 const FAQS = [
   {
@@ -41,8 +42,7 @@ export default function FaqSection() {
     >
       <div className="faq-band-inner">
         <div className="faq-intro">
-          <p className="faq-kicker">FAQ /</p>
-          <h2 id="faq-title">Questions, answered</h2>
+          <TitleReveal id="faq-title">Questions, answered</TitleReveal>
           <p>
             Still unsure about something? Write to{" "}
             <a href="mailto:team@active20.com">team@active20.com</a> and
@@ -68,7 +68,7 @@ export default function FaqSection() {
                       setOpenIndex((current) => (current === index ? null : index))
                     }
                   >
-                    <span>{item.question}</span>
+                    <TitleReveal as="span">{item.question}</TitleReveal>
                     <span className="faq-toggle" aria-hidden="true" />
                   </button>
                 </h3>
