@@ -425,13 +425,15 @@
   }
 }
 
-@media (max-width: 899px) and (prefers-reduced-motion: reduce) {
-  .benefit-pin {
-    display: none !important;
+@media (max-width: 899px) {
+  .hero-stage {
+    width: calc(100% + 1.5rem);
+    max-width: none;
+    margin-inline: -0.75rem;
   }
 
   .benefit-stack {
-    display: flex !important;
+    display: flex;
   }
 }
 
@@ -1729,6 +1731,19 @@
 
   .site-footer-bottom {
     flex-direction: column;
+  }
+}
+
+@media (max-width: 899px) {
+  .testimonial-marquee-bleed,
+  .site-close {
+    width: calc(100% + 1.5rem);
+    max-width: none;
+    margin-inline: -0.75rem;
+  }
+
+  .trial-cta h2 {
+    white-space: normal;
   }
 }
 
