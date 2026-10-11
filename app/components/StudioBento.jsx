@@ -194,15 +194,24 @@ function SlideCard({ order, className, children }) {
   const zIndex = useMotionValue(1);
 
   useLayoutEffect(() => {
-    if (reduce) {
+    const desktop = window.matchMedia("(min-width: 900px)");
+
+    const reset = () => {
       x.set(0);
       zIndex.set(1);
+    };
+
+    if (reduce) {
+      reset();
       return undefined;
     }
 
     const update = () => {
       const el = ref.current;
-      if (!el) return;
+      if (!el || !desktop.matches) {
+        reset();
+        return;
+      }
       const rect = el.getBoundingClientRect();
       const progress = scrollYProgress.get();
       const offscreen = fromLeft
@@ -215,9 +224,11 @@ function SlideCard({ order, className, children }) {
     update();
     const unsubscribe = scrollYProgress.on("change", update);
     window.addEventListener("resize", update);
+    desktop.addEventListener("change", update);
     return () => {
       unsubscribe();
       window.removeEventListener("resize", update);
+      desktop.removeEventListener("change", update);
     };
   }, [fromLeft, reduce, scrollYProgress, x, zIndex]);
 
