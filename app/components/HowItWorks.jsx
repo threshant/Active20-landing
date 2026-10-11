@@ -80,9 +80,9 @@ export default function HowItWorks() {
       context = gsap.context(() => {
         const mm = gsap.matchMedia();
 
-        mm.add("(prefers-reduced-motion: no-preference)", () => {
+        const mountDeck = (trigger, start) => {
           const cards = gsap.utils.toArray(".how-card");
-          if (!cards.length) return undefined;
+          if (!cards.length || !trigger) return undefined;
 
           section.classList.add("is-deck");
 
@@ -99,8 +99,8 @@ export default function HowItWorks() {
           const timeline = gsap.timeline({
             defaults: { ease: "none" },
             scrollTrigger: {
-              trigger: section,
-              start: "top top",
+              trigger,
+              start,
               end: () => `+=${window.innerHeight * (cards.length - 1) * 0.9}`,
               pin: true,
               scrub: true,
@@ -190,7 +190,21 @@ export default function HowItWorks() {
           return () => {
             section.classList.remove("is-deck");
           };
-        });
+        };
+
+        mm.add(
+          "(min-width: 900px) and (prefers-reduced-motion: no-preference)",
+          () => mountDeck(section, "top top"),
+        );
+
+        mm.add(
+          "(max-width: 899px) and (prefers-reduced-motion: no-preference)",
+          () =>
+            mountDeck(
+              section.querySelector(".how-steps-deck"),
+              "top 4.5rem",
+            ),
+        );
       }, section);
 
       const refresh = () => {
@@ -214,7 +228,7 @@ export default function HowItWorks() {
     <section
       ref={sectionRef}
       id="how-it-works"
-      className="how-steps scroll-mt-24 -mx-[calc(50vw-50%)] w-screen"
+      className="how-steps scroll-mt-24"
       aria-labelledby="how-it-works-title"
     >
       <div className="how-steps-grid">
@@ -242,7 +256,7 @@ export default function HowItWorks() {
                   src={step.src}
                   alt={step.alt}
                   fill
-                  sizes="(max-width: 899px) 68vw, 400px"
+                  sizes="(max-width: 899px) 86vw, 640px"
                   className="object-cover"
                   style={{ objectPosition: step.objectPosition }}
                 />
@@ -251,7 +265,7 @@ export default function HowItWorks() {
                     src={step.src}
                     alt=""
                     fill
-                    sizes="(max-width: 899px) 72vw, 430px"
+                    sizes="(max-width: 899px) 90vw, 680px"
                     className="how-card-blur-image object-cover"
                     style={{ objectPosition: step.objectPosition }}
                   />

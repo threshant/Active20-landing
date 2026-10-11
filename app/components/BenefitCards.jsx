@@ -30,7 +30,7 @@ const EASE = "cubic-bezier(0.16, 1, 0.3, 1)";
 
 function CardDots({ active }) {
   return (
-    <div className="benefit-dots pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-center gap-[0.42rem] bg-[linear-gradient(to_top,rgba(0,0,0,0.42)_0%,rgba(0,0,0,0)_72%)] px-3 pb-[0.85rem] pt-9">
+    <div className="benefit-dots pointer-events-none absolute inset-x-0 bottom-0 z-[1] flex items-end justify-center gap-[0.42rem] px-3 pb-[0.85rem] pt-9">
       {CARDS.map((card, index) => (
         <span
           key={card.title}
@@ -181,30 +181,35 @@ export default function BenefitCards() {
             <article
               key={card.title}
               data-expanded={isOpen ? "true" : "false"}
-              className="benefit-card grid h-full min-w-0 overflow-hidden rounded-[1.2rem] bg-white shadow-[0_10px_28px_rgba(12,27,42,0.07)]"
+              className="benefit-card relative h-full min-w-0 overflow-hidden rounded-[1.2rem] bg-[#123044] shadow-[0_10px_28px_rgba(12,27,42,0.07)]"
               style={{
                 flexGrow: isOpen ? 2.15 : 1,
                 flexBasis: "0%",
                 flexShrink: 1,
-                gridTemplateColumns: isOpen ? "1.05fr 0.95fr" : "1fr 0fr",
-                transition: `flex-grow 700ms ${EASE}, grid-template-columns 700ms ${EASE}`,
+                transition: `flex-grow 700ms ${EASE}`,
               }}
             >
-              <div className="relative h-full min-h-0 min-w-0 overflow-hidden">
+              <Image
+                src={card.src}
+                alt={card.title}
+                fill
+                sizes="(max-width: 899px) 100vw, 55vw"
+                className="object-cover object-[center_18%]"
+              />
+              <div className="benefit-blur" aria-hidden="true">
                 <Image
                   src={card.src}
-                  alt={card.title}
+                  alt=""
                   fill
-                  sizes="(max-width: 899px) 100vw, 34vw"
-                  className="object-cover object-[center_18%]"
+                  sizes="(max-width: 899px) 100vw, 55vw"
+                  className="benefit-blur-image object-cover object-[center_18%]"
                 />
-                <CardDots active={active} />
+                <div className="benefit-blur-wash" />
               </div>
-              <div className="h-full min-h-0 min-w-0 overflow-hidden bg-white">
-                <div className="flex h-full min-w-0 flex-col justify-between px-[1.05rem] py-[1.15rem] min-[1100px]:px-[1.4rem] min-[1100px]:py-[1.4rem] min-[1300px]:px-[1.65rem] min-[1300px]:py-[1.6rem]">
-                  <CardCopy card={card} tone="dark" />
-                </div>
+              <div className="benefit-copy text-left">
+                <CardCopy card={card} tone="light" />
               </div>
+              <CardDots active={active} />
             </article>
           );
         })}

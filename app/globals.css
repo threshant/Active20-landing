@@ -292,8 +292,9 @@
 }
 
 .how-steps {
-  --how-card-max-height: min(72svh, 38rem);
-  --how-inset-y: 56px;
+  --how-card-max-height: min(86svh, 48rem);
+  --how-card-ratio: 0.94;
+  --how-inset-y: 16px;
   --how-inset-start: 66px;
   --how-inset-end: 124px;
   --how-shift: 27px;
@@ -316,14 +317,13 @@
 
 .how-steps-grid {
   display: grid;
-  grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+  grid-template-columns: minmax(0, 0.76fr) minmax(0, 1.24fr);
   align-items: center;
   gap: clamp(1.4rem, 3.5vw, 3.5rem);
   box-sizing: border-box;
   height: 100svh;
   min-height: 100svh;
-  padding: clamp(4.6rem, 8vh, 5.6rem) clamp(1.2rem, 4vw, 4.25rem)
-    clamp(1.25rem, 4vh, 2.4rem);
+  padding: clamp(4.6rem, 8vh, 5.6rem) 0 clamp(0.75rem, 2.5vh, 1.4rem);
 }
 
 .how-steps-deck {
@@ -340,8 +340,8 @@
 
 .how-card {
   position: relative;
-  width: min(100%, calc(var(--how-card-max-height) * 5 / 8));
-  aspect-ratio: 5 / 8;
+  width: min(100%, calc(var(--how-card-max-height) * var(--how-card-ratio)));
+  aspect-ratio: var(--how-card-ratio);
   height: auto;
   margin-inline: auto;
   overflow: visible;
@@ -451,14 +451,14 @@
   bottom: auto;
   left: calc(50% - var(--how-shift));
   width: min(
-    calc(var(--how-card-max-height) * 5 / 8),
+    calc(var(--how-card-max-height) * var(--how-card-ratio)),
     calc(100cqw - var(--how-inset-start) - var(--how-inset-end)),
-    calc((100cqh - (var(--how-inset-y) * 2)) * 5 / 8)
+    calc((100cqh - (var(--how-inset-y) * 2)) * var(--how-card-ratio))
   );
-  max-width: calc(100vw - var(--how-inset-start) - var(--how-inset-end));
+  max-width: 100%;
   height: auto;
   margin: 0;
-  aspect-ratio: 5 / 8;
+  aspect-ratio: var(--how-card-ratio);
   transform-origin: 50% 50%;
   will-change: transform;
 }
@@ -478,23 +478,23 @@
 
 @media (max-width: 899px) {
   .how-steps {
-    --how-inset-y: 58px;
-    --how-inset-start: 58px;
-    --how-inset-end: 112px;
-    --how-shift: 22px;
+    --how-inset-y: 10px;
+    --how-inset-start: 18px;
+    --how-inset-end: 108px;
+    --how-shift: 14px;
   }
 
   .how-steps-grid {
     grid-template-columns: 1fr;
     grid-template-rows: auto minmax(0, 1fr);
     align-items: stretch;
-    gap: 0.75rem;
+    gap: 0.85rem;
     box-sizing: border-box;
-    height: 100svh;
-    min-height: 100svh;
+    height: auto;
+    min-height: 0;
     overflow: visible;
-    padding-top: 4.35rem;
-    padding-bottom: 0.7rem;
+    padding-top: 0.35rem;
+    padding-bottom: 0;
   }
 
   .how-steps-copy h2 {
@@ -508,16 +508,17 @@
   }
 
   .how-steps.is-deck .how-steps-deck {
-    height: 100%;
-    min-height: 0;
+    height: calc(100svh - 4.5rem);
+    min-height: calc(100svh - 4.5rem);
     max-height: none;
   }
 
   .how-steps.is-deck .how-card {
-    width: min(
-      calc(100vw - var(--how-inset-start) - var(--how-inset-end)),
-      calc((100cqh - (var(--how-inset-y) * 2)) * 5 / 8)
-    );
+    width: calc(100cqw - var(--how-inset-start) - var(--how-inset-end));
+    height: calc(100cqh - (var(--how-inset-y) * 2));
+    max-width: none;
+    max-height: none;
+    aspect-ratio: auto;
   }
 
   .how-card-copy h3 {
@@ -556,10 +557,10 @@
   .how-card {
     position: relative;
     inset: auto;
-    width: min(100%, calc(min(72svh, 38rem) * 5 / 8));
+    width: min(100%, calc(var(--how-card-max-height) * var(--how-card-ratio)));
     max-width: 100%;
     height: auto;
-    aspect-ratio: 5 / 8;
+    aspect-ratio: var(--how-card-ratio);
     margin-inline: auto;
     transform: none !important;
     opacity: 1 !important;
