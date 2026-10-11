@@ -9,6 +9,7 @@ const STEPS = [
     meta: "Before you arrive",
     title: "Prepare for your visit",
     src: "/images/holders/ems-tech-4.png",
+    video: "/images/holders/step_1.mp4",
     alt: "Member wearing the EMS suit and training pack",
     objectPosition: "72% center",
   },
@@ -23,6 +24,7 @@ const STEPS = [
     meta: "20-minute session",
     title: "Turn it on",
     src: "/images/holders/how-it-works.png",
+    video: "/images/holders/step_3.mp4",
     alt: "Member training with battle ropes in the EMS suit",
     objectPosition: "70% center",
   },
@@ -131,14 +133,28 @@ export default function HowItWorks() {
               className="how-works-card"
               style={{ "--stack": index, zIndex: index + 1 }}
             >
-              <Image
-                src={step.src}
-                alt={step.alt}
-                fill
-                sizes="(max-width: 899px) 92vw, 640px"
-                className="object-cover"
-                style={{ objectPosition: step.objectPosition }}
-              />
+              {step.video ? (
+                <video
+                  className="how-works-card-video"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="auto"
+                  aria-label={step.alt}
+                >
+                  <source src={step.video} type="video/mp4" />
+                </video>
+              ) : (
+                <Image
+                  src={step.src}
+                  alt={step.alt}
+                  fill
+                  sizes="(max-width: 899px) 92vw, 640px"
+                  className="object-cover"
+                  style={{ objectPosition: step.objectPosition }}
+                />
+              )}
               <div className="how-works-card-copy">
                 <p>{step.meta}</p>
                   <TitleReveal as="h3">{step.title}</TitleReveal>

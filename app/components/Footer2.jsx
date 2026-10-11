@@ -2,73 +2,109 @@ import Image from "next/image";
 import Link from "next/link";
 import { TitleReveal } from "./Reveal";
 
+const FOOTER_LINKS = [
+  [
+    { href: "/", label: "Home" },
+    { href: "/#about", label: "About Active20" },
+    { href: "/#how-it-works", label: "How it works" },
+    { href: "/#training", label: "Training" },
+    { href: "/#faq", label: "FAQs" },
+  ],
+  [
+    { href: "/book-trial", label: "Book a trial" },
+    { href: "/#testimonials", label: "Testimonials" },
+    { href: "/privacy-policy", label: "Privacy policy" },
+    { href: "/terms", label: "Terms and conditions" },
+  ],
+];
+
 export default function Footer2() {
   return (
-    <>
-      <section className="trial-cta" aria-labelledby="trial-cta-title">
-        <svg className="trial-cta-mark trial-cta-mark-left" viewBox="0 0 64 48" aria-hidden="true">
-          <path d="M8 36c8-17 21-23 39-19M39 9l9 8-11 4" />
-        </svg>
+    <section className="site-close" aria-labelledby="trial-cta-title">
+      <div className="trial-cta">
         <div className="trial-cta-copy">
-          <TitleReveal id="trial-cta-title">Book your 30-minute trial</TitleReveal>
+          <TitleReveal id="trial-cta-title">
+            Still thinking about it?
+            <br />
+            Book a trial
+          </TitleReveal>
           <p>
-            Meet your certified coach, try EMS training, and find the training
-            style that fits your goals.
+            Meet your certified coach, try EMS training, and find the style
+            that fits your goals.
           </p>
           <Link href="/book-trial" className="trial-cta-button">
             Book a trial
           </Link>
         </div>
-        <svg className="trial-cta-mark trial-cta-mark-right" viewBox="0 0 64 48" aria-hidden="true">
-          <path d="M56 12c-8 17-21 23-39 19M25 39l-9-8 11-4" />
-        </svg>
-      </section>
+      </div>
 
       <footer className="site-footer">
-        <div className="site-footer-main">
-          <div className="site-footer-brand">
-            <Link href="/" aria-label="Active20 home">
-              <Image
-                src="/images/logo.png"
-                alt="Active20"
-                width={252}
-                height={48}
-                className="site-footer-logo"
-              />
-            </Link>
-            <p>
-              Coach-guided EMS training for a focused full-body workout in just
-              20 minutes.
-            </p>
+        <div className="site-footer-inner">
+          <div className="site-footer-main">
+            <div className="site-footer-brand">
+              <Link href="/" aria-label="Active20 home">
+                <Image
+                  src="/images/logo.png"
+                  alt="Active20"
+                  width={252}
+                  height={48}
+                  className="site-footer-logo"
+                />
+              </Link>
+              <p>
+                Coach-guided EMS training for a focused full-body workout in
+                just 20 minutes.
+              </p>
+              <a className="site-footer-mail" href="mailto:team@active20.com">
+                <Mail />
+                team@active20.com
+              </a>
+            </div>
+
+            <div className="site-footer-links">
+              {FOOTER_LINKS.map((column) => (
+                <nav key={column[0].href} aria-label={column[0].label}>
+                  {column.map((link) => (
+                    <Link key={link.href} href={link.href}>
+                      {link.label}
+                    </Link>
+                  ))}
+                </nav>
+              ))}
+            </div>
           </div>
 
-          <div className="site-footer-links">
-            <nav aria-label="Explore">
-              <TitleReveal as="h3">Explore</TitleReveal>
-              <Link href="/#about">About Active20</Link>
-              <Link href="/#how-it-works">How it works</Link>
-              <Link href="/#training">Training</Link>
-              <Link href="/#faq">FAQs</Link>
-            </nav>
-            <nav aria-label="Get started">
-              <TitleReveal as="h3">Get started</TitleReveal>
-              <Link href="/book-trial">Book a trial</Link>
-              <Link href="/#testimonials">Testimonials</Link>
-              <Link href="/">Home</Link>
-            </nav>
-            <nav aria-label="Legal">
-              <TitleReveal as="h3">Legal</TitleReveal>
-              <Link href="/privacy-policy">Privacy policy</Link>
-              <Link href="/terms">Terms and conditions</Link>
-            </nav>
+          <div className="site-footer-bottom">
+            <p>© 2026 Active20. All rights reserved.</p>
+            <p>Twenty minutes. Full-body focus.</p>
           </div>
-        </div>
-
-        <div className="site-footer-bottom">
-          <p>© 2026 Active20. All rights reserved.</p>
-          <p>Twenty minutes. Full-body focus.</p>
         </div>
       </footer>
-    </>
+    </section>
+  );
+}
+
+function Mail() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 15 15" aria-hidden="true">
+      <rect
+        x="1.4"
+        y="3"
+        width="12.2"
+        height="9"
+        rx="1.4"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.3"
+      />
+      <path
+        d="M2 4.2 7.5 8.1 13 4.2"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }

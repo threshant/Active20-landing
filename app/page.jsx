@@ -31,7 +31,7 @@ export default function HomePage() {
             <Image
               src="/images/holders/hero.png"
               alt="Athlete in EMS suit"
-              className="object-cover max-[899px]:object-[70%_20%]"
+              className="object-cover max-[899px]:object-center"
               fill
               sizes="100vw"
               priority
