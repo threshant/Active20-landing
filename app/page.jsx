@@ -18,7 +18,7 @@ export default function HomePage() {
 
   return (
     <main className="relative isolate flex w-full justify-center bg-white p-0">
-      <div className="relative z-[1] w-[min(100%,1440px)] min-w-0 max-w-full px-4 pb-6 max-[899px]:px-3 max-[899px]:pb-4 [&>section+section]:mt-16 max-[899px]:[&>section+section]:mt-[2.6rem] min-[900px]:px-[1.2rem] min-[900px]:[&>section+section]:mt-24">
+      <div className="relative z-[1] w-[min(100%,1440px)] min-w-0 max-w-full px-4 max-[899px]:px-3 [&>section+section]:mt-16 max-[899px]:[&>section+section]:mt-[2.6rem] min-[900px]:px-[1.2rem] min-[900px]:[&>section+section]:mt-24">
         <SiteHeader />
 
         <section className="hero-stage relative isolate -mx-[calc(50vw-50%)] h-[100svh] w-screen overflow-hidden bg-[#01111e]">

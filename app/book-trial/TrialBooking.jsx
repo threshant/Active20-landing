@@ -386,7 +386,7 @@ export default function TrialBooking() {
 
   return (
     <main className="relative isolate flex w-full justify-center bg-white p-0">
-      <div className="relative z-[1] w-[min(100%,1440px)] min-w-0 max-w-full px-4 pb-6 max-[899px]:px-3 max-[899px]:pb-4 min-[900px]:px-[1.2rem]">
+      <div className="relative z-[1] w-[min(100%,1440px)] min-w-0 max-w-full px-4 max-[899px]:px-3 min-[900px]:px-[1.2rem]">
         <SiteHeader variant="solid" />
 
         <section className="mx-auto mb-16 w-full max-w-[58rem] pt-[clamp(5.6rem,12vw,7.2rem)] max-[899px]:mb-10 min-[900px]:mb-24 min-[900px]:pt-[clamp(6.6rem,10vw,7.8rem)]">
