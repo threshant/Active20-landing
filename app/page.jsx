@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import AboutActive20 from "./components/AboutActive20";
 import BenefitCards from "./components/BenefitCards";
+import FaqSection from "./components/FaqSection";
 import Footer2 from "./components/Footer2";
 import HowItWorks from "./components/HowItWorks";
 import { premiumEase } from "./components/Reveal";
@@ -147,6 +148,8 @@ export default function HomePage() {
         <StudioBento />
 
         <TestimonialMarquee />
+
+        <FaqSection />
 
         <Footer2 />
       </div>

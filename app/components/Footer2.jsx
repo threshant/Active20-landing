@@ -47,6 +47,7 @@ export default function Footer2() {
               <Link href="/#about">About Active20</Link>
               <Link href="/#how-it-works">How it works</Link>
               <Link href="/#training">Training</Link>
+              <Link href="/#faq">FAQs</Link>
             </nav>
             <nav aria-label="Get started">
               <h3>Get started</h3>

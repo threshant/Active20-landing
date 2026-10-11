@@ -1,290 +1,221 @@
 "use client";
 
 import { useReducedMotion } from "framer-motion";
-import { useLenis } from "lenis/react";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const STEPS = [
   {
-    number: "01",
+    meta: "Before you arrive",
     title: "Prepare for your visit",
-    description:
-      "Stay hydrated and skip intense workouts for 24 to 48 hours before. No gym clothes needed. We provide a sterilized EMS suit.",
     src: "/images/holders/ems-tech-4.png",
     alt: "Member wearing the EMS suit and training pack",
     objectPosition: "72% center",
   },
   {
-    number: "02",
+    meta: "Coach and scan",
     title: "Get suited up",
-    description:
-      "Meet your Coach, get a complimentary body composition scan and talk through your goals.",
     src: "/images/holders/gentle-on-joints.png",
     alt: "Member training in the EMS suit",
     objectPosition: "32% 28%",
   },
   {
-    number: "03",
+    meta: "20-minute session",
     title: "Turn it on",
-    description:
-      "Try a sample of Strength, Endurance and Performance training, tailored to you.",
     src: "/images/holders/how-it-works.png",
     alt: "Member training with battle ropes in the EMS suit",
     objectPosition: "70% center",
   },
   {
-    number: "04",
+    meta: "Your plan",
     title: "Unlock your potential",
-    description:
-      "Review your results with your Coach and get a recommended plan.",
     src: "/images/holders/advance-fitness.png",
     alt: "Members training together in EMS suits",
     objectPosition: "center 30%",
   },
 ];
 
-const PEEK = 18;
-const SLOTS = [
-  { x: 0, y: 2, rotation: -1.6 },
-  { x: PEEK, y: -7, rotation: 2.5 },
-  { x: PEEK * 2, y: 6, rotation: -2.2 },
-  { x: PEEK * 3, y: -3, rotation: 1.8 },
-];
-const FADE_AT = 0.8;
-const FADE_DURATION = 0.18;
+const FACES = STEPS.slice(0, 3);
 
 export default function HowItWorks() {
-  const sectionRef = useRef(null);
-  const lenis = useLenis();
+  const railRef = useRef(null);
   const preference = useReducedMotion();
+  const [atStart, setAtStart] = useState(true);
+  const [atEnd, setAtEnd] = useState(false);
 
   useEffect(() => {
-    const section = sectionRef.current;
-    if (!section || preference === true) return undefined;
+    const rail = railRef.current;
+    if (!rail) return undefined;
 
-    let context;
-    let alive = true;
+    const update = () => {
+      setAtStart(rail.scrollLeft <= 2);
+      setAtEnd(rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 2);
+    };
 
-    (async () => {
-      const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
-        import("gsap"),
-        import("gsap/ScrollTrigger"),
-      ]);
-
-      if (!alive) return;
-
-      gsap.registerPlugin(ScrollTrigger);
-      gsap.ticker.lagSmoothing(0);
-
-      context = gsap.context(() => {
-        const mm = gsap.matchMedia();
-
-        const mountDeck = (trigger, start) => {
-          const cards = gsap.utils.toArray(".how-card");
-          if (!cards.length || !trigger) return undefined;
-
-          section.classList.add("is-deck");
-
-          gsap.set(cards, {
-            xPercent: -50,
-            yPercent: -50,
-            x: (index) => SLOTS[index].x,
-            y: (index) => SLOTS[index].y,
-            rotation: (index) => SLOTS[index].rotation,
-            zIndex: (index) => cards.length - index,
-            transformOrigin: "50% 50%",
-          });
-
-          const timeline = gsap.timeline({
-            defaults: { ease: "none" },
-            scrollTrigger: {
-              trigger,
-              start,
-              end: () => `+=${window.innerHeight * (cards.length - 1) * 0.9}`,
-              pin: true,
-              scrub: true,
-              anticipatePin: 1,
-              invalidateOnRefresh: true,
-              fastScrollEnd: true,
-            },
-          });
-
-          timeline.to({}, { duration: cards.length - 1 }, 0);
-
-          for (let step = 0; step < cards.length - 1; step += 1) {
-            timeline.set(cards[step], { zIndex: cards.length + 2 }, step);
-
-            cards.forEach((card, index) => {
-              if (index <= step) return;
-              const depth = index - step - 1;
-              const from = SLOTS[depth + 1];
-              const to = SLOTS[depth];
-              timeline.set(card, { zIndex: cards.length - depth }, step);
-              timeline.fromTo(
-                card,
-                {
-                  xPercent: -50,
-                  yPercent: -50,
-                  x: from.x,
-                  y: from.y,
-                  rotation: from.rotation,
-                },
-                {
-                  xPercent: -50,
-                  yPercent: -50,
-                  x: to.x,
-                  y: to.y,
-                  rotation: to.rotation,
-                  duration: 0.18,
-                  ease: "power2.out",
-                  immediateRender: false,
-                },
-                step,
-              );
-            });
-
-            timeline.fromTo(
-              cards[step].querySelector(".how-card-copy"),
-              { autoAlpha: 1 },
-              {
-                autoAlpha: 0,
-                duration: 0.06,
-                ease: "none",
-                immediateRender: false,
-              },
-              step + FADE_AT,
-            );
-
-            timeline.fromTo(
-              cards[step],
-              {
-                autoAlpha: 1,
-                xPercent: -50,
-                yPercent: -50,
-                x: SLOTS[0].x,
-                y: SLOTS[0].y,
-                rotation: SLOTS[0].rotation,
-              },
-              {
-                autoAlpha: 0,
-                xPercent: -50,
-                yPercent: -50,
-                x: SLOTS[0].x - 6,
-                y: SLOTS[0].y - 14,
-                rotation: SLOTS[0].rotation + 1.5,
-                duration: FADE_DURATION,
-                ease: "none",
-                immediateRender: false,
-              },
-              step + FADE_AT,
-            );
-
-            timeline.set(
-              cards[step],
-              { zIndex: 0 },
-              step + FADE_AT + FADE_DURATION,
-            );
-          }
-
-          return () => {
-            section.classList.remove("is-deck");
-          };
-        };
-
-        mm.add(
-          "(min-width: 900px) and (prefers-reduced-motion: no-preference)",
-          () => mountDeck(section, "top top"),
-        );
-
-        mm.add(
-          "(max-width: 899px) and (prefers-reduced-motion: no-preference)",
-          () =>
-            mountDeck(
-              section.querySelector(".how-steps-deck"),
-              "top 4.5rem",
-            ),
-        );
-      }, section);
-
-      const refresh = () => {
-        if (!alive) return;
-        ScrollTrigger.refresh();
-        lenis?.resize();
-      };
-
-      requestAnimationFrame(refresh);
-      document.fonts?.ready.then(refresh);
-    })();
+    update();
+    rail.addEventListener("scroll", update, { passive: true });
+    const observer = new ResizeObserver(update);
+    observer.observe(rail);
 
     return () => {
-      alive = false;
-      section.classList.remove("is-deck");
-      context?.revert();
+      rail.removeEventListener("scroll", update);
+      observer.disconnect();
     };
-  }, [lenis, preference]);
+  }, []);
+
+  const scrollByCard = (direction) => {
+    const rail = railRef.current;
+    const card = rail?.querySelector(".how-works-card");
+    const track = rail?.querySelector("ol");
+    if (!rail || !card || !track) return;
+    const gap = Number.parseFloat(getComputedStyle(track).columnGap) || 14;
+    const step = card.getBoundingClientRect().width + gap;
+    const index = Math.round(rail.scrollLeft / step);
+    const maxIndex = Math.max(0, track.children.length - 1);
+    const next = Math.min(Math.max(index + direction, 0), maxIndex);
+    rail.scrollTo({
+      left: next * step,
+      behavior: preference ? "auto" : "smooth",
+    });
+  };
 
   return (
     <section
-      ref={sectionRef}
       id="how-it-works"
-      className="how-steps scroll-mt-24"
+      className="how-works scroll-mt-24"
       aria-labelledby="how-it-works-title"
     >
-      <div className="how-steps-grid">
-        <div className="how-steps-copy">
-          <h2
-            id="how-it-works-title"
-            className="m-0 max-w-[12ch] text-[clamp(2.15rem,4.6vw,3.7rem)] leading-[0.92] text-[#0d5f72] [font-family:var(--font-new-science-extended)] [text-wrap:balance]"
-          >
-            HOW DOES IT WORK
+      <div className="how-works-head">
+        <div>
+          <p className="how-works-kicker">How it works /</p>
+          <h2 id="how-it-works-title">
+            How does
+            <br />
+            it work
           </h2>
-          <p className="m-0 mt-4 max-w-[34rem] text-[0.95rem] leading-[1.5] text-[#243240] [font-family:var(--font-inter)] min-[900px]:mt-5 min-[900px]:text-[1.05rem]">
-            During an ACTIVE20 session, low-impact electrical impulses activate
-            multiple muscle groups at once while you move through simple, guided
-            exercises with your coach. This creates deeper, more complete muscle
-            contractions, delivering a full-body workout in just 20 minutes with
-            minimal joint stress.
-          </p>
+        </div>
+        <p className="how-works-lead">
+          During an ACTIVE20 session, low-impact electrical impulses activate
+          multiple muscle groups at once while you move through simple, guided
+          exercises with your coach.
+        </p>
+      </div>
+
+      <div className="how-works-stage">
+        <div className="how-works-aside">
+          <div>
+            <div className="how-works-stat">
+              <div className="how-works-faces" aria-hidden="true">
+                {FACES.map((face) => (
+                  <span key={face.src}>
+                    <Image
+                      src={face.src}
+                      alt=""
+                      fill
+                      sizes="48px"
+                      className="object-cover"
+                      style={{ objectPosition: face.objectPosition }}
+                    />
+                  </span>
+                ))}
+              </div>
+              <p>
+                <strong>20</strong>
+                <span>minutes per session</span>
+              </p>
+            </div>
+            <p className="how-works-note">
+              Swipe through a first visit, from preparation to your plan.
+            </p>
+          </div>
+          <div className="how-works-controls">
+            <button
+              type="button"
+              aria-label="Previous step"
+              disabled={atStart}
+              onClick={() => scrollByCard(-1)}
+            >
+              <Chevron direction="left" />
+            </button>
+            <button
+              type="button"
+              aria-label="Next step"
+              disabled={atEnd}
+              onClick={() => scrollByCard(1)}
+            >
+              <Chevron direction="right" />
+            </button>
+          </div>
         </div>
 
-        <ol className="how-steps-deck">
-          {STEPS.map((step) => (
-            <li key={step.number} className="how-card">
-              <div className="how-card-frame">
+        <div
+          ref={railRef}
+          className="how-works-rail"
+          tabIndex={0}
+          onKeyDown={(event) => {
+            if (event.key === "ArrowRight") {
+              event.preventDefault();
+              scrollByCard(1);
+            }
+            if (event.key === "ArrowLeft") {
+              event.preventDefault();
+              scrollByCard(-1);
+            }
+          }}
+        >
+          <ol>
+            {STEPS.map((step) => (
+              <li key={step.title} className="how-works-card">
                 <Image
                   src={step.src}
                   alt={step.alt}
                   fill
-                  sizes="(max-width: 899px) 86vw, 640px"
+                  sizes="(max-width: 899px) 78vw, 280px"
                   className="object-cover"
                   style={{ objectPosition: step.objectPosition }}
                 />
-                <div className="how-card-blur" aria-hidden="true">
-                  <Image
-                    src={step.src}
-                    alt=""
-                    fill
-                    sizes="(max-width: 899px) 90vw, 680px"
-                    className="how-card-blur-image object-cover"
-                    style={{ objectPosition: step.objectPosition }}
-                  />
+                <div className="how-works-card-copy">
+                  <p>{step.meta}</p>
+                  <h3>{step.title}</h3>
                 </div>
-                <div className="how-card-shade" aria-hidden="true" />
-                <div className="how-card-copy">
-                  <span className="how-card-number">{step.number}</span>
-                  <h3 className="m-0 text-white [font-family:var(--font-new-science-extended)] [text-wrap:balance]">
-                    {step.title}
-                  </h3>
-                  <p className="m-0 mt-2 text-white/82 [font-family:var(--font-inter)] [text-wrap:pretty]">
-                    {step.description}
-                  </p>
-                </div>
-              </div>
-            </li>
-          ))}
-        </ol>
+                <span className="how-works-card-arrow" aria-hidden="true">
+                  <ArrowUpRight />
+                </span>
+              </li>
+            ))}
+          </ol>
+        </div>
       </div>
     </section>
+  );
+}
+
+function Chevron({ direction }) {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+      <path
+        d={direction === "left" ? "M10 3.5 5.5 8 10 12.5" : "M6 3.5 10.5 8 6 12.5"}
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function ArrowUpRight() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 15 15" aria-hidden="true">
+      <path
+        d="M4 11 11 4M6.2 4H11v4.8"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }

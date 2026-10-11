@@ -10,7 +10,7 @@ const NAV_LINKS = [
   { href: "/#", label: "FRANCHISE" },
   { href: "/#", label: "ABOUT US" },
   { href: "/#", label: "OUR STUDIOS" },
-  { href: "/#", label: "FAQS" },
+  { href: "/#faq", label: "FAQS" },
 ];
 
 const HIDE_DISTANCE = 10;
