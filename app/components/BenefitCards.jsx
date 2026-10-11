@@ -1,9 +1,8 @@
 "use client";
 
 import { useReducedMotion } from "framer-motion";
-import { useLenis } from "lenis/react";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { TitleReveal } from "./Reveal";
 
 const CARDS = [
@@ -65,10 +64,6 @@ function CardCopy({ card, tone }) {
 }
 
 export default function BenefitCards() {
-  const sectionRef = useRef(null);
-  const viewportRef = useRef(null);
-  const trackRef = useRef(null);
-  const lenis = useLenis();
   const preference = useReducedMotion();
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -101,77 +96,11 @@ export default function BenefitCards() {
     };
   }, [paused, preference]);
 
-  useEffect(() => {
-    const section = sectionRef.current;
-    const viewport = viewportRef.current;
-    const track = trackRef.current;
-    if (!section || !viewport || !track) return undefined;
-
-    let context;
-    let alive = true;
-
-    (async () => {
-      const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
-        import("gsap"),
-        import("gsap/ScrollTrigger"),
-      ]);
-
-      if (!alive) return;
-
-      gsap.registerPlugin(ScrollTrigger);
-      gsap.ticker.lagSmoothing(0);
-
-      context = gsap.context(() => {
-        const mm = gsap.matchMedia();
-
-        mm.add("(max-width: 899px) and (prefers-reduced-motion: no-preference)", () => {
-          const travel = () => Math.max(0, track.scrollWidth - viewport.clientWidth);
-
-          const tween = gsap.to(track, {
-            x: () => -travel(),
-            ease: "none",
-            scrollTrigger: {
-              trigger: section,
-              start: "top top",
-              end: () =>
-                `+=${Math.max(travel(), window.innerHeight * (CARDS.length - 1))}`,
-              pin: true,
-              scrub: true,
-              anticipatePin: 1,
-              invalidateOnRefresh: true,
-              fastScrollEnd: true,
-            },
-          });
-
-          return () => {
-            tween.scrollTrigger?.kill();
-            tween.kill();
-          };
-        });
-      }, section);
-
-      const refresh = () => {
-        if (!alive) return;
-        ScrollTrigger.refresh();
-        lenis?.resize();
-      };
-
-      requestAnimationFrame(refresh);
-      document.fonts?.ready.then(refresh);
-    })();
-
-    return () => {
-      alive = false;
-      context?.revert();
-    };
-  }, [lenis]);
-
   return (
     <section
-      ref={sectionRef}
       id="benefits"
       aria-label="Training benefits"
-      className="benefit-cards relative max-[899px]:-mx-3 max-[899px]:w-[calc(100%+1.5rem)]"
+      className="benefit-cards relative min-w-0 max-[899px]:-mx-3 max-[899px]:w-[calc(100%+1.5rem)]"
     >
       <div
         className="benefit-row hidden h-[clamp(19rem,30vw,25rem)] w-full min-w-0 gap-[0.55rem] min-[900px]:flex"
@@ -219,29 +148,7 @@ export default function BenefitCards() {
         })}
       </div>
 
-      <div
-        ref={viewportRef}
-        className="benefit-pin h-[100svh] w-full overflow-hidden min-[900px]:hidden"
-      >
-        <div ref={trackRef} className="flex h-full w-[300%] will-change-transform">
-          {CARDS.map((card) => (
-            <article key={card.title} className="relative h-full w-1/3 shrink-0">
-              <Image
-                src={card.src}
-                alt=""
-                fill
-                sizes="100vw"
-                className="object-cover object-[center_18%]"
-              />
-              <div className="absolute inset-x-0 bottom-0 bg-[linear-gradient(to_top,rgba(1,8,16,0.86)_0%,rgba(1,8,16,0.48)_42%,rgba(1,8,16,0)_100%)] px-5 pb-8 pt-28">
-                <CardCopy card={card} tone="light" />
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-
-      <div className="benefit-stack hidden flex-col gap-[0.65rem] px-3 min-[900px]:hidden">
+      <div className="benefit-stack flex min-w-0 flex-col gap-[0.65rem] px-3 min-[900px]:hidden">
         {CARDS.map((card) => (
           <article
             key={card.title}

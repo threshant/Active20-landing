@@ -53,7 +53,7 @@ export function LegalContactEmail() {
 export default function LegalPageLayout({ title, lastUpdated, children }) {
   return (
     <main className="relative isolate flex w-full justify-center bg-white p-0">
-      <div className="relative z-[1] w-[min(100%,1440px)] px-4 pb-6 max-[899px]:px-3 max-[899px]:pb-4 min-[900px]:px-[1.2rem]">
+      <div className="relative z-[1] w-[min(100%,1440px)] min-w-0 max-w-full px-4 pb-6 max-[899px]:px-3 max-[899px]:pb-4 min-[900px]:px-[1.2rem]">
         <header className="fixed left-0 top-0 z-40 w-full border-b border-[rgba(12,40,56,0.08)] bg-white/95 px-[1.2rem] py-[0.85rem] text-[#0c1b2a] shadow-[0_8px_24px_rgba(12,27,42,0.06)] backdrop-blur-[8px] max-[899px]:px-3 max-[899px]:pb-[0.6rem] max-[899px]:pt-[0.55rem]">
           <div className="mx-auto grid w-[min(100%,1440px)] grid-cols-[1fr_auto] items-center gap-[1.2rem] px-[1.2rem] max-[899px]:gap-[0.65rem] min-[900px]:grid-cols-[1fr_auto_1fr]">
             <Link
