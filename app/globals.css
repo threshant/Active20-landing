@@ -340,8 +340,8 @@
 
 .how-card {
   position: relative;
-  width: min(100%, calc(var(--how-card-max-height) * 5 / 8));
-  aspect-ratio: 5 / 8;
+  width: min(100%, calc(var(--how-card-max-height) * 11 / 16));
+  aspect-ratio: 11 / 16;
   height: auto;
   margin-inline: auto;
   overflow: visible;
@@ -451,14 +451,14 @@
   bottom: auto;
   left: calc(50% - var(--how-shift));
   width: min(
-    calc(var(--how-card-max-height) * 5 / 8),
+    calc(var(--how-card-max-height) * 11 / 16),
     calc(100cqw - var(--how-inset-start) - var(--how-inset-end)),
-    calc((100cqh - (var(--how-inset-y) * 2)) * 5 / 8)
+    calc((100cqh - (var(--how-inset-y) * 2)) * 11 / 16)
   );
   max-width: calc(100vw - var(--how-inset-start) - var(--how-inset-end));
   height: auto;
   margin: 0;
-  aspect-ratio: 5 / 8;
+  aspect-ratio: 11 / 16;
   transform-origin: 50% 50%;
   will-change: transform;
 }
@@ -480,7 +480,7 @@
   .how-steps {
     --how-inset-y: 58px;
     --how-inset-start: 58px;
-    --how-inset-end: 112px;
+    --how-inset-end: 90px;
     --how-shift: 22px;
   }
 
@@ -516,7 +516,7 @@
   .how-steps.is-deck .how-card {
     width: min(
       calc(100vw - var(--how-inset-start) - var(--how-inset-end)),
-      calc((100cqh - (var(--how-inset-y) * 2)) * 5 / 8)
+      calc((100cqh - (var(--how-inset-y) * 2)) * 11 / 16)
     );
   }
 
@@ -556,15 +556,19 @@
   .how-card {
     position: relative;
     inset: auto;
-    width: min(100%, calc(min(72svh, 38rem) * 5 / 8));
+    width: min(100%, calc(min(72svh, 38rem) * 11 / 16));
     max-width: 100%;
     height: auto;
-    aspect-ratio: 5 / 8;
+    aspect-ratio: 11 / 16;
     margin-inline: auto;
     transform: none !important;
     opacity: 1 !important;
     visibility: visible !important;
   }
+}
+
+.testimonial-marquee {
+  background: transparent;
 }
 
 .testimonial-marquee-heading {
