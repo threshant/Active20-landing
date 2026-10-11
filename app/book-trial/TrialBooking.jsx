@@ -397,7 +397,7 @@ export default function TrialBooking() {
           </h1>
           <p className="mt-3 max-w-[38rem] text-[0.92rem] leading-[1.55] text-[#243240] [font-family:var(--font-inter)] min-[900px]:text-[1rem]">
             Choose a studio, pick a time that works, and leave your details. We
-            will confirm your 20-minute EMS trial.
+            will confirm your 30-minute EMS trial.
           </p>
 
           <ol className="mt-8 grid grid-cols-3 gap-2" aria-label="Booking steps">
