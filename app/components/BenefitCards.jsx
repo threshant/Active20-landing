@@ -191,6 +191,7 @@ export default function BenefitCards() {
                 flexShrink: 1,
                 transition: `flex-grow 700ms ${EASE}`,
               }}
+              onPointerEnter={() => setActive(index)}
             >
               <Image
                 src={card.src}

@@ -386,6 +386,7 @@
   overflow: hidden;
   border-radius: 1.2rem;
   background: #123044;
+  transform-origin: center top;
 }
 
 .how-works-card-copy {

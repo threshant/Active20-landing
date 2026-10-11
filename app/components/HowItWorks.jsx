@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { TitleReveal } from "./Reveal";
 
@@ -35,6 +38,52 @@ const STEPS = [
 const FACES = STEPS.slice(0, 3);
 
 export default function HowItWorks() {
+  const stackRef = useRef(null);
+
+  useEffect(() => {
+    const stack = stackRef.current;
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (!stack || motionQuery.matches) return undefined;
+
+    const cards = [...stack.querySelectorAll(".how-works-card")];
+    let frame = 0;
+
+    const update = () => {
+      frame = 0;
+      cards.forEach((card, index) => {
+        const next = cards[index + 1];
+        if (!next) {
+          card.style.transform = "";
+          return;
+        }
+
+        const cardTop = card.getBoundingClientRect().top;
+        const nextTop = next.getBoundingClientRect().top;
+        const height = card.offsetHeight;
+        const start = cardTop + height;
+        const end = cardTop + 14;
+        const distance = start - end;
+        const progress =
+          distance <= 0 ? 0 : Math.min(1, Math.max(0, (start - nextTop) / distance));
+        const scale = 1 - progress * 0.08;
+        card.style.transform = `scale(${scale})`;
+      });
+    };
+
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+
   return (
     <section
       id="how-it-works"
@@ -75,7 +124,7 @@ export default function HowItWorks() {
           </div>
         </div>
 
-        <ol className="how-works-stack">
+        <ol className="how-works-stack" ref={stackRef}>
           {STEPS.map((step, index) => (
             <li
               key={step.title}
