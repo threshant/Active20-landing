@@ -119,6 +119,7 @@ function PhotoCard({ card }) {
 
 export default function StudioBento() {
   const rootRef = useRef(null);
+  const gridRef = useRef(null);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -147,13 +148,64 @@ export default function StudioBento() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const root = rootRef.current;
+    const grid = gridRef.current;
+    if (!root || !grid) return undefined;
+
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) {
+      grid.style.transform = "translate3d(0, 0, 0) scale(1)";
+      return undefined;
+    }
+
+    let context;
+    let alive = true;
+
+    (async () => {
+      const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
+        import("gsap"),
+        import("gsap/ScrollTrigger"),
+      ]);
+
+      if (!alive) return;
+      gsap.registerPlugin(ScrollTrigger);
+
+      context = gsap.context(() => {
+        gsap.fromTo(
+          grid,
+          { scale: 1.1, y: 90 },
+          {
+            scale: 1,
+            y: 0,
+            ease: "none",
+            scrollTrigger: {
+              trigger: root,
+              start: "top 95%",
+              end: "top 28%",
+              scrub: 0.8,
+              pin: false,
+              invalidateOnRefresh: true,
+            },
+          },
+        );
+      }, root);
+    })();
+
+    return () => {
+      alive = false;
+      context?.revert();
+    };
+  }, []);
+
   return (
     <section
       ref={rootRef}
+      id="training"
       className="studio-bento-section"
       aria-label="An Active20 session"
     >
-      <div className="studio-bento">
+      <div ref={gridRef} className="studio-bento">
         {CARDS.filter((card) => card.id === "session").map((card) => (
           <PhotoCard key={card.id} card={card} />
         ))}
@@ -228,7 +280,7 @@ export default function StudioBento() {
           <div className="bento-scrim" aria-hidden="true" />
           <div className="bento-photo-copy">
             <h3>Book a trial</h3>
-            <p>No pressure. Just 20 minutes.</p>
+            <p>Your first visit takes 30 minutes.</p>
             <Link href="/book-trial" className="bento-book-link">
               <span className="bento-book-copy">
                 <span className="bento-book-kicker">
@@ -250,7 +302,7 @@ export default function StudioBento() {
                       strokeLinejoin="round"
                     />
                   </svg>
-                  20-min session
+                  30-min trial
                 </span>
                 <span className="bento-book-label">Book a trial</span>
               </span>

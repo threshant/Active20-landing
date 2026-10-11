@@ -167,7 +167,11 @@ export default function TestimonialMarquee() {
   const bottomRow = TESTIMONIALS.filter((_, index) => index % 2 === 1);
 
   return (
-    <section className="testimonial-marquee" aria-labelledby="testimonials-heading">
+    <section
+      id="testimonials"
+      className="testimonial-marquee scroll-mt-24"
+      aria-labelledby="testimonials-heading"
+    >
       <header className="testimonial-marquee-heading">
         <p className="testimonial-marquee-eyebrow">Testimonials</p>
         <h2 id="testimonials-heading" className="testimonial-marquee-title">
@@ -175,7 +179,7 @@ export default function TestimonialMarquee() {
         </h2>
       </header>
       <div className="testimonial-marquee-bleed">
-        <div className="testimonial-marquee-rows" tabIndex={0}>
+        <div className="testimonial-marquee-rows">
           <MarqueeRow testimonials={topRow} direction="left" />
           <MarqueeRow testimonials={bottomRow} direction="right" />
         </div>

@@ -3,11 +3,11 @@
 import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import AboutActive20 from "./components/AboutActive20";
 import BenefitCards from "./components/BenefitCards";
 import Footer2 from "./components/Footer2";
 import HowItWorks from "./components/HowItWorks";
 import { premiumEase } from "./components/Reveal";
-import ScrollRevealText from "./components/ScrollRevealText";
 import SiteHeader from "./components/SiteHeader";
 import StudioBento from "./components/StudioBento";
 import TestimonialMarquee from "./components/TestimonialMarquee";
@@ -107,7 +107,7 @@ export default function HomePage() {
                             strokeLinejoin="round"
                           />
                         </svg>
-                        20-min session
+                        30-min trial
                       </span>
                       <span className="mt-1.5 text-[1.12rem] font-semibold leading-none tracking-[-0.01em] text-[#111] [font-family:var(--font-inter)] min-[900px]:text-[1.22rem]">
                         Book a trial
@@ -130,7 +130,7 @@ export default function HomePage() {
                     </span>
                   </Link>
                   <p className="m-0 text-right text-[0.75rem] leading-none text-white/88 [font-family:var(--font-inter)] [text-shadow:0_1px_2px_rgba(0,0,0,0.45)]">
-                    No pressure. Just 20 minutes.
+                    Your first visit takes 30 minutes.
                   </p>
                 </motion.div>
               </div>
@@ -138,7 +138,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <ScrollRevealText />
+        <AboutActive20 />
 
         <BenefitCards />
 

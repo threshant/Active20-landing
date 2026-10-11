@@ -197,6 +197,7 @@ export default function BenefitCards() {
   return (
     <section
       ref={sectionRef}
+      id="benefits"
       aria-label="Training benefits"
       className="benefit-cards relative max-[899px]:-mx-3 max-[899px]:w-[calc(100%+1.5rem)]"
     >

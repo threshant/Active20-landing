@@ -246,6 +246,16 @@ export default function HowItWorks() {
                   className="object-cover"
                   style={{ objectPosition: step.objectPosition }}
                 />
+                <div className="how-card-blur" aria-hidden="true">
+                  <Image
+                    src={step.src}
+                    alt=""
+                    fill
+                    sizes="(max-width: 899px) 72vw, 430px"
+                    className="how-card-blur-image object-cover"
+                    style={{ objectPosition: step.objectPosition }}
+                  />
+                </div>
                 <div className="how-card-shade" aria-hidden="true" />
                 <div className="how-card-copy">
                   <span className="how-card-number">{step.number}</span>
